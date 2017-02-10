@@ -7,23 +7,50 @@
 //
 
 import UIKit
+import CoreLocation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, CLLocationManagerDelegate  {
 
     @IBOutlet weak var gradientView: UIView!
     
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startMonitoringSignificantLocationChanges()
+        
         gradientForDitailsVC(color: UIColor.clear, view: gradientView)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationAuthStatus()
+    }
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
+            currentLocation = locationManager.location
+            
+            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            
+            // download data from Dark Sky API
+        
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+            locationAuthStatus()
+        }
     }
     
     func gradientForDitailsVC(color: UIColor, view: UIView) {
         let gradient = CAGradientLayer()
         
         let gradientOrigin = view.bounds.origin
-//        let gradientWidth = UIScreen.main.bounds.width
         let gradientWidth = view.bounds.width
         let gradientHeight = view.bounds.height
         let gradientSize = CGSize(width: gradientWidth, height: gradientHeight)
