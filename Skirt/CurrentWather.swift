@@ -13,7 +13,8 @@ class CurrentWeather {
     
     var _cityName: String!
     var _weatherTypeIcon: String!
-    var _currentTemp: Double!
+    var _currentTemp: Int!
+    var _rainChance: Int!
     var _weatherSummery: String!
     
     var cityName: String {
@@ -30,11 +31,18 @@ class CurrentWeather {
         return _weatherTypeIcon
     }
     
-    var currentTemp: Double {
+    var currentTemp: Int {
         if _currentTemp == nil {
-            _currentTemp = 0.0
+            _currentTemp = 0
         }
         return _currentTemp
+    }
+    
+    var rainChance: Int {
+        if _rainChance == nil {
+            _rainChance = 0
+        }
+        return _rainChance
     }
     
     var weatherSummery: String {
@@ -54,8 +62,27 @@ class CurrentWeather {
                     if let dataDict = dailyDict["data"] as? [Dictionary<String,AnyObject>]{
                         if let summary = dataDict[0]["summary"] as? String {
                             self._weatherSummery = summary
-                            print("Zhenya: Summery is \(self._weatherSummery!)")
+                            
                         }
+                        
+                        if let icon = dataDict[0]["icon"] as? String {
+                            self._weatherTypeIcon = icon
+                            
+                        }
+                        
+                        if let precipProbability = dataDict[0]["precipProbability"] as? Double {
+                            let probabilityInPercents = precipProbability * 100
+                            let probabilityInt: Int = Int(probabilityInPercents)
+                            self._rainChance = probabilityInt
+                            
+                        }
+                    }
+                }
+                
+                if let currentlyDict = dict["currently"] as? Dictionary<String,AnyObject> {
+                    if let currentTemp = currentlyDict["temperature"] as? Int{
+                        self._currentTemp = currentTemp
+                        
                     }
                 }
             }

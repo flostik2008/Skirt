@@ -12,6 +12,7 @@ import CoreLocation
 class MainVC: UIViewController, CLLocationManagerDelegate  {
 
     @IBOutlet weak var cityLbl: UILabel!
+    @IBOutlet weak var currentWeatherImg: UIImageView!
     @IBOutlet weak var weatherTypeImg: UIImageView!
     @IBOutlet weak var rainChanceLbl: UILabel!
     @IBOutlet weak var tempLbl: UILabel!
@@ -70,10 +71,11 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
     }
     
     func updateMainUI() {
-        // update UI based on currentWeather properties.
-        // 
+        rainChanceLbl.text = "%\(currentWeather.rainChance)"
+        tempLbl.text = "\(currentWeather.currentTemp)°"
+        weatherSummeryLbl.text = currentWeather._weatherSummery
         
-        
+        currentWeatherImg.image = UIImage(named: currentWeather.weatherTypeIcon)
     }
     
     func addGradient(color: UIColor, view: UIView) {

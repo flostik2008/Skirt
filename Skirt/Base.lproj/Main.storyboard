@@ -45,7 +45,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cES-va-zaA">
                                 <rect key="frame" x="0.0" y="494" width="375" height="173"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="74˚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj6-Ht-BrJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pj6-Ht-BrJ">
                                         <rect key="frame" x="12" y="64" width="178" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="F8A-bZ-47M"/>
@@ -62,7 +62,7 @@
                                             <constraint firstAttribute="width" constant="25" id="yrs-mO-WMc"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWh-OU-OOX">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWh-OU-OOX">
                                         <rect key="frame" x="51" y="40" width="47" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Eq4-R6-sU6"/>
@@ -72,7 +72,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clear" translatesAutoresizingMaskIntoConstraints="NO" id="KBb-BY-E6j" userLabel="WatherType">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clear-day" translatesAutoresizingMaskIntoConstraints="NO" id="KBb-BY-E6j" userLabel="WatherType">
                                         <rect key="frame" x="18" y="-15" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="l4u-NT-eYr"/>
@@ -120,6 +120,7 @@
                     </view>
                     <connections>
                         <outlet property="cityLbl" destination="IjZ-xN-5sf" id="hMi-qv-7ca"/>
+                        <outlet property="currentWeatherImg" destination="KBb-BY-E6j" id="0g3-lW-6xg"/>
                         <outlet property="gradientView" destination="cES-va-zaA" id="Rdq-Fl-UHg"/>
                         <outlet property="rainChanceLbl" destination="NWh-OU-OOX" id="bOn-MQ-K9S"/>
                         <outlet property="tempLbl" destination="Pj6-Ht-BrJ" id="BZe-M3-jHY"/>
@@ -134,7 +135,7 @@
     </scenes>
     <resources>
         <image name="1.5w" width="429" height="763"/>
-        <image name="Clear" width="100" height="100"/>
         <image name="Umbrella" width="100" height="100"/>
+        <image name="clear-day" width="100" height="100"/>
     </resources>
 </document>
