@@ -18,5 +18,5 @@ let API_KEY = "1b942a63046402bdfd204924e57119aa"
 
 typealias DownloadComplete = ()->()
 
-let CURRENT_WEATHER_URL = "https://api.darksky.net/forecast/\(API_KEY)/\(Location.sharedInstance.currentLatitude),\(Location.sharedInstance.currentLongitude)"
+let CURRENT_WEATHER_URL = "https://api.darksky.net/forecast/\(API_KEY)/\(Location.sharedInstance.currentLatitude!),\(Location.sharedInstance.currentLongitude!)"
 

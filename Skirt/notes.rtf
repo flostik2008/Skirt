@@ -8,15 +8,18 @@
 
 \f1\fs36 \expnd0\expndtw0\kerning0
 \
-0. UI Ready. \
-1. Get current location to display. \
+0. \
+UI Ready. \
+1. \
+Get current location to display. \
 Location implemented, but should be passed to Dark Sky Api, installing Alamofire.\
 (Couldn't install Alamofire 4.3. Problem was - pod update (to updates cocoaPods))\
-2. Create file for constants. Build a link for current weather. \
+2. \
+Create file for constants. Build a link for current weather. \
 Take daily data, take its summary and percepProbab. Icon take from 'icon'. \
 API doesn't provide the location name. But we do have coordinates. -> we can use MapKit and its CLGeocoder. \
 Where would we add that method? In Location class. Done. \
-\
+3.\
 problem: cant get location name and assigned it to locationLbl. Read SO answer. \
 \
 Maybe create a completionHandler in 'getLocationName( )' and inside of it set the currentCity. \
@@ -34,9 +37,20 @@ We declared a func with a completion handler. \
 Then,  we are using it somewhere. Usually, with regular func arguments we would construct those arg outside of the func call, and then pass those arg to a func. \
 With completion handler, the constructing coming from the func declaration. We declare different values of completion handler inside of the func declaration. \
 So, when we actually call the func, we can test different values of completion handler, because it was already set. \
-\
-\
+4.\
 Start parsing JSON data. \
+Strip down the lat/long from "Optional". \
+Simply added "!" at the end, when calling "Location.sharedInstance.currentLatitude!"\
+\
+Parsing JSON. \
+Keep track, when we have a 1 dictionary of key value pairs, and when we have an array of many dictionaries. \
+When parsing JSON file, when typing "dataDict[0]["summary"]" we get into first element of the dataDict array and then we get into that first element and get whatever is under "summary" key. \
+\
+get the "icon" to set our icons. \
+get the "PrecipProbabilty"\
+(under which key temperature sits?)\
+\
+5. \
 \
 \
 Create custom CurrentWather class. Set its vars. \

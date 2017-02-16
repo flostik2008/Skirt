@@ -46,16 +46,18 @@ class CurrentWeather {
     
     func downloadWeatherDetails(completed: @escaping DownloadComplete) {
     
-        // build a url link. call Alamofire.request(   )
         Alamofire.request(CURRENT_WEATHER_URL, method: .get).responseJSON {response in
             let result = response.result
-            
             if let dict = result.value as? Dictionary<String,AnyObject> {
                 
-                
-                
-                
-                
+                if let dailyDict = dict["daily"] as? Dictionary<String,AnyObject> {
+                    if let dataDict = dailyDict["data"] as? [Dictionary<String,AnyObject>]{
+                        if let summary = dataDict[0]["summary"] as? String {
+                            self._weatherSummery = summary
+                            print("Zhenya: Summery is \(self._weatherSummery!)")
+                        }
+                    }
+                }
             }
         completed()
         }

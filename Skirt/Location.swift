@@ -31,18 +31,12 @@ class Location {
                 completionHandler(false)
                 return
             }
+          
             if let city = addressDict["City"] as? String {
                 self.currentCity = city
-                print(city)
             }
-            if let zip = addressDict["ZIP"] as? String {
-                print(zip)
-            }
-            if let country = addressDict["Country"] as? String {
-                print(country)
-            }
+
             completionHandler(true)
-            //self.nowUpdateUI()
         })
     }
 }

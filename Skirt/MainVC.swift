@@ -19,6 +19,8 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
     
     @IBOutlet weak var gradientView: UIView!
     
+    var currentWeather: CurrentWeather!
+
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
     
@@ -28,6 +30,8 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
+        
+        currentWeather = CurrentWeather()
         
         addGradient(color: UIColor.clear, view: gradientView)
     }
@@ -47,22 +51,28 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
             
             Location.sharedInstance.getLocationName { (success) in
                 if success {
-                        //If successfully got response
-                        self.updateUI()
+                        self.updateLocatinLabel()
                 }
             }
             
-            // download data from Dark Sky API
-        
+            currentWeather.downloadWeatherDetails{
+                 self.updateMainUI()
+            }
+            
         } else {
             locationManager.requestWhenInUseAuthorization()
             locationAuthStatus()
         }
     }
     
-    func updateUI() {
-        
+    func updateLocatinLabel() {
             cityLbl.text = Location.sharedInstance.currentCity
+    }
+    
+    func updateMainUI() {
+        // update UI based on currentWeather properties.
+        // 
+        
         
     }
     
