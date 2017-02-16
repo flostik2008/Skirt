@@ -9,8 +9,14 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate  {
+class MainVC: UIViewController, CLLocationManagerDelegate  {
 
+    @IBOutlet weak var cityLbl: UILabel!
+    @IBOutlet weak var weatherTypeImg: UIImageView!
+    @IBOutlet weak var rainChanceLbl: UILabel!
+    @IBOutlet weak var tempLbl: UILabel!
+    @IBOutlet weak var weatherSummeryLbl: UILabel!
+    
     @IBOutlet weak var gradientView: UIView!
     
     let locationManager = CLLocationManager()
@@ -23,7 +29,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate  {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         
-        gradientForDitailsVC(color: UIColor.clear, view: gradientView)
+        addGradient(color: UIColor.clear, view: gradientView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,8 +42,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate  {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
             
-            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
-            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            Location.sharedInstance.currentLatitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
+            
+            Location.sharedInstance.getLocationName { (success) in
+                if success {
+                        //If successfully got response
+                        self.updateUI()
+                }
+            }
             
             // download data from Dark Sky API
         
@@ -47,7 +60,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate  {
         }
     }
     
-    func gradientForDitailsVC(color: UIColor, view: UIView) {
+    func updateUI() {
+        
+            cityLbl.text = Location.sharedInstance.currentCity
+        
+    }
+    
+    func addGradient(color: UIColor, view: UIView) {
         let gradient = CAGradientLayer()
         
         let gradientOrigin = view.bounds.origin

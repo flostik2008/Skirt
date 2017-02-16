@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870650251E4AA7430057AED5 /* AppDelegate.swift */; };
-		870650281E4AA7430057AED5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870650271E4AA7430057AED5 /* ViewController.swift */; };
+		870650281E4AA7430057AED5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870650271E4AA7430057AED5 /* MainVC.swift */; };
 		8706502B1E4AA7440057AED5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 870650291E4AA7440057AED5 /* Main.storyboard */; };
 		8706502E1E4AA7440057AED5 /* Skirt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8706502C1E4AA7440057AED5 /* Skirt.xcdatamodeld */; };
 		870650301E4AA7440057AED5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8706502F1E4AA7440057AED5 /* Assets.xcassets */; };
@@ -17,6 +17,8 @@
 		870650501E4D29E50057AED5 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */; };
 		875CE59C1E4D594000A6B492 /* notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 875CE59B1E4D594000A6B492 /* notes.rtf */; };
 		875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CE5A01E4D6F2F00A6B492 /* Location.swift */; };
+		87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */; };
+		87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */; };
 		CDB6D985F3F3950A39B76931 /* Pods_Skirt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B029A8CFE0AF8D4AA5613D /* Pods_Skirt.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +27,7 @@
 		50B029A8CFE0AF8D4AA5613D /* Pods_Skirt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skirt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		870650221E4AA7430057AED5 /* Skirt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skirt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		870650251E4AA7430057AED5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		870650271E4AA7430057AED5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		870650271E4AA7430057AED5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		8706502A1E4AA7440057AED5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8706502D1E4AA7440057AED5 /* Skirt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Skirt.xcdatamodel; sourceTree = "<group>"; };
 		8706502F1E4AA7440057AED5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,6 +37,8 @@
 		8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		875CE59B1E4D594000A6B492 /* notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = notes.rtf; sourceTree = "<group>"; };
 		875CE5A01E4D6F2F00A6B492 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWather.swift; sourceTree = "<group>"; };
+		87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B8C33E57D35C2D24108E9E3E /* Pods-Skirt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skirt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Skirt/Pods-Skirt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,8 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				870650251E4AA7430057AED5 /* AppDelegate.swift */,
-				870650271E4AA7430057AED5 /* ViewController.swift */,
-				875CE5A01E4D6F2F00A6B492 /* Location.swift */,
+				87F8F1FE1E4E6A18004C1DA7 /* Model */,
+				87F8F1FD1E4E6A09004C1DA7 /* Controller */,
 				870650291E4AA7440057AED5 /* Main.storyboard */,
 				875CE59B1E4D594000A6B492 /* notes.rtf */,
 				8706502F1E4AA7440057AED5 /* Assets.xcassets */,
@@ -84,6 +88,24 @@
 				8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */,
 			);
 			path = Skirt;
+			sourceTree = "<group>";
+		};
+		87F8F1FD1E4E6A09004C1DA7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				870650271E4AA7430057AED5 /* MainVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		87F8F1FE1E4E6A18004C1DA7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				875CE5A01E4D6F2F00A6B492 /* Location.swift */,
+				87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */,
+				87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		CE4B4BDFBEBE34693C2D87AA /* Frameworks */ = {
@@ -231,9 +253,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8706502E1E4AA7440057AED5 /* Skirt.xcdatamodeld in Sources */,
-				870650281E4AA7430057AED5 /* ViewController.swift in Sources */,
+				870650281E4AA7430057AED5 /* MainVC.swift in Sources */,
+				87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */,
 				875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */,
 				870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */,
+				87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

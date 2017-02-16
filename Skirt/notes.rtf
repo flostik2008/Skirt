@@ -10,7 +10,51 @@
 \
 0. UI Ready. \
 1. Get current location to display. \
-Location implemented, but should be passed to Dark Sky Api, installing CocoaPods.\
+Location implemented, but should be passed to Dark Sky Api, installing Alamofire.\
+(Couldn't install Alamofire 4.3. Problem was - pod update (to updates cocoaPods))\
+2. Create file for constants. Build a link for current weather. \
+Take daily data, take its summary and percepProbab. Icon take from 'icon'. \
+API doesn't provide the location name. But we do have coordinates. -> we can use MapKit and its CLGeocoder. \
+Where would we add that method? In Location class. Done. \
+\
+problem: cant get location name and assigned it to locationLbl. Read SO answer. \
+\
+Maybe create a completionHandler in 'getLocationName( )' and inside of it set the currentCity. \
+How do we declare a completion handler, so we can call getLocationName( completion handler ) in MainVC . \
+\
+Task: updateUI( ) in ViewController, only when completionHandler in Location is finished running: \
+Solution: \
+we declared:  getLocationName(completionHandler: @escaping (_ success: BOOL) -> Void ) \{   \}\
+That is a declaration, in MainVC we will use an implementation. \
+Inside of the getLocationName, inside of the reverseGeocodeLocation, we construct that completion handler as completionHandler(false) if we didn't get any placemarks, completionHandler(true) if everything went fine and we got location name. \
+Now, we want to implement getLocationName in MainVC. We call for it ....getLocationName\{(success) in .... \} in MainVC. \
+\
+The idea of completionHandlers: \
+We declared a func with a completion handler. \
+Then,  we are using it somewhere. Usually, with regular func arguments we would construct those arg outside of the func call, and then pass those arg to a func. \
+With completion handler, the constructing coming from the func declaration. We declare different values of completion handler inside of the func declaration. \
+So, when we actually call the func, we can test different values of completion handler, because it was already set. \
+\
+\
+Start parsing JSON data. \
+\
+\
+Create custom CurrentWather class. Set its vars. \
+\
+\
+\
+Create func for Alamofire.request and pass the current weather link. \
+\
+\
+\
+Call for that func in main VC. \
+\
+\
+\
+Update the UI. \
+\
+\
+\
 \
 \
 }
