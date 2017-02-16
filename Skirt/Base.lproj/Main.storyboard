@@ -29,7 +29,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.5w" translatesAutoresizingMaskIntoConstraints="NO" id="F86-Lv-LJF" userLabel="MainPhoto">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F86-Lv-LJF" userLabel="MainPhoto">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjZ-xN-5sf">
@@ -73,7 +73,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloudy" translatesAutoresizingMaskIntoConstraints="NO" id="KBb-BY-E6j" userLabel="WatherType">
-                                        <rect key="frame" x="18" y="-17" width="30" height="30"/>
+                                        <rect key="frame" x="18" y="-13" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="l4u-NT-eYr"/>
                                             <constraint firstAttribute="width" constant="30" id="urW-9g-pIk"/>
@@ -96,7 +96,7 @@
                                     <constraint firstAttribute="trailing" secondItem="YU1-J6-N3W" secondAttribute="trailing" constant="21" id="D44-lO-rx6"/>
                                     <constraint firstItem="KBb-BY-E6j" firstAttribute="leading" secondItem="cES-va-zaA" secondAttribute="leading" constant="18" id="OmW-cz-5vr"/>
                                     <constraint firstItem="YU1-J6-N3W" firstAttribute="top" secondItem="Pj6-Ht-BrJ" secondAttribute="bottom" constant="-2" id="QoV-Gw-TXt"/>
-                                    <constraint firstItem="rkD-LJ-jJK" firstAttribute="top" secondItem="KBb-BY-E6j" secondAttribute="bottom" constant="15" id="VHE-wK-p7H"/>
+                                    <constraint firstItem="rkD-LJ-jJK" firstAttribute="top" secondItem="KBb-BY-E6j" secondAttribute="bottom" constant="11" id="VHE-wK-p7H"/>
                                     <constraint firstAttribute="height" constant="173" id="WHa-px-8Bs"/>
                                     <constraint firstItem="Pj6-Ht-BrJ" firstAttribute="top" secondItem="rkD-LJ-jJK" secondAttribute="bottom" constant="8" id="fJ7-Ge-Mgd"/>
                                     <constraint firstItem="NWh-OU-OOX" firstAttribute="leading" secondItem="rkD-LJ-jJK" secondAttribute="trailing" constant="6" id="fdG-ow-qh5"/>
@@ -122,6 +122,7 @@
                         <outlet property="cityLbl" destination="IjZ-xN-5sf" id="hMi-qv-7ca"/>
                         <outlet property="currentWeatherImg" destination="KBb-BY-E6j" id="0g3-lW-6xg"/>
                         <outlet property="gradientView" destination="cES-va-zaA" id="Rdq-Fl-UHg"/>
+                        <outlet property="outfitImg" destination="F86-Lv-LJF" id="JlU-K5-DC0"/>
                         <outlet property="rainChanceLbl" destination="NWh-OU-OOX" id="bOn-MQ-K9S"/>
                         <outlet property="tempLbl" destination="Pj6-Ht-BrJ" id="BZe-M3-jHY"/>
                         <outlet property="weatherSummeryLbl" destination="YU1-J6-N3W" id="u0X-Rw-gij"/>
@@ -134,7 +135,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1.5w" width="429" height="763"/>
         <image name="Umbrella" width="100" height="100"/>
         <image name="cloudy" width="100" height="100"/>
     </resources>
