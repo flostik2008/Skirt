@@ -48,8 +48,16 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
             
-            Location.sharedInstance.currentLatitude = currentLocation.coordinate.latitude
-            Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
+            if Location.sharedInstance.currentLatitude != nil {
+                Location.sharedInstance.currentLatitude = currentLocation.coordinate.latitude
+            } else {
+                Location.sharedInstance.currentLatitude = 37.773972
+            }
+            if Location.sharedInstance.currentLongitude != nil {
+                Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
+            } else {
+                Location.sharedInstance.currentLongitude = -122.431297
+            }
             
             Location.sharedInstance.getLocationName { (success) in
                 if success {
@@ -83,10 +91,23 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
     
     
     func addGradient(color: UIColor, view: UIView) {
-        let gradient = CAGradientLayer()
         
+        /*
+         let gradient = CAGradientLayer()
+         let gradientOrigin = view.bounds.origin
+         let huy = UIScreen.main.bounds.width
+         let gradientSize = CGSize(width: huy, height: CGFloat(100))
+         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
+         
+         let bottomColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:0.9)
+         gradient.colors = [color.cgColor, bottomColor.cgColor]
+         
+         view.layer.insertSublayer(gradient, at: 0)
+         */
+        
+        let gradient = CAGradientLayer()
         let gradientOrigin = view.bounds.origin
-        let gradientWidth = view.bounds.width
+        let gradientWidth = UIScreen.main.bounds.width
         let gradientHeight = view.bounds.height
         let gradientSize = CGSize(width: gradientWidth, height: gradientHeight)
         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
