@@ -48,16 +48,14 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
             
-            if Location.sharedInstance.currentLatitude != nil {
-                Location.sharedInstance.currentLatitude = currentLocation.coordinate.latitude
-            } else {
-                Location.sharedInstance.currentLatitude = 37.773972
-            }
-            if Location.sharedInstance.currentLongitude != nil {
-                Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
-            } else {
-                Location.sharedInstance.currentLongitude = -122.431297
-            }
+            Location.sharedInstance.currentLatitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
+
+//            if Location.sharedInstance.currentLongitude != nil {
+//                Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
+//            } else {
+//                Location.sharedInstance.currentLongitude = -149.863129
+//            }
             
             Location.sharedInstance.getLocationName { (success) in
                 if success {
