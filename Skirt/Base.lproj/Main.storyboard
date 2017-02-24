@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nGo-QY-wM3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,8 +15,113 @@
         <array key="Roboto-LightItalic.ttf">
             <string>Roboto-LightItalic</string>
         </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
     </customFonts>
     <scenes>
+        <!--Log InVC-->
+        <scene sceneID="rlg-qQ-KCq">
+            <objects>
+                <viewController id="nGo-QY-wM3" customClass="LogInVC" customModule="Skirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M3I-vE-s0W"/>
+                        <viewControllerLayoutGuide type="bottom" id="2hg-pW-ubf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2dT-G4-ZaS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loginBackground" translatesAutoresizingMaskIntoConstraints="NO" id="nBo-Ng-i76">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YUP-LM-3Nx" userLabel="emailTextField">
+                                <rect key="frame" x="37" y="346" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Le2-Gc-ozg"/>
+                                    <constraint firstAttribute="width" constant="270" id="Y13-rB-NYd"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="pass" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RE7-p2-Qwq" userLabel="passTextField">
+                                <rect key="frame" x="52" y="430" width="270" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="6Se-6G-Oae"/>
+                                    <constraint firstAttribute="height" constant="30" id="UsX-Sn-nUm"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSG-VH-3tG" userLabel="signUpBtn">
+                                <rect key="frame" x="52" y="480" width="270" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aXC-Ii-f5A"/>
+                                    <constraint firstAttribute="width" constant="270" id="heC-1p-mZH"/>
+                                </constraints>
+                                <state key="normal" image="signUpBtn"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHb-bR-qX6" userLabel="fbBtn">
+                                <rect key="frame" x="52" y="567" width="270" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="O38-0O-mDg"/>
+                                    <constraint firstAttribute="width" constant="270" id="z2w-Cw-OLe"/>
+                                </constraints>
+                                <state key="normal" image="fbBtn"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bw7-Ub-Kzs" userLabel="orLogIngBtn">
+                                <rect key="frame" x="160" y="642" width="55" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="uUJ-15-8Kx"/>
+                                    <constraint firstAttribute="height" constant="16" id="xiO-ic-6QI"/>
+                                </constraints>
+                                <state key="normal" image="orlogIn"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jRD-Bv-rLU">
+                                <rect key="frame" x="179" y="538" width="16" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7Yx-he-Zgi"/>
+                                    <constraint firstAttribute="width" constant="16" id="rb4-4b-vVP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nBo-Ng-i76" firstAttribute="leading" secondItem="2dT-G4-ZaS" secondAttribute="leading" id="17x-lC-fgE"/>
+                            <constraint firstAttribute="trailing" secondItem="nBo-Ng-i76" secondAttribute="trailing" id="3Vh-rD-HT6"/>
+                            <constraint firstItem="nBo-Ng-i76" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="5Rk-JA-lKc"/>
+                            <constraint firstItem="kHb-bR-qX6" firstAttribute="top" secondItem="jRD-Bv-rLU" secondAttribute="bottom" constant="8" id="9aW-Vn-t4w"/>
+                            <constraint firstItem="nBo-Ng-i76" firstAttribute="top" secondItem="2dT-G4-ZaS" secondAttribute="top" id="GI1-dC-xVo"/>
+                            <constraint firstItem="2hg-pW-ubf" firstAttribute="top" secondItem="Bw7-Ub-Kzs" secondAttribute="bottom" constant="9" id="Ovy-fY-VIb"/>
+                            <constraint firstItem="jRD-Bv-rLU" firstAttribute="top" secondItem="kSG-VH-3tG" secondAttribute="bottom" constant="8" id="PPq-hr-agA"/>
+                            <constraint firstItem="2hg-pW-ubf" firstAttribute="top" secondItem="nBo-Ng-i76" secondAttribute="bottom" id="Rrz-x6-SC4"/>
+                            <constraint firstItem="RE7-p2-Qwq" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="XhR-e9-86x"/>
+                            <constraint firstItem="RE7-p2-Qwq" firstAttribute="top" secondItem="YUP-LM-3Nx" secondAttribute="bottom" constant="15" id="dKn-Y6-S1Z"/>
+                            <constraint firstItem="kSG-VH-3tG" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="dpF-20-8Gp"/>
+                            <constraint firstItem="nBo-Ng-i76" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="g73-dK-lfg"/>
+                            <constraint firstItem="Bw7-Ub-Kzs" firstAttribute="top" secondItem="kHb-bR-qX6" secondAttribute="bottom" constant="25" id="gKO-4p-48D"/>
+                            <constraint firstItem="Bw7-Ub-Kzs" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="kUT-xM-DsD"/>
+                            <constraint firstItem="YUP-LM-3Nx" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="kfy-W4-cvO"/>
+                            <constraint firstItem="jRD-Bv-rLU" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="l7h-hf-6l7"/>
+                            <constraint firstItem="kHb-bR-qX6" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="qqr-MG-u3J"/>
+                            <constraint firstItem="nBo-Ng-i76" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="vri-kE-16q"/>
+                            <constraint firstItem="kSG-VH-3tG" firstAttribute="top" secondItem="RE7-p2-Qwq" secondAttribute="bottom" constant="20" id="xag-Yc-jko"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="YUP-LM-3Nx" id="8v4-v5-Egk"/>
+                        <outlet property="passTextField" destination="RE7-p2-Qwq" id="5nr-Sa-uoq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R2a-yO-yeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-732" y="144.3778110944528"/>
+        </scene>
         <!--MainVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -137,5 +242,9 @@
     <resources>
         <image name="Umbrella" width="100" height="100"/>
         <image name="cloudy" width="100" height="100"/>
+        <image name="fbBtn" width="299" height="60"/>
+        <image name="loginBackground" width="375" height="667"/>
+        <image name="orlogIn" width="71" height="20"/>
+        <image name="signUpBtn" width="299" height="60"/>
     </resources>
 </document>
