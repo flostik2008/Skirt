@@ -15,9 +15,11 @@
 		870650331E4AA7440057AED5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 870650311E4AA7440057AED5 /* LaunchScreen.storyboard */; };
 		8706504F1E4D29E20057AED5 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */; };
 		870650501E4D29E50057AED5 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */; };
+		8711B9741E610B9A007F344B /* LineSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8711B9731E610B9A007F344B /* LineSeparator.swift */; };
 		873516A61E60DF4F00F5C550 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873516A51E60DF4F00F5C550 /* LogInVC.swift */; };
 		875CE59C1E4D594000A6B492 /* notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 875CE59B1E4D594000A6B492 /* notes.rtf */; };
 		875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CE5A01E4D6F2F00A6B492 /* Location.swift */; };
+		87AA3C211E616E1D00CC5589 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */; };
 		87DB98601E5F7CB300EECC1F /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87DB985F1E5F7CB300EECC1F /* Roboto-Regular.ttf */; };
 		87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */; };
 		87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */; };
@@ -37,9 +39,12 @@
 		870650341E4AA7440057AED5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		8711B9731E610B9A007F344B /* LineSeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineSeparator.swift; sourceTree = "<group>"; };
 		873516A51E60DF4F00F5C550 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		875CE59B1E4D594000A6B492 /* notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = notes.rtf; sourceTree = "<group>"; };
 		875CE5A01E4D6F2F00A6B492 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		87AA3C1F1E616BAC00CC5589 /* Skirt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Skirt.entitlements; sourceTree = "<group>"; };
+		87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87DB985F1E5F7CB300EECC1F /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWather.swift; sourceTree = "<group>"; };
 		87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -79,13 +84,16 @@
 		870650241E4AA7430057AED5 /* Skirt */ = {
 			isa = PBXGroup;
 			children = (
+				87AA3C1F1E616BAC00CC5589 /* Skirt.entitlements */,
 				870650251E4AA7430057AED5 /* AppDelegate.swift */,
 				87F8F1FE1E4E6A18004C1DA7 /* Model */,
+				8711B9721E610B88007F344B /* View */,
 				87F8F1FD1E4E6A09004C1DA7 /* Controller */,
 				870650291E4AA7440057AED5 /* Main.storyboard */,
 				875CE59B1E4D594000A6B492 /* notes.rtf */,
 				8706502F1E4AA7440057AED5 /* Assets.xcassets */,
 				870650341E4AA7440057AED5 /* Info.plist */,
+				87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */,
 				8706502C1E4AA7440057AED5 /* Skirt.xcdatamodeld */,
 				8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */,
 				8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */,
@@ -93,6 +101,14 @@
 				870650311E4AA7440057AED5 /* LaunchScreen.storyboard */,
 			);
 			path = Skirt;
+			sourceTree = "<group>";
+		};
+		8711B9721E610B88007F344B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8711B9731E610B9A007F344B /* LineSeparator.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		87F8F1FD1E4E6A09004C1DA7 /* Controller */ = {
@@ -168,6 +184,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = PC6ZE95SDH;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -195,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				875CE59C1E4D594000A6B492 /* notes.rtf in Resources */,
+				87AA3C211E616E1D00CC5589 /* GoogleService-Info.plist in Resources */,
 				87DB98601E5F7CB300EECC1F /* Roboto-Regular.ttf in Resources */,
 				870650331E4AA7440057AED5 /* LaunchScreen.storyboard in Resources */,
 				8706504F1E4D29E20057AED5 /* Roboto-Italic.ttf in Resources */,
@@ -266,6 +288,7 @@
 				875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */,
 				870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */,
 				87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */,
+				8711B9741E610B9A007F344B /* LineSeparator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +412,7 @@
 			baseConfigurationReference = 2394E4E5A8BAD846738052FC /* Pods-Skirt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Skirt/Skirt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Evgeny Vlasov (PC6ZE95SDH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
@@ -409,6 +433,7 @@
 			baseConfigurationReference = B8C33E57D35C2D24108E9E3E /* Pods-Skirt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Skirt/Skirt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Evgeny Vlasov (PC6ZE95SDH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";

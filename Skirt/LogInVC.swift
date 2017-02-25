@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LogInVC: UIViewController {
 
@@ -15,6 +18,8 @@ class LogInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 75
 
     }
     
@@ -41,6 +46,23 @@ class LogInVC: UIViewController {
         
     }
     
+    @IBAction func fbLogIn(_ sender: Any) {
+        
+        let facebookLogin = FBSDKLoginManager()
+        
+        facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            if error != nil {
+                print("Zhenya: unable to login with fb")
+            } else if result?.isCancelled == true {
+                print("Zhenya: user canceled login")
+            }  else {
+                print("Zhenya: successfully loged in with fb")
+                //smth related to firebase
+                // let cridentials = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                //
+            }
+        }
+    }
 }
 
 

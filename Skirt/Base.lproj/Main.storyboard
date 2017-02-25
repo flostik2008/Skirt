@@ -70,6 +70,9 @@
                                     <constraint firstAttribute="width" constant="270" id="z2w-Cw-OLe"/>
                                 </constraints>
                                 <state key="normal" image="fbBtn"/>
+                                <connections>
+                                    <action selector="fbLogIn:" destination="nGo-QY-wM3" eventType="touchUpInside" id="NSq-AZ-V9t"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bw7-Ub-Kzs" userLabel="orLogIngBtn">
                                 <rect key="frame" x="160" y="642" width="55" height="16"/>
@@ -89,6 +92,13 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d2G-ma-sHF" userLabel="LineSeparator" customClass="LineSeparator" customModule="Skirt" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="626" width="375" height="13"/>
+                                <color key="backgroundColor" red="0.1647058824" green="0.1764705882" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="7uz-gj-XjL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -96,6 +106,7 @@
                             <constraint firstAttribute="trailing" secondItem="nBo-Ng-i76" secondAttribute="trailing" id="3Vh-rD-HT6"/>
                             <constraint firstItem="nBo-Ng-i76" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="5Rk-JA-lKc"/>
                             <constraint firstItem="kHb-bR-qX6" firstAttribute="top" secondItem="jRD-Bv-rLU" secondAttribute="bottom" constant="8" id="9aW-Vn-t4w"/>
+                            <constraint firstAttribute="trailing" secondItem="d2G-ma-sHF" secondAttribute="trailing" id="9hD-XP-6EH"/>
                             <constraint firstItem="nBo-Ng-i76" firstAttribute="top" secondItem="2dT-G4-ZaS" secondAttribute="top" id="GI1-dC-xVo"/>
                             <constraint firstItem="2hg-pW-ubf" firstAttribute="top" secondItem="Bw7-Ub-Kzs" secondAttribute="bottom" constant="9" id="Ovy-fY-VIb"/>
                             <constraint firstItem="jRD-Bv-rLU" firstAttribute="top" secondItem="kSG-VH-3tG" secondAttribute="bottom" constant="8" id="PPq-hr-agA"/>
@@ -111,6 +122,8 @@
                             <constraint firstItem="kHb-bR-qX6" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="qqr-MG-u3J"/>
                             <constraint firstItem="nBo-Ng-i76" firstAttribute="centerX" secondItem="2dT-G4-ZaS" secondAttribute="centerX" id="vri-kE-16q"/>
                             <constraint firstItem="kSG-VH-3tG" firstAttribute="top" secondItem="RE7-p2-Qwq" secondAttribute="bottom" constant="20" id="xag-Yc-jko"/>
+                            <constraint firstItem="Bw7-Ub-Kzs" firstAttribute="top" secondItem="d2G-ma-sHF" secondAttribute="bottom" constant="7" id="xsh-Cy-Mhb"/>
+                            <constraint firstItem="d2G-ma-sHF" firstAttribute="leading" secondItem="2dT-G4-ZaS" secondAttribute="leading" id="zhj-FD-MOQ"/>
                         </constraints>
                     </view>
                     <connections>
