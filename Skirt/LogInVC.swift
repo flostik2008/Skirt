@@ -10,15 +10,19 @@ import UIKit
 import IQKeyboardManagerSwift
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Firebase
 
 class LogInVC: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
     
+    @IBOutlet weak var fbBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        fbBtn.layer.borderWidth = 0.0;
+
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 75
 
     }
@@ -58,9 +62,41 @@ class LogInVC: UIViewController {
             }  else {
                 print("Zhenya: successfully loged in with fb")
                 //smth related to firebase
-                // let cridentials = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                //
+                 let credentials = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                self.firebaseAuth(credentials)
             }
+        }
+    }
+    
+    func firebaseAuth(_ credential: FIRAuthCredential) {
+        FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
+            if error != nil {
+                print("Zhenya: Unable to login with Firebase")
+            } else {
+                print("Zhenya: Successfully loged in eith Firebase")
+            }
+        })
+    }
+    
+    // this is not a sign Up button, this is for the log in, button.
+    
+    @IBAction func signUpBtn(_ sender: Any) {
+        if let email = emailTextField.text, let pass = passTextField.text {
+            
+            FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
+                if error == nil {
+                    print("Zhenya: User loged in with email and pass through Firebase")
+                } else {
+                    // there wasn't a user with such email/pass, create a new one.
+                    FIRAuth.auth()?.createUser(withEmail: email, password: pass, completion: { (user, error) in
+                        if error != nil {
+                            print("Zhenya: unable to create user with this email with Firebase")
+                        } else {
+                            print("Zhenya: successfully created user with this email/pass with Firebase")
+                        }
+                    })
+                }
+            })
         }
     }
 }
