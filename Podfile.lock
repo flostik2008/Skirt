@@ -57,6 +57,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.8)
   - IQKeyboardManagerSwift (4.0.8)
+  - SwiftKeychainWrapper (3.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
@@ -66,6 +67,17 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - IQKeyboardManagerSwift
+  - SwiftKeychainWrapper (from `https://github.com/jrendel/SwiftKeychainWrapper.git`, branch `master`)
+
+EXTERNAL SOURCES:
+  SwiftKeychainWrapper:
+    :branch: master
+    :git: https://github.com/jrendel/SwiftKeychainWrapper.git
+
+CHECKOUT OPTIONS:
+  SwiftKeychainWrapper:
+    :commit: 46e5980ee7630be015aae6a6307c2fe1e8f3661d
+    :git: https://github.com/jrendel/SwiftKeychainWrapper.git
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -84,7 +96,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  SwiftKeychainWrapper: e353c2d5ac22e72ff7c1dc3b1de1f0e7341ba030
 
-PODFILE CHECKSUM: 7b8817c03c9627c3e0c895d607c731997332136a
+PODFILE CHECKSUM: ba5a64e994e1d4a3edbe2d943dcb96b102b7e775
 
 COCOAPODS: 1.1.0.rc.2

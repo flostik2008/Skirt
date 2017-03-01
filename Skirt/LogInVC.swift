@@ -11,20 +11,42 @@ import IQKeyboardManagerSwift
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import SwiftKeychainWrapper
+
 
 class LogInVC: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
     
-    @IBOutlet weak var fbBtn: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        fbBtn.layer.borderWidth = 0.0;
 
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 75
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        /*
+         // if user already exists in keychain:
+         if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+         print("Zhenya: ID found in keychain")
+         
+         // how to check if I have userName or not?
+         userNameRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
+         
+         userNameRef.observe(.value, with:{ (snapshot) in
+         let snapshotValue = snapshot.value
+         if snapshotValue == nil {
+         self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+         } else {
+         
+         self.performSegue(withIdentifier: "FeedVC", sender: nil)
+         }
+         })
+         }
 
+        */
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,20 +72,49 @@ class LogInVC: UIViewController {
         
     }
     
-    @IBAction func fbLogIn(_ sender: Any) {
-        
+    @IBAction func signUpBtn(_ sender: Any) {
+        if let email = emailTextField.text, let pwd = passTextField.text {
+            FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                if error == nil {
+                    print("Zhenya: Email user authenticated with Firebase")
+                    if let user = user {
+                        let userData = ["provider": user.providerID]
+                        self.completeSignIn(id: user.uid, userData: userData)
+                    }
+                } else {
+                    FIRAuth.auth()?.createUser(withEmail: email, password: pwd) { (user, error) in
+                        if error != nil {
+                            print("Zhenya: Unable to authenticate with Firbase using email")
+                            print("Zhenya: \(error.debugDescription)")
+                            
+                        } else {
+                            print("Zhenya: Successfully authenticated with Firbase")
+                            if let user = user {
+                                let userData = ["provider": user.providerID]
+                                self.completeSignIn(id: user.uid, userData: userData)
+                            }
+                        }
+                    }
+                 }
+            })
+        }
+    }
+
+    
+    @IBAction func fbLoginBtn(_ sender: Any) {
         let facebookLogin = FBSDKLoginManager()
         
         facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+            
             if error != nil {
-                print("Zhenya: unable to login with fb")
+                print("Zhenya: Цукерман не может залогиниться \(error)" )
             } else if result?.isCancelled == true {
-                print("Zhenya: user canceled login")
-            }  else {
-                print("Zhenya: successfully loged in with fb")
-                //smth related to firebase
-                 let credentials = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                self.firebaseAuth(credentials)
+                print("Zhenya: User canceled FB authentication")
+            } else {
+                print("Zhenya: Successfully athenticated with FB")
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                
+                self.firebaseAuth(credential)
             }
         }
     }
@@ -74,31 +125,24 @@ class LogInVC: UIViewController {
                 print("Zhenya: Unable to login with Firebase")
             } else {
                 print("Zhenya: Successfully loged in eith Firebase")
+                if let user = user {
+                    let userData = ["provider": credential.provider]
+                    self.completeSignIn(id: user.uid, userData: userData)
+                }
             }
         })
     }
     
-    // this is not a sign Up button, this is for the log in, button.
-    
-    @IBAction func signUpBtn(_ sender: Any) {
-        if let email = emailTextField.text, let pass = passTextField.text {
-            
-            FIRAuth.auth()?.signIn(withEmail: email, password: pass, completion: { (user, error) in
-                if error == nil {
-                    print("Zhenya: User loged in with email and pass through Firebase")
-                } else {
-                    // there wasn't a user with such email/pass, create a new one.
-                    FIRAuth.auth()?.createUser(withEmail: email, password: pass, completion: { (user, error) in
-                        if error != nil {
-                            print("Zhenya: unable to create user with this email with Firebase")
-                        } else {
-                            print("Zhenya: successfully created user with this email/pass with Firebase")
-                        }
-                    })
-                }
-            })
-        }
+    func completeSignIn(id: String, userData: Dictionary<String, String>) {
+        
+        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
+        
+        let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("Zhenya: Data saved to keychain \(keychainResult)")
+        
+        performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
     }
+
 }
 
 

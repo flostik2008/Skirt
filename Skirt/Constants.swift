@@ -21,3 +21,4 @@ typealias DownloadComplete = ()->()
 
 let CURRENT_WEATHER_URL = "https://api.darksky.net/forecast/\(API_KEY)/\(Location.sharedInstance.currentLatitude!),\(Location.sharedInstance.currentLongitude!)?exclude=minutely,alerts,flags"
 
+let KEY_UID = "uid"
