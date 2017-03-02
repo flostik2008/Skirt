@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import Firebase
 
-class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var genderPickerTextField: UITextField!
+    @IBOutlet weak var userpicImg: UIImageView!
     
     var genderPicker = UIPickerView()
     let genders = ["female", "male", "gender fluid"]
+    
+    var imagePicker: UIImagePickerController!
+    var usernameRef: FIRDatabaseReference!
+    var genderRef: FIRDatabaseReference!
+    var avatarRef: FIRDatabaseReference!
+    var avatarUrl: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +31,80 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         genderPicker.dataSource = self
         genderPickerTextField.inputView = genderPicker
         
+        let userpicImgBordeWidth: CGFloat = 1
+        userpicImg.layer.cornerRadius = userpicImg.frame.size.width/2
+        userpicImg.layer.borderColor = UIColor.darkGray.cgColor
+        userpicImg.layer.borderWidth = userpicImgBordeWidth
+        userpicImg.clipsToBounds = true
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
+        usernameRef.observe(.value, with:{ (snapshot) in
+            let snapshotValue = snapshot.value as? String
+            
+            
+            if snapshotValue != nil || snapshotValue != "" {
+                self.usernameTextField.text = snapshotValue
+            }
+        })
+        
+        genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
+        genderRef.observe(.value, with:{ (snapshot) in
+            let snapshotValue = snapshot.value as? String
+            
+            if snapshotValue != nil || snapshotValue != "" {
+                self.genderPickerTextField.text = snapshotValue
+            }
+        })
+
+        // need to make a check if avatarURL is nil 
+        
+        avatarRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
+        avatarRef.observe(.value, with:{(snapshot) in
+            
+            let snapshotValue = snapshot.value as? String
+          //  self.avatarUrl = snapshotValue
+         
+            if snapshotValue != nil {
+                FIRStorage.storage().reference(forURL: snapshotValue!).data(withMaxSize: 25*1024*1024, completion: {(data, error) -> Void
+                    in
+                    let image = UIImage(data: data!)
+                    self.userpicImg.image = image!
+                    
+                })
+            }
+
+        })
+        
+        
+        
+        // set up image if available. 
+        /*
+         // Create a reference to the file you want to download
+         let islandRef = storageRef.child("images/island.jpg")
+         
+         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+         islandRef.data(withMaxSize: 1 * 1024 * 1024) { data, error in
+         if let error = error {
+         // Uh-oh, an error occurred!
+         } else {
+         // Data for "images/island.jpg" is returned
+         let image = UIImage(data: data!)
+         }
+         }
+         
+         
+         self.storage.referenceForURL(url).dataWithMaxSize(25 * 1024 * 1024, completion: { (data, error) -> Void in
+         let image = UIImage(data: data!)
+         chatMessage.image = image!
+         self.messages.append(chatMessage)
+         self.tableView.reloadData()
+         self.scrollToBottom()
+         })
+         
+        */
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,6 +130,7 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         
     }
 
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let title = genders[row]
         return title
@@ -68,9 +151,151 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
     }
     
     
+    @IBAction func chooseUserPicBtn(_ sender: Any) {
     
+        let alertController = UIAlertController(title: "Choose source of image:", message: nil, preferredStyle: .actionSheet)
+        
+        let takePicAction = UIAlertAction(title: "Take Photo", style: .default) { (action) in
+            let picker = UIImagePickerController()
+            if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+                picker.sourceType = UIImagePickerControllerSourceType.camera
+                picker.delegate = self
+                picker.allowsEditing = false
+                
+                self.present(picker, animated: true, completion: nil)
+            }
+            else {
+                print("Coudn't open the camera")
+            }
+        }
+        alertController.addAction(takePicAction)
+        
+        let choosePicAction = UIAlertAction(title: "Choose from Library", style: .default) { (action) in
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        
+        alertController.addAction(choosePicAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            userpicImg.image = image
+        }
+        self.dismiss(animated: true, completion: nil)
+        
+    }
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+        
+    }
     
-    
+    @IBAction func saveBtn(_ sender: Any) {
+        
+        //username:
+        usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
+        
+        if let userName = usernameTextField.text, userName != "" {
+            
+            print("Zhenya: Successfully saved username to FireBase")
+            usernameRef.setValue(userName)
+            
+        } else {
+            print("Zhenya: No caption was enetered")
+            // show alert view "username/gender/userpic are required"
+
+        }
+        
+        //gender
+        genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
+        
+        if let gender = genderPickerTextField.text, gender != "" {
+        
+            print("Zhenya: Successfully saved gender to Firebase")
+            genderRef.setValue(gender)
+        } else {
+            print("Zhenya: no gender was chosen")
+        }
+        
+        
+        //userpic url:
+        avatarRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
+        
+        guard let img = userpicImg.image else {
+            print("Zhenya: No image was selected")
+            return
+        }
+        
+        if let imgData = UIImageJPEGRepresentation(img, 0.2) {
+            
+            let imgUid = NSUUID().uuidString
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            // here we take avatar (imgData) and save it to Fireabase (we did the same in "postBtnPressed"):
+            
+            print("Zhenya: here is my avatar: \(imgData)")
+            
+            DataService.ds.REF_USER_AVATARS.child(imgUid).put(imgData, metadata: metadata) {(metadata, error) in
+                
+                if error != nil {
+                    print("Zhenya: UserAvatar didn't upload to Firebase: \(error.debugDescription)" )
+                    return
+
+                } else {
+                    print("Zhenya: UserAvatar successfully uploaded to Firebase")
+                    
+                    //getting the url to saved imageData to save it
+                    let downloadUrl = metadata?.downloadURL()?.absoluteString
+                    
+                    if let url = downloadUrl {
+                        self.avatarRef.setValue(downloadUrl)
+                    }
+                }
+            }
+        }
+        
+        view.endEditing(true)
+        
+        if usernameTextField.text != nil, genderPickerTextField != nil, userpicImg.image != nil {
+            performSegue(withIdentifier: "FeedVC", sender: nil)
+        } else {
+            let alertController = UIAlertController(title: "Please fill all fields", message: "don't forget about userpic", preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
+            
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

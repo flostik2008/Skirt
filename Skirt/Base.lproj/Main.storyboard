@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="EhL-nZ-GzR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nGo-QY-wM3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -15,6 +14,9 @@
         </array>
         <array key="Roboto-LightItalic.ttf">
             <string>Roboto-LightItalic</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
         </array>
     </customFonts>
     <scenes>
@@ -59,7 +61,7 @@
                                     <constraint firstAttribute="width" constant="420" id="FER-CP-qxJ"/>
                                     <constraint firstAttribute="height" constant="84" id="aXC-Ii-f5A"/>
                                 </constraints>
-                                <state key="normal" image="signUpBtn420"/>
+                                <state key="normal" image="signUpBtn"/>
                                 <connections>
                                     <action selector="signUpBtn:" destination="nGo-QY-wM3" eventType="touchUpInside" id="Q0K-bG-cog"/>
                                 </connections>
@@ -70,7 +72,7 @@
                                     <constraint firstAttribute="height" constant="84" id="O38-0O-mDg"/>
                                     <constraint firstAttribute="width" constant="420" id="eJF-xa-Jyk"/>
                                 </constraints>
-                                <state key="normal" image="fbBtn416"/>
+                                <state key="normal" image="fbBtn"/>
                                 <connections>
                                     <action selector="fbLoginBtn:" destination="nGo-QY-wM3" eventType="touchUpInside" id="LfI-Um-LhT"/>
                                 </connections>
@@ -98,6 +100,8 @@
                     <connections>
                         <outlet property="emailTextField" destination="YUP-LM-3Nx" id="8v4-v5-Egk"/>
                         <outlet property="passTextField" destination="RE7-p2-Qwq" id="5nr-Sa-uoq"/>
+                        <segue destination="EhL-nZ-GzR" kind="show" identifier="CreateUsernameVC" id="YTy-Cl-w5P"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="FeedVC" id="ayJ-SA-eQg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2a-yO-yeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -116,13 +120,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="skirtIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ia2-8q-fPT">
-                                <rect key="frame" x="84" y="292" width="206" height="192"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="192" id="I8v-o2-Bhh"/>
-                                    <constraint firstAttribute="width" constant="206" id="MM6-UH-kRP"/>
-                                </constraints>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oic-rf-5Uc">
                                 <rect key="frame" x="78" y="119" width="219" height="30"/>
                                 <constraints>
@@ -130,7 +127,7 @@
                                     <constraint firstAttribute="height" constant="30" id="icY-jZ-cHd"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="I'm a: " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGj-OR-R8o">
@@ -140,32 +137,58 @@
                                     <constraint firstAttribute="height" constant="30" id="ibA-ks-G2t"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backIcon" translatesAutoresizingMaskIntoConstraints="NO" id="gGm-mZ-vbD">
-                                <rect key="frame" x="19" y="36" width="15" height="27"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="addUserPic" translatesAutoresizingMaskIntoConstraints="NO" id="Gz3-Pm-ntZ" userLabel="AddUserPicImg">
+                                <rect key="frame" x="95" y="229" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="KXB-cv-zET"/>
-                                    <constraint firstAttribute="height" constant="27" id="WgA-MS-7nc"/>
+                                    <constraint firstAttribute="width" constant="150" id="4Jb-vF-n4y"/>
+                                    <constraint firstAttribute="height" constant="150" id="yit-bC-HWm"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dZ-jf-TuB" userLabel="AddUserPicBtn">
+                                <rect key="frame" x="142" y="245" width="90" height="90"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseUserPicBtn:" destination="EhL-nZ-GzR" eventType="touchUpInside" id="ZN2-Vy-8nG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CaD-RU-Qpf">
+                                <rect key="frame" x="38" y="578" width="299" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="HGl-ki-GgA"/>
+                                    <constraint firstAttribute="width" constant="299" id="Tm4-Ao-L0X"/>
+                                </constraints>
+                                <state key="normal" image="saveBtn"/>
+                                <connections>
+                                    <action selector="saveBtn:" destination="EhL-nZ-GzR" eventType="touchUpInside" id="N2W-98-tvF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Gz3-Pm-ntZ" firstAttribute="centerX" secondItem="IQh-Q0-gp9" secondAttribute="centerX" id="3Zl-cZ-auO"/>
+                            <constraint firstItem="Gz3-Pm-ntZ" firstAttribute="top" secondItem="iGj-OR-R8o" secondAttribute="bottom" constant="59" id="6pe-Ql-aAk"/>
                             <constraint firstItem="Oic-rf-5Uc" firstAttribute="centerX" secondItem="IQh-Q0-gp9" secondAttribute="centerX" id="CYa-GK-gEF"/>
-                            <constraint firstItem="ia2-8q-fPT" firstAttribute="centerX" secondItem="IQh-Q0-gp9" secondAttribute="centerX" id="Es6-J7-iv1"/>
-                            <constraint firstItem="gGm-mZ-vbD" firstAttribute="top" secondItem="GHv-Xe-ref" secondAttribute="bottom" constant="16" id="NuF-Ea-k5C"/>
                             <constraint firstItem="Oic-rf-5Uc" firstAttribute="top" secondItem="GHv-Xe-ref" secondAttribute="bottom" constant="99" id="TA8-eJ-kmt"/>
+                            <constraint firstItem="6Zs-wP-uK6" firstAttribute="top" secondItem="CaD-RU-Qpf" secondAttribute="bottom" constant="29" id="U3g-Uv-8aO"/>
                             <constraint firstItem="iGj-OR-R8o" firstAttribute="top" secondItem="Oic-rf-5Uc" secondAttribute="bottom" constant="19" id="WFn-3Y-5Ax"/>
+                            <constraint firstItem="5dZ-jf-TuB" firstAttribute="height" secondItem="Gz3-Pm-ntZ" secondAttribute="height" id="WIi-1q-FWu"/>
+                            <constraint firstItem="5dZ-jf-TuB" firstAttribute="centerY" secondItem="Gz3-Pm-ntZ" secondAttribute="centerY" id="WmB-ND-mMy"/>
+                            <constraint firstItem="5dZ-jf-TuB" firstAttribute="centerX" secondItem="Gz3-Pm-ntZ" secondAttribute="centerX" id="XBY-ka-4yF"/>
+                            <constraint firstItem="CaD-RU-Qpf" firstAttribute="centerX" secondItem="IQh-Q0-gp9" secondAttribute="centerX" id="XxD-Y7-xjx"/>
                             <constraint firstItem="iGj-OR-R8o" firstAttribute="centerX" secondItem="IQh-Q0-gp9" secondAttribute="centerX" id="fOI-ck-LPS"/>
-                            <constraint firstItem="ia2-8q-fPT" firstAttribute="top" secondItem="GHv-Xe-ref" secondAttribute="bottom" constant="272" id="oz1-gW-t4U"/>
-                            <constraint firstItem="gGm-mZ-vbD" firstAttribute="leading" secondItem="IQh-Q0-gp9" secondAttribute="leadingMargin" constant="3" id="rEy-fK-B8L"/>
+                            <constraint firstItem="5dZ-jf-TuB" firstAttribute="width" secondItem="Gz3-Pm-ntZ" secondAttribute="width" id="wK7-eS-jOK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="genderPickerTextField" destination="iGj-OR-R8o" id="X2o-aZ-xxD"/>
                         <outlet property="usernameTextField" destination="Oic-rf-5Uc" id="OEZ-Bq-qlf"/>
+                        <outlet property="userpicImg" destination="Gz3-Pm-ntZ" id="fyG-LE-XFh"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="FeedVC" id="8mW-W5-tAR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqa-es-BrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -286,7 +309,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="145.27736131934034"/>
+            <point key="canvasLocation" x="126" y="262"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bN5-to-OIH">
@@ -309,11 +332,14 @@
     </scenes>
     <resources>
         <image name="Umbrella" width="100" height="100"/>
-        <image name="backIcon" width="51" height="84"/>
+        <image name="addUserPic" width="153" height="153"/>
         <image name="backgroundPic" width="375" height="667"/>
         <image name="cloudy" width="100" height="100"/>
-        <image name="fbBtn416" width="416" height="84"/>
-        <image name="signUpBtn420" width="420" height="84"/>
-        <image name="skirtIcon" width="200" height="200"/>
+        <image name="fbBtn" width="832" height="168"/>
+        <image name="saveBtn" width="299" height="60"/>
+        <image name="signUpBtn" width="840" height="168"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="ayJ-SA-eQg"/>
+    </inferredMetricsTieBreakers>
 </document>

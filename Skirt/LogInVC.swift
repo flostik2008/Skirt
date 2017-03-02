@@ -19,6 +19,10 @@ class LogInVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
     
+    var avatarUrlRef: FIRDatabaseReference!
+    var usernameRef: FIRDatabaseReference!
+    var genderRef: FIRDatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,27 +30,49 @@ class LogInVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        /*
+
          // if user already exists in keychain:
          if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
-         print("Zhenya: ID found in keychain")
+            print("Zhenya: ID found in keychain")
          
-         // how to check if I have userName or not?
-         userNameRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
-         
-         userNameRef.observe(.value, with:{ (snapshot) in
-         let snapshotValue = snapshot.value
-         if snapshotValue == nil {
-         self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
-         } else {
-         
-         self.performSegue(withIdentifier: "FeedVC", sender: nil)
-         }
-         })
-         }
+            // If user has avatarUrl/username/gender in Firebase - FeedVC, if not - CreateUsernameVC
+            
+           avatarUrlRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
+            
+           avatarUrlRef.observe(.value, with:{ (snapshot) in
+                let snapshotValue = snapshot.value as? String
+                
+                if snapshotValue == nil || snapshotValue == "" {
+                    self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                }
+            })
+            
+            usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
+            usernameRef.observe(.value, with:{ (snapshot) in
+                let snapshotValue = snapshot.value as? String
+                
+                if snapshotValue == nil || snapshotValue == "" {
+                    self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                }
+            })
+            
+            genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
+            genderRef.observe(.value, with:{ (snapshot) in
+                let snapshotValue = snapshot.value as? String
+                
+                if snapshotValue == nil || snapshotValue == "" {
+                    self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+                } else {
+                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                }
+            })
 
-        */
+            
+         }
     }
     
     override func viewDidLayoutSubviews() {
