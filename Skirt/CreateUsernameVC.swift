@@ -59,52 +59,20 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
             }
         })
 
-        // need to make a check if avatarURL is nil 
-        
         avatarRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
         avatarRef.observe(.value, with:{(snapshot) in
             
             let snapshotValue = snapshot.value as? String
-          //  self.avatarUrl = snapshotValue
-         
             if snapshotValue != nil {
                 FIRStorage.storage().reference(forURL: snapshotValue!).data(withMaxSize: 25*1024*1024, completion: {(data, error) -> Void
                     in
                     let image = UIImage(data: data!)
                     self.userpicImg.image = image!
-                    
                 })
             }
-
         })
         
         
-        
-        // set up image if available. 
-        /*
-         // Create a reference to the file you want to download
-         let islandRef = storageRef.child("images/island.jpg")
-         
-         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-         islandRef.data(withMaxSize: 1 * 1024 * 1024) { data, error in
-         if let error = error {
-         // Uh-oh, an error occurred!
-         } else {
-         // Data for "images/island.jpg" is returned
-         let image = UIImage(data: data!)
-         }
-         }
-         
-         
-         self.storage.referenceForURL(url).dataWithMaxSize(25 * 1024 * 1024, completion: { (data, error) -> Void in
-         let image = UIImage(data: data!)
-         chatMessage.image = image!
-         self.messages.append(chatMessage)
-         self.tableView.reloadData()
-         self.scrollToBottom()
-         })
-         
-        */
     }
     
     override func viewDidLayoutSubviews() {

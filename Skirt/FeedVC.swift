@@ -9,25 +9,31 @@
 import UIKit
 import CoreLocation
 
-class MainVC: UIViewController, CLLocationManagerDelegate  {
+class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
 
     @IBOutlet weak var cityLbl: UILabel!
-    @IBOutlet weak var outfitImg: UIImageView!
     @IBOutlet weak var currentWeatherImg: UIImageView!
     @IBOutlet weak var weatherTypeImg: UIImageView!
     @IBOutlet weak var rainChanceLbl: UILabel!
     @IBOutlet weak var tempLbl: UILabel!
     @IBOutlet weak var weatherSummeryLbl: UILabel!
-    
     @IBOutlet weak var gradientView: UIView!
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var currentWeather: CurrentWeather!
 
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
+
+    var posts = [AnyObject]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -84,24 +90,10 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
         
         currentWeatherImg.image = UIImage(named: currentWeather.weatherTypeIcon)
     
-        outfitImg.image = UIImage(named: currentWeather.outfitForWeather)
+    //    outfitImg.image = UIImage(named: currentWeather.outfitForWeather)
     }
     
-    
     func addGradient(color: UIColor, view: UIView) {
-        
-        /*
-         let gradient = CAGradientLayer()
-         let gradientOrigin = view.bounds.origin
-         let huy = UIScreen.main.bounds.width
-         let gradientSize = CGSize(width: huy, height: CGFloat(100))
-         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
-         
-         let bottomColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:0.9)
-         gradient.colors = [color.cgColor, bottomColor.cgColor]
-         
-         view.layer.insertSublayer(gradient, at: 0)
-         */
         
         let gradient = CAGradientLayer()
         let gradientOrigin = view.bounds.origin
@@ -115,4 +107,36 @@ class MainVC: UIViewController, CLLocationManagerDelegate  {
         
         view.layer.insertSublayer(gradient, at: 0)
     }
+  
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        // return posts.count
+        return 2
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870650251E4AA7430057AED5 /* AppDelegate.swift */; };
-		870650281E4AA7430057AED5 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870650271E4AA7430057AED5 /* MainVC.swift */; };
+		870650281E4AA7430057AED5 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870650271E4AA7430057AED5 /* FeedVC.swift */; };
 		8706502B1E4AA7440057AED5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 870650291E4AA7440057AED5 /* Main.storyboard */; };
 		8706502E1E4AA7440057AED5 /* Skirt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8706502C1E4AA7440057AED5 /* Skirt.xcdatamodeld */; };
 		870650301E4AA7440057AED5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8706502F1E4AA7440057AED5 /* Assets.xcassets */; };
@@ -32,7 +32,7 @@
 		50B029A8CFE0AF8D4AA5613D /* Pods_Skirt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Skirt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		870650221E4AA7430057AED5 /* Skirt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skirt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		870650251E4AA7430057AED5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		870650271E4AA7430057AED5 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		870650271E4AA7430057AED5 /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		8706502A1E4AA7440057AED5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8706502D1E4AA7440057AED5 /* Skirt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Skirt.xcdatamodel; sourceTree = "<group>"; };
 		8706502F1E4AA7440057AED5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 			children = (
 				873516A51E60DF4F00F5C550 /* LogInVC.swift */,
 				8793F1A11E664518008DB7C6 /* CreateUsernameVC.swift */,
-				870650271E4AA7430057AED5 /* MainVC.swift */,
+				870650271E4AA7430057AED5 /* FeedVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -285,7 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8706502E1E4AA7440057AED5 /* Skirt.xcdatamodeld in Sources */,
-				870650281E4AA7430057AED5 /* MainVC.swift in Sources */,
+				870650281E4AA7430057AED5 /* FeedVC.swift in Sources */,
 				87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */,
 				873516A61E60DF4F00F5C550 /* LogInVC.swift in Sources */,
 				875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */,

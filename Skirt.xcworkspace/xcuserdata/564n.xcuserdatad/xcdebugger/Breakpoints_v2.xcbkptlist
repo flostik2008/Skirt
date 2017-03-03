@@ -10,11 +10,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Skirt/CreateUsernameVC.swift"
-            timestampString = "510191581.190974"
+            timestampString = "510214469.748969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Skirt/CreateUsernameVC.swift"
+            timestampString = "510214469.748969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
@@ -26,11 +42,11 @@
                   moduleName = "Skirt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/564n/Desktop/iOSDev2/Skirt/Skirt/CreateUsernameVC.swift"
-                  timestampString = "510191581.20075"
+                  timestampString = "510278073.348846"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
                   offsetFromSymbolStart = "3272">
                </Location>
                <Location
@@ -41,11 +57,11 @@
                   moduleName = "Skirt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/564n/Desktop/iOSDev2/Skirt/Skirt/CreateUsernameVC.swift"
-                  timestampString = "510191581.203564"
+                  timestampString = "510278073.351239"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -58,27 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Skirt/CreateUsernameVC.swift"
-            timestampString = "510191581.190974"
+            timestampString = "510214469.748969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "65"
             endingLineNumber = "65"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Skirt/CreateUsernameVC.swift"
-            timestampString = "510191581.190974"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>

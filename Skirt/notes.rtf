@@ -25,14 +25,14 @@ Where would we add that method? In Location class. Done. \
 problem: cant get location name and assigned it to locationLbl. Read SO answer. \
 \
 Maybe create a completionHandler in 'getLocationName( )' and inside of it set the currentCity. \
-How do we declare a completion handler, so we can call getLocationName( completion handler ) in MainVC . \
+How do we declare a completion handler, so we can call getLocationName( completion handler ) in FeedVC . \
 \
 Task: updateUI( ) in ViewController, only when completionHandler in Location is finished running: \
 Solution: \
 we declared:  getLocationName(completionHandler: @escaping (_ success: BOOL) -> Void ) \{   \}\
-That is a declaration, in MainVC we will use an implementation. \
+That is a declaration, in FeedVC we will use an implementation. \
 Inside of the getLocationName, inside of the reverseGeocodeLocation, we construct that completion handler as completionHandler(false) if we didn't get any placemarks, completionHandler(true) if everything went fine and we got location name. \
-Now, we want to implement getLocationName in MainVC. We call for it ....getLocationName\{(success) in .... \} in MainVC. \
+Now, we want to implement getLocationName in FeedVC. We call for it ....getLocationName\{(success) in .... \} in FeedVC. \
 \
 The idea of completionHandlers: \
 We declared a func with a completion handler. \
@@ -81,7 +81,7 @@ Done. \
 Create CoreData file with images. \
 Rotate them based on temperature categories. \
 Instead, will save them in xcassets. \
-In MainVC, in updateUI, will call currentOutfitImg.img = UIImage(named: currentWather.outfitForWeather )\
+In FeedVC, in updateUI, will call currentOutfitImg.img = UIImage(named: currentWather.outfitForWeather )\
 For that, - new property of currentWeather = outfitForWeather. \
 Done. \
 \
@@ -99,15 +99,14 @@ v2.0 \
 1. Add keyboard cocoapod. Done. \
 2. Draw lines to separate "or log in".\
 Add UIView to the LogInVC. Set it in LogInVC. Done. \
-3. Add Facebook login. (consult the SocialApp)\
+3. \
+Add Firebase/Facebook login. (consult the SocialApp)\
 In SocialApp, he implements func to immideatelly login with FB, if success, login with Firebase. \
 Will do the same - sign up and login - are on the same screen. \
 Set up Firebase. \
 finish redesign LogIn Sketch.Done \
-\
 Implement same logic of signIn fields as in SocialApp. \
 Create DataService file, implement keyChain logic, fix signInBtn and fbBtn accordingly. Done. \
-\
 In StoryBoard connect to the "createUserVC" or "feedVC", name segue, initiate it. (when sign in is finished)\
 \
 The login logic: \
@@ -116,37 +115,47 @@ The login logic: \
 - In completeSignIn, some weird method ".ds.createFirebaseDBUser" that Updates the values at the specified paths in the dictionary without overwriting other keys at this location.\
 - Then,  we save user's uid to the keychain. Perform segue to "createUsernameVC"\
 (what's happening then? some checks with usernpic and usernames)\
-\
+4. \
 Create new VC, set underlines. Done. \
 Set up gender picker. Done. \
 Set up userpic picker. Done. \
 Set up "Save" btn, show this VC. Done. \
 Seve username, gender and userpic to Firebase. \
 	Save gender to Firebase\
-\
-	Bug: Include messege "pass should be 6 char long"\
+		Bug: Include messege "pass should be 6 char long"\
 \
 	Note: If i need to test some value from Firebase, it comes as NSNull . It is not a String, so we can't simply check for "nil". 	Therefore, when declering a var for that data, we should cast it with "as? String":\
 \pard\tx692\pardeftab692\pardirnatural\partightenfactor0
 
 \f3\fs28 \cf0 \kerning1\expnd0\expndtw0 \CocoaLigature0                 \cf4 let\cf0  snapshotValue = snapshot.\cf5 value\cf0  \cf4 as\cf0 ? \cf6 String\
 				\cf4 if\cf0  snapshotValue == \cf4 nil ... \
-\
 	
 \f1\fs36 \cf0 \expnd0\expndtw0\kerning0
 \CocoaLigature1 	\
-	Problem: when loading "createUsernameVC" in viewWillAppear check if we have a userpic. If yes, load it. \
-\
-how to load userpic from Firebase database from picurl ?\
+Problem: when loading "createUsernameVC" in viewWillAppear check if we have a userpic. If yes, load it. Done.\
+How to load userpic from Firebase database from picurl ? Done. \
+Need to make a check if avatarURL is nil. Done. \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 	\
-\pard\tx692\pardeftab692\pardirnatural\partightenfactor0
-\cf0 - need to make a check if avatarURL is nil \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \
+\cf0 5.\
+Make feedVC - a UITableView. Current View should stay with temp data laying over.  \
+	If containerView transparent on top of TableView, how will it receive touch events? \
+	\
 \
 \
-\
+Create a custom cell class that will has post pic, userpic, username, like btn, flag btn. \
+Make source of that feed - array that is created and populated from Firebase when feedVC first loads.\
+Enable likes btns and count. \
+Create Firebase test data to load the feed. \
+Create a  makePostVC that will create posts and submits them to Firebase. \
+Enable swipe to the right to see that VC. \
+Create a userVC that show userpic, name, looks/following/followers count. All user's posts in a collectionView. \
+Edit button for user info, load editUserVC. \
+How to enable following in the app? \
+How to show only local posts? \
+How to flag posts as "not a look". \
+How to add emoji stickers to photos (in makePostVC)? \
+How to make available window when taking pic to a set parameters (that is good for my UX)? \
+How to mix in posts from SkirtTeam into all users feed? \
 \
 \
 \
