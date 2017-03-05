@@ -102,7 +102,7 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         let gradientSize = CGSize(width: gradientWidth, height: gradientHeight)
         gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
         
-        let bottomColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:0.7)
+        let bottomColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:0.5)
         gradient.colors = [color.cgColor, bottomColor.cgColor]
         
         view.layer.insertSublayer(gradient, at: 0)
@@ -124,8 +124,6 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         return 1
     }
-    
-    
 
 }
 
