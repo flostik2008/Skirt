@@ -57,7 +57,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSG-VH-3tG" userLabel="signUpBtn">
-                                <rect key="frame" x="-22.5" y="500" width="420" height="84"/>
+                                <rect key="frame" x="-23" y="500" width="421" height="84"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="420" id="FER-CP-qxJ"/>
                                     <constraint firstAttribute="height" constant="84" id="aXC-Ii-f5A"/>
@@ -515,11 +515,94 @@
                         <outlet property="camView" destination="dvy-oY-hQ9" id="C8H-U4-dba"/>
                         <outlet property="rotateCamBtn" destination="ZcE-Hl-6b2" id="u6l-0n-Og5"/>
                         <outlet property="takePicBtn" destination="iGo-Ge-wTt" id="Nce-wb-xTn"/>
+                        <segue destination="SsD-ef-Q6S" kind="show" identifier="EmojiVC" id="U3q-EB-VlT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cqn-Pk-X70" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1045.5999999999999" y="257.72113943028489"/>
+        </scene>
+        <!--EmojiVC-->
+        <scene sceneID="P0P-B5-FFJ">
+            <objects>
+                <viewController id="SsD-ef-Q6S" customClass="EmojiVC" customModule="Skirt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="h75-j0-r7b"/>
+                        <viewControllerLayoutGuide type="bottom" id="O64-nq-kgv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d0u-8e-eut">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UlM-lX-yex">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DA4-Nn-PAj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-D2-A7m">
+                                        <rect key="frame" x="20" y="35" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="7dy-yd-xzS"/>
+                                            <constraint firstAttribute="width" constant="40" id="M9S-EH-CCj"/>
+                                        </constraints>
+                                        <state key="normal" image="re_snap_btn"/>
+                                        <connections>
+                                            <action selector="cancelPic:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="Fu3-UT-iFm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1W-gB-ml1">
+                                        <rect key="frame" x="273" y="582" width="50" height="49"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="49" id="Idx-K5-QIa"/>
+                                            <constraint firstAttribute="width" constant="50" id="wLL-jr-2ml"/>
+                                        </constraints>
+                                        <state key="normal" image="send_snap"/>
+                                        <connections>
+                                            <action selector="postPic:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="yI4-Xb-Xdi"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Zj-BBv">
+                                        <rect key="frame" x="295" y="35" width="45" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="AXm-Lw-8lF"/>
+                                            <constraint firstAttribute="width" constant="45" id="Joh-sK-Qsx"/>
+                                        </constraints>
+                                        <state key="normal" image="emoji_btn"/>
+                                        <connections>
+                                            <action selector="addEmoji:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="UKy-M7-FGc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="uHa-D2-A7m" firstAttribute="top" secondItem="DA4-Nn-PAj" secondAttribute="top" constant="35" id="Kbf-SK-E3S"/>
+                                    <constraint firstAttribute="bottom" secondItem="t1W-gB-ml1" secondAttribute="bottom" constant="36" id="Rny-Fh-rZR"/>
+                                    <constraint firstItem="87d-Zj-BBv" firstAttribute="top" secondItem="DA4-Nn-PAj" secondAttribute="top" constant="35" id="SVK-3U-irU"/>
+                                    <constraint firstItem="uHa-D2-A7m" firstAttribute="leading" secondItem="DA4-Nn-PAj" secondAttribute="leading" constant="20" id="ev8-FY-iOG"/>
+                                    <constraint firstAttribute="trailing" secondItem="87d-Zj-BBv" secondAttribute="trailing" constant="35" id="h8F-v9-ltI"/>
+                                    <constraint firstAttribute="trailing" secondItem="t1W-gB-ml1" secondAttribute="trailing" constant="35" id="r78-XS-wIj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O64-nq-kgv" firstAttribute="top" secondItem="DA4-Nn-PAj" secondAttribute="bottom" id="0mt-yn-IB5"/>
+                            <constraint firstAttribute="trailing" secondItem="DA4-Nn-PAj" secondAttribute="trailing" id="561-pQ-o6Z"/>
+                            <constraint firstItem="O64-nq-kgv" firstAttribute="top" secondItem="UlM-lX-yex" secondAttribute="bottom" id="5np-bG-0YS"/>
+                            <constraint firstItem="UlM-lX-yex" firstAttribute="top" secondItem="d0u-8e-eut" secondAttribute="top" id="6Xe-cq-NeQ"/>
+                            <constraint firstAttribute="trailing" secondItem="UlM-lX-yex" secondAttribute="trailing" id="BsH-hv-Nxj"/>
+                            <constraint firstItem="DA4-Nn-PAj" firstAttribute="top" secondItem="d0u-8e-eut" secondAttribute="top" id="EkL-9f-nna"/>
+                            <constraint firstItem="UlM-lX-yex" firstAttribute="leading" secondItem="d0u-8e-eut" secondAttribute="leading" id="F5t-dP-GaR"/>
+                            <constraint firstItem="DA4-Nn-PAj" firstAttribute="leading" secondItem="d0u-8e-eut" secondAttribute="leading" id="GzR-aW-fff"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainImg" destination="UlM-lX-yex" id="MWb-di-C60"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="19e-Dn-LnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1900" y="262.21889055472263"/>
         </scene>
     </scenes>
     <resources>
@@ -529,13 +612,16 @@
         <image name="backgroundPic" width="375" height="667"/>
         <image name="cloudy" width="100" height="100"/>
         <image name="createpic_btn" width="90" height="90"/>
+        <image name="emoji_btn" width="45" height="45"/>
         <image name="fbBtn" width="832" height="168"/>
         <image name="flagBtn" width="20" height="160"/>
         <image name="flash_btn" width="48" height="66"/>
         <image name="likeBtn" width="86" height="86"/>
         <image name="photoLib" width="128" height="128"/>
+        <image name="re_snap_btn" width="48" height="48"/>
         <image name="rotate" width="350" height="350"/>
         <image name="saveBtn" width="299" height="60"/>
+        <image name="send_snap" width="50" height="49"/>
         <image name="signUpBtn" width="840" height="168"/>
         <image name="userPic" width="87" height="87"/>
     </resources>

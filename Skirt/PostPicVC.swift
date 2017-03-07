@@ -40,6 +40,25 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
     @IBAction func switchFlashBtn(_ sender: Any) {
     }
     
+    func snapshotTaken(_ snapshotData: Data!) {
+        performSegue(withIdentifier: "EmojiVC", sender: ["snapshotData":snapshotData])
+        
+    }
+    
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let emojiVC = segue.destination as? EmojiVC {
+            if let snapDict = sender as? Dictionary<String,Data> {
+                let snapData = snapDict["snapshotData"]
+                emojiVC.imageData = snapData
+            }
+        }
+    }
+
+    
+    
+    func snapshotFailed() {
+    }
     func shouldEnableCameraUI(_ enable: Bool) {
         rotateCamBtn.isEnabled = enable
         print("Should enable camera UI: \(enable)")
@@ -52,33 +71,15 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
     
     func recordingHasStarted() {
         print("Recording has started")
-        
     }
     
     func canStartRecording() {
         print("Can start recording")
-        
     }
     
     func videoRecordingComplete(_ videoURL: URL!) {
-        performSegue(withIdentifier: "UsersVC", sender: ["videoURL": videoURL])
-        
-        
     }
     
     func videoRecordingFailed() {
-        
-        
     }
-    
-    func snapshotTaken(_ snapshotData: Data!) {
-        performSegue(withIdentifier: "SenderVC", sender: ["snapshotData":snapshotData])
-        
-    }
-    
-    func snapshotFailed() {
-        
-        
-    }
-    
 }

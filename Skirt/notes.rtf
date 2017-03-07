@@ -139,13 +139,20 @@ Need to make a check if avatarURL is nil. Done. \
 \cf0 5.\
 Make feedVC - a UITableView. Current View should stay with temp data laying over.  \
 	If containerView transparent on top of TableView, how will it receive touch events? - Simply by unchecking "User interaction enabled". But I switched to a different design. \
-\
-\
+6.\
 Create a custom cell class that will has post pic, userpic, username, like btn, flag btn. \
+7.\
 Make source of that feed - array that is created and populated from Firebase when feedVC first loads.\
-Enable likes btns and count. \
-Create Firebase test data to load the feed. \
+8.\
 Create a  makePostVC that will create posts and submits them to Firebase. \
+	Whats happening after pressing snap btn? segue to a VC where we add emoji. \
+	(This whole step is done in ImagePicker. Reverse engineer it. )\
+	\
+9.\
+Enable likes btns and count. \
+	Need to create like icon with colored heart. \
+	\
+Create Firebase test data to load the feed. \
 Enable swipe to the right to see that VC. \
 Create a userVC that show userpic, name, looks/following/followers count. All user's posts in a collectionView. \
 Edit button for user info, load editUserVC. \

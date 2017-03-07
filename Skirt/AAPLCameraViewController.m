@@ -491,141 +491,6 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 	} );
 }
 
-- (void)changeCamera
-{
- 
-    [self.delegate shouldEnableCameraUI:NO];
-    [self.delegate shouldEnableRecordUI:NO];
-    
-    self.stillButton.enabled = NO;
-
-	dispatch_async( self.sessionQueue, ^{
-		AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
-		AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
-		AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
-
-		switch ( currentPosition )
-		{
-			case AVCaptureDevicePositionUnspecified:
-			case AVCaptureDevicePositionFront:
-				preferredPosition = AVCaptureDevicePositionBack;
-				break;
-			case AVCaptureDevicePositionBack:
-				preferredPosition = AVCaptureDevicePositionFront;
-				break;
-		}
-
-		AVCaptureDevice *videoDevice = [AAPLCameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
-		AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
-
-		[self.session beginConfiguration];
-
-		// Remove the existing device input first, since using the front and back camera simultaneously is not supported.
-		[self.session removeInput:self.videoDeviceInput];
-
-		if ( [self.session canAddInput:videoDeviceInput] ) {
-			[[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
-
-			[AAPLCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
-			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
-
-			[self.session addInput:videoDeviceInput];
-			self.videoDeviceInput = videoDeviceInput;
-		}
-		else {
-			[self.session addInput:self.videoDeviceInput];
-		}
-
-		AVCaptureConnection *connection = [self.movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-		if ( connection.isVideoStabilizationSupported ) {
-			connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
-		}
-
-		[self.session commitConfiguration];
-
-		dispatch_async( dispatch_get_main_queue(), ^{
-            
-            [self.delegate shouldEnableRecordUI:YES];
-            [self.delegate shouldEnableCameraUI:YES];
-            
-			self.stillButton.enabled = YES;
-		} );
-	} );
-}
-
-- (void)snapStillImage 
-{
-	dispatch_async( self.sessionQueue, ^{
-		AVCaptureConnection *connection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
-		AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self._previewView.layer;
-
-		// Update the orientation on the still image output video connection before capturing.
-		connection.videoOrientation = previewLayer.connection.videoOrientation;
-
-		// Flash set to Auto for Still Capture.
-		[AAPLCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:self.videoDeviceInput.device];
-
-		// Capture a still image.
-		[self.stillImageOutput captureStillImageAsynchronouslyFromConnection:connection completionHandler:^( CMSampleBufferRef imageDataSampleBuffer, NSError *error ) {
-			if ( imageDataSampleBuffer ) {
-				// The sample buffer is not retained. Create image data before saving the still image to the photo library asynchronously.
-				NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                
-                [self.delegate snapshotTaken:imageData];
-                
-                /*
-				[PHPhotoLibrary requestAuthorization:^( PHAuthorizationStatus status ) {
-					if ( status == PHAuthorizationStatusAuthorized ) {
-						// To preserve the metadata, we create an asset from the JPEG NSData representation.
-						// Note that creating an asset from a UIImage discards the metadata.
-						// In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
-						// In iOS 8, we save the image to a temporary file and use +[PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:].
-						if ( [PHAssetCreationRequest class] ) {
-							[[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-								[[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
-							} completionHandler:^( BOOL success, NSError *error ) {
-								if ( ! success ) {
-									NSLog( @"Error occurred while saving image to photo library: %@", error );
-								}
-							}];
-						}
-						else {
-							NSString *temporaryFileName = [NSProcessInfo processInfo].globallyUniqueString;
-							NSString *temporaryFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[temporaryFileName stringByAppendingPathExtension:@"jpg"]];
-							NSURL *temporaryFileURL = [NSURL fileURLWithPath:temporaryFilePath];
-
-							[[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
-								NSError *error = nil;
-								[imageData writeToURL:temporaryFileURL options:NSDataWritingAtomic error:&error];
-								if ( error ) {
-									NSLog( @"Error occured while writing image data to a temporary file: %@", error );
-								}
-								else {
-									[PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:temporaryFileURL];
-								}
-							} completionHandler:^( BOOL success, NSError *error ) {
-								if ( ! success ) {
-									NSLog( @"Error occurred while saving image to photo library: %@", error );
-								}
-
-								// Delete the temporary file.
-								[[NSFileManager defaultManager] removeItemAtURL:temporaryFileURL error:nil];
-							}];
-						}
-					}
-				}];
-                
-                */
-			}
-			else {
-
-                [self.delegate snapshotFailed];
-                
-                NSLog( @"Could not capture still image: %@", error );
-			}
-		}];
-	} );
-}
 
 - (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -779,5 +644,143 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 
 	return captureDevice;
 }
+
+- (void)changeCamera
+{
+    
+    [self.delegate shouldEnableCameraUI:NO];
+    [self.delegate shouldEnableRecordUI:NO];
+    
+    self.stillButton.enabled = NO;
+    
+    dispatch_async( self.sessionQueue, ^{
+        AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
+        AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
+        AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
+        
+        switch ( currentPosition )
+        {
+                case AVCaptureDevicePositionUnspecified:
+                case AVCaptureDevicePositionFront:
+                preferredPosition = AVCaptureDevicePositionBack;
+                break;
+                case AVCaptureDevicePositionBack:
+                preferredPosition = AVCaptureDevicePositionFront;
+                break;
+        }
+        
+        AVCaptureDevice *videoDevice = [AAPLCameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+        AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
+        
+        [self.session beginConfiguration];
+        
+        // Remove the existing device input first, since using the front and back camera simultaneously is not supported.
+        [self.session removeInput:self.videoDeviceInput];
+        
+        if ( [self.session canAddInput:videoDeviceInput] ) {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
+            
+            [AAPLCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
+            
+            [self.session addInput:videoDeviceInput];
+            self.videoDeviceInput = videoDeviceInput;
+        }
+        else {
+            [self.session addInput:self.videoDeviceInput];
+        }
+        
+        AVCaptureConnection *connection = [self.movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+        if ( connection.isVideoStabilizationSupported ) {
+            connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+        }
+        
+        [self.session commitConfiguration];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            
+            [self.delegate shouldEnableRecordUI:YES];
+            [self.delegate shouldEnableCameraUI:YES];
+            
+            self.stillButton.enabled = YES;
+        } );
+    } );
+}
+
+- (void)snapStillImage
+{
+    dispatch_async( self.sessionQueue, ^{
+        AVCaptureConnection *connection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+        AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self._previewView.layer;
+        
+        // Update the orientation on the still image output video connection before capturing.
+        connection.videoOrientation = previewLayer.connection.videoOrientation;
+        
+        // Flash set to Auto for Still Capture.
+        [AAPLCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:self.videoDeviceInput.device];
+        
+        // Capture a still image.
+        [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:connection completionHandler:^( CMSampleBufferRef imageDataSampleBuffer, NSError *error ) {
+            if ( imageDataSampleBuffer ) {
+                // The sample buffer is not retained. Create image data before saving the still image to the photo library asynchronously.
+                NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                
+                [self.delegate snapshotTaken:imageData];
+                
+                /*
+                 [PHPhotoLibrary requestAuthorization:^( PHAuthorizationStatus status ) {
+                 if ( status == PHAuthorizationStatusAuthorized ) {
+                 // To preserve the metadata, we create an asset from the JPEG NSData representation.
+                 // Note that creating an asset from a UIImage discards the metadata.
+                 // In iOS 9, we can use -[PHAssetCreationRequest addResourceWithType:data:options].
+                 // In iOS 8, we save the image to a temporary file and use +[PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:].
+                 if ( [PHAssetCreationRequest class] ) {
+                 [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                 [[PHAssetCreationRequest creationRequestForAsset] addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
+                 } completionHandler:^( BOOL success, NSError *error ) {
+                 if ( ! success ) {
+                 NSLog( @"Error occurred while saving image to photo library: %@", error );
+                 }
+                 }];
+                 }
+                 else {
+                 NSString *temporaryFileName = [NSProcessInfo processInfo].globallyUniqueString;
+                 NSString *temporaryFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[temporaryFileName stringByAppendingPathExtension:@"jpg"]];
+                 NSURL *temporaryFileURL = [NSURL fileURLWithPath:temporaryFilePath];
+                 
+                 [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+                 NSError *error = nil;
+                 [imageData writeToURL:temporaryFileURL options:NSDataWritingAtomic error:&error];
+                 if ( error ) {
+                 NSLog( @"Error occured while writing image data to a temporary file: %@", error );
+                 }
+                 else {
+                 [PHAssetChangeRequest creationRequestForAssetFromImageAtFileURL:temporaryFileURL];
+                 }
+                 } completionHandler:^( BOOL success, NSError *error ) {
+                 if ( ! success ) {
+                 NSLog( @"Error occurred while saving image to photo library: %@", error );
+                 }
+                 
+                 // Delete the temporary file.
+                 [[NSFileManager defaultManager] removeItemAtURL:temporaryFileURL error:nil];
+                 }];
+                 }
+                 }
+                 }];
+                 
+                 */
+            }
+            else {
+                
+                [self.delegate snapshotFailed];
+                
+                NSLog( @"Could not capture still image: %@", error );
+            }
+        }];
+    } );
+}
+
+
 
 @end
