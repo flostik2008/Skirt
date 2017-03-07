@@ -79,5 +79,7 @@
 	<string>Please, allow access to your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please, allow access to your photo library</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please, allow access to your mic</string>
 </dict>
 </plist>

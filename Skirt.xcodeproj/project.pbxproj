@@ -25,6 +25,12 @@
 		87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */; };
 		87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */; };
 		87FF1FF41E6BC5A400072C94 /* LineSeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FF1FF31E6BC5A400072C94 /* LineSeparator.swift */; };
+		87FF1FF61E6BE09F00072C94 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FF1FF51E6BE09F00072C94 /* PostCell.swift */; };
+		87FF1FF81E6E327F00072C94 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FF1FF71E6E327F00072C94 /* Post.swift */; };
+		87FF1FFA1E6E332A00072C94 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FF1FF91E6E332A00072C94 /* User.swift */; };
+		87FF1FFC1E6E4EFD00072C94 /* PostPicVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FF1FFB1E6E4EFD00072C94 /* PostPicVC.swift */; };
+		87FF20031E6E5D1B00072C94 /* AAPLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FF20001E6E5D1B00072C94 /* AAPLPreviewView.m */; };
+		87FF20041E6E5D1B00072C94 /* AAPLCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FF20021E6E5D1B00072C94 /* AAPLCameraViewController.m */; };
 		CDB6D985F3F3950A39B76931 /* Pods_Skirt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50B029A8CFE0AF8D4AA5613D /* Pods_Skirt.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +58,16 @@
 		87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWather.swift; sourceTree = "<group>"; };
 		87F8F1FF1E4E6C1B004C1DA7 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		87FF1FF31E6BC5A400072C94 /* LineSeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineSeparator.swift; sourceTree = "<group>"; };
+		87FF1FF51E6BE09F00072C94 /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		87FF1FF71E6E327F00072C94 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		87FF1FF91E6E332A00072C94 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		87FF1FFB1E6E4EFD00072C94 /* PostPicVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostPicVC.swift; sourceTree = "<group>"; };
+		87FF1FFD1E6E5D1B00072C94 /* Skirt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Skirt-Bridging-Header.h"; sourceTree = "<group>"; };
+		87FF1FFE1E6E5D1B00072C94 /* AAPLCameraVCDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCameraVCDelegate.h; sourceTree = "<group>"; };
+		87FF1FFF1E6E5D1B00072C94 /* AAPLPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLPreviewView.h; sourceTree = "<group>"; };
+		87FF20001E6E5D1B00072C94 /* AAPLPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLPreviewView.m; sourceTree = "<group>"; };
+		87FF20011E6E5D1B00072C94 /* AAPLCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCameraViewController.h; sourceTree = "<group>"; };
+		87FF20021E6E5D1B00072C94 /* AAPLCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCameraViewController.m; sourceTree = "<group>"; };
 		B8C33E57D35C2D24108E9E3E /* Pods-Skirt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Skirt.release.xcconfig"; path = "Pods/Target Support Files/Pods-Skirt/Pods-Skirt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,8 +111,10 @@
 				87F8F1FE1E4E6A18004C1DA7 /* Model */,
 				8711B9721E610B88007F344B /* View */,
 				87F8F1FD1E4E6A09004C1DA7 /* Controller */,
+				87FF20051E6E5D3600072C94 /* Protocols */,
 				873516A51E60DF4F00F5C550 /* LogInVC.swift */,
 				870650291E4AA7440057AED5 /* Main.storyboard */,
+				87FF1FFD1E6E5D1B00072C94 /* Skirt-Bridging-Header.h */,
 				875CE59B1E4D594000A6B492 /* notes.rtf */,
 				8706502F1E4AA7440057AED5 /* Assets.xcassets */,
 				870650341E4AA7440057AED5 /* Info.plist */,
@@ -113,7 +131,10 @@
 		8711B9721E610B88007F344B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				87FF1FF51E6BE09F00072C94 /* PostCell.swift */,
 				87FF1FF31E6BC5A400072C94 /* LineSeparator.swift */,
+				87FF1FFF1E6E5D1B00072C94 /* AAPLPreviewView.h */,
+				87FF20001E6E5D1B00072C94 /* AAPLPreviewView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -121,8 +142,11 @@
 		87F8F1FD1E4E6A09004C1DA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				87FF20011E6E5D1B00072C94 /* AAPLCameraViewController.h */,
+				87FF20021E6E5D1B00072C94 /* AAPLCameraViewController.m */,
 				8793F1A11E664518008DB7C6 /* CreateUsernameVC.swift */,
 				870650271E4AA7430057AED5 /* FeedVC.swift */,
+				87FF1FFB1E6E4EFD00072C94 /* PostPicVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -132,8 +156,18 @@
 			children = (
 				875CE5A01E4D6F2F00A6B492 /* Location.swift */,
 				87F8F1FB1E4E69F3004C1DA7 /* CurrentWather.swift */,
+				87FF1FF71E6E327F00072C94 /* Post.swift */,
+				87FF1FF91E6E332A00072C94 /* User.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		87FF20051E6E5D3600072C94 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				87FF1FFE1E6E5D1B00072C94 /* AAPLCameraVCDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		CE4B4BDFBEBE34693C2D87AA /* Frameworks */ = {
@@ -189,6 +223,7 @@
 					870650211E4AA7430057AED5 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = PC6ZE95SDH;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -287,14 +322,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87FF1FFA1E6E332A00072C94 /* User.swift in Sources */,
+				87FF1FFC1E6E4EFD00072C94 /* PostPicVC.swift in Sources */,
+				87FF20031E6E5D1B00072C94 /* AAPLPreviewView.m in Sources */,
 				8706502E1E4AA7440057AED5 /* Skirt.xcdatamodeld in Sources */,
 				870650281E4AA7430057AED5 /* FeedVC.swift in Sources */,
 				87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */,
+				87FF1FF81E6E327F00072C94 /* Post.swift in Sources */,
 				873516A61E60DF4F00F5C550 /* LogInVC.swift in Sources */,
 				875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */,
 				870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */,
 				87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */,
+				87FF20041E6E5D1B00072C94 /* AAPLCameraViewController.m in Sources */,
 				87FF1FF41E6BC5A400072C94 /* LineSeparator.swift in Sources */,
+				87FF1FF61E6BE09F00072C94 /* PostCell.swift in Sources */,
 				8793F1A21E664518008DB7C6 /* CreateUsernameVC.swift in Sources */,
 				87B81CC41E627D7D0052C2D2 /* DataService.swift in Sources */,
 			);
@@ -419,7 +460,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2394E4E5A8BAD846738052FC /* Pods-Skirt.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Skirt/Skirt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Evgeny Vlasov (PC6ZE95SDH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -431,6 +474,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Skirt/Skirt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -440,7 +485,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B8C33E57D35C2D24108E9E3E /* Pods-Skirt.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Skirt/Skirt.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Evgeny Vlasov (PC6ZE95SDH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -452,6 +499,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Skirt/Skirt-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

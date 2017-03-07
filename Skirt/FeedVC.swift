@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
 
@@ -26,7 +27,11 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     let locationManager = CLLocationManager()
     var currentLocation: CLLocation!
 
-    var posts = [AnyObject]()
+    var posts = [Post]()
+    var users = [User]()
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
+    var imageSelected = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +47,36 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         currentWeather = CurrentWeather()
         
         addGradient(color: UIColor.clear, view: gradientView)
+        
+        // Getting posts data into users array:
+        DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
+            self.posts = []
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshot {
+                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let post = Post(postKey: key, postData: postDict)
+                        self.posts.append(post)
+                    }
+                }
+            }
+            self.posts.reverse()
+        })
+        
+        // Getting users data into users array:
+        DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
+            self.users = []
+            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
+                for snap in snapshot {
+                    if let userDict = snap.value as? Dictionary<String, AnyObject> {
+                        let key = snap.key
+                        let user = User(userKey: key, userData: userDict)
+                        self.users.append(user)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+        } )
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,9 +144,28 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        return cell
+       
+         let post1 = posts[indexPath.row]
+        // do i save userKeys? i don't think so.
+         let key = post1.userKey
+         let user1 = users.filter({$0.userKey == key}).first!
         
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PostCell {
+          
+             if let img = FeedVC.imageCache.object(forKey: post1.imageUrl as NSString) {
+             
+             cell.configureCell(user: user1, post: post1, img: img)
+             return cell
+             } else {
+             print("Zhenya: loading feed with user \(user1.avatarUrl) and post \(post1.imageUrl)")
+             
+             cell.configureCell(user: user1, post: post1)
+             }
+             return cell
+             
+            } else {
+            return PostCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
