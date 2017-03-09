@@ -95,12 +95,6 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         locationAuthStatus()
     }
     
-    func showPostPicVC() {
-        self.performSegue(withIdentifier: "customSegueToPostVC", sender: self)
-    }
-    
-    
-    
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
@@ -193,7 +187,27 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         return 1
     }
-
+    
+    // custom segue methods
+    func showPostPicVC() {
+        self.performSegue(withIdentifier: "customSegueToPostVC", sender: self)
+    }
+    
+    @IBAction func returnPostPicVCSegue(sender: UIStoryboardSegue){
+        
+    }
+    
+    override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
+        if let id = identifier {
+            if id == "customSegueToPostVCUnwind" {
+                let unwindSegue = SwipeToLeftSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: { () -> Void in
+                    
+                })
+                return unwindSegue
+            }
+        }
+        return super.segueForUnwinding(to: toViewController, from: fromViewController, identifier: identifier)
+    }
 }
 
 

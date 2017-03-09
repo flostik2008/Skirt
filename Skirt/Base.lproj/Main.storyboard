@@ -57,7 +57,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSG-VH-3tG" userLabel="signUpBtn">
-                                <rect key="frame" x="-22.5" y="500" width="420" height="84"/>
+                                <rect key="frame" x="-23" y="500" width="421" height="84"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="420" id="FER-CP-qxJ"/>
                                     <constraint firstAttribute="height" constant="84" id="aXC-Ii-f5A"/>
@@ -515,9 +515,11 @@
                         <outlet property="takePicBtn" destination="iGo-Ge-wTt" id="Nce-wb-xTn"/>
                         <segue destination="SsD-ef-Q6S" kind="show" identifier="EmojiVC" id="U3q-EB-VlT"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="customSegueToFeedVC" customClass="SwipeToLeftSegueUnwind" id="kNZ-93-p6t"/>
+                        <segue destination="fj4-yX-dUI" kind="unwind" identifier="customSegueToPostVCUnwind" unwindAction="returnPostPicVCSegueWithSender:" id="Tiy-at-6Sf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cqn-Pk-X70" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="fj4-yX-dUI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1070" y="-160"/>
         </scene>

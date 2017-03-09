@@ -11,21 +11,21 @@ import UIKit
 class SwipeToLeftSegue: UIStoryboardSegue {
 
     override func perform() {
-        var sourceVCView = self.source.view as UIView!
-        var destinationVCView = self.destination.view as UIView!
+        var feedVCView = self.source.view as UIView!
+        var postPicVCView = self.destination.view as UIView!
         
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         
-        destinationVCView?.frame = CGRect(x: screenWidth, y: 0.0, width: screenWidth, height: screenHeight)
+        postPicVCView?.frame = CGRect(x: screenWidth, y: 0.0, width: screenWidth, height: screenHeight)
         
         let window = UIApplication.shared.keyWindow
-        window?.insertSubview(destinationVCView!, aboveSubview: sourceVCView!)
+        window?.insertSubview(postPicVCView!, aboveSubview: feedVCView!)
         
         
         UIView.animate(withDuration: 0.4, animations: { () -> Void in
-            sourceVCView!.frame = sourceVCView!.frame.offsetBy(dx: -screenWidth, dy: 0.0)
-            destinationVCView!.frame = destinationVCView!.frame.offsetBy(dx: -screenWidth, dy: 0.0)
+            feedVCView!.frame = feedVCView!.frame.offsetBy(dx: -screenWidth, dy: 0.0)
+            postPicVCView!.frame = postPicVCView!.frame.offsetBy(dx: -screenWidth, dy: 0.0)
             
         }) { (Finished) -> Void in
             self.source.present(self.destination as UIViewController,

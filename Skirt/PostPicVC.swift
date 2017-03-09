@@ -21,6 +21,11 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
         delegate = self
         _previewView = camView
         super.viewDidLoad()
+        
+        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showFirstViewController")
+        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
+        
     }
 
     @IBAction func takePicPressed(_ sender: Any) {
@@ -55,8 +60,12 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
         }
     }
 
+    func showFirstViewController() {
+        self.performSegue(withIdentifier: "customSegueToPostVCUnwind", sender: self)
+    }
     
     
+    //unused protocol funcs
     func snapshotFailed() {
     }
     func shouldEnableCameraUI(_ enable: Bool) {
