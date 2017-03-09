@@ -77,6 +77,16 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             }
             self.tableView.reloadData()
         } )
+        
+        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showPostPicVC")
+        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,6 +94,12 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         locationAuthStatus()
     }
+    
+    func showPostPicVC() {
+        self.performSegue(withIdentifier: "customSegueToPostVC", sender: self)
+    }
+    
+    
     
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
@@ -170,8 +186,7 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // return posts.count
-        return 2
+        return posts.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
