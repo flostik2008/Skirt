@@ -25,10 +25,13 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
         _previewView = camView
         super.viewDidLoad()
         
-        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showFirstViewController")
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        
+        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(PostPicVC.showFirstViewController))
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(swipeGestureRecognizer)
-        
     }
 
     @IBAction func takePicPressed(_ sender: Any) {
@@ -46,22 +49,30 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
         
     }
     
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-       
-      performSegue(withIdentifier: "EmojiVC", sender: info)
+        picker.dismiss(animated: true, completion: nil)
 
         
-//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-//            addImage.image = image
-//            imageSelected = true
-//        } else {
-//            print("Zhenya: A valid image wasn't selected")
-//        }
-//        
-//        picker.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            self.performSegue(withIdentifier: "EmojiVC", sender: image)
+            }
+        }
         
+    /*
+         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+
+         
+         }
+    */
+    
     }
+    
+    
+    
     @IBAction func switchFlashBtn(_ sender: Any) {
      
         let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -95,6 +106,8 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
             if let snapDict = sender as? Dictionary<String,Data> {
                 let snapData = snapDict["snapshotData"]
                 emojiVC.imageData = snapData
+            } else if let image = sender as? UIImage {
+                    emojiVC.imageItself = image
             }
         }
     }

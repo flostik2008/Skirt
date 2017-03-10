@@ -14,13 +14,18 @@ class EmojiVC: UIViewController {
 
     @IBOutlet weak var mainImg: UIImageView!
     
-    var imageData: Data! 
+    var imageData: Data!
+    var imageItself: UIImage! 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // create image out of Data, set mainImg. 
-        let img = UIImage(data: imageData)
-        mainImg.image = img 
+        if imageData != nil {
+            let img = UIImage(data: imageData)
+            mainImg.image = img
+        } else if imageItself != nil {
+            mainImg.image = imageItself
+        }
     }
 
     @IBAction func cancelPic(_ sender: Any) {
