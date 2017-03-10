@@ -78,7 +78,7 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             self.tableView.reloadData()
         } )
         
-        var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "showPostPicVC")
+        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FeedVC.showPostPicVC))
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeGestureRecognizer)
     }

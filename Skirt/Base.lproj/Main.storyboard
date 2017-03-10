@@ -512,7 +512,7 @@
                         <outlet property="camView" destination="dvy-oY-hQ9" id="C8H-U4-dba"/>
                         <outlet property="rotateCamBtn" destination="ZcE-Hl-6b2" id="u6l-0n-Og5"/>
                         <outlet property="takePicBtn" destination="iGo-Ge-wTt" id="Nce-wb-xTn"/>
-                        <segue destination="SsD-ef-Q6S" kind="show" identifier="EmojiVC" id="U3q-EB-VlT"/>
+                        <segue destination="SsD-ef-Q6S" kind="custom" identifier="EmojiVC" customClass="SwipeToLeftSegue" customModule="Skirt" customModuleProvider="target" id="U3q-EB-VlT"/>
                         <segue destination="BYZ-38-t0r" kind="custom" identifier="customSegueToFeedVC" customClass="SwipeToLeftSegueUnwind" id="kNZ-93-p6t"/>
                         <segue destination="fj4-yX-dUI" kind="unwind" identifier="customSegueToPostVCUnwind" unwindAction="returnPostPicVCSegueWithSender:" id="Tiy-at-6Sf"/>
                     </connections>
@@ -625,6 +625,6 @@
         <image name="signUpBtn" width="840" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UpY-gJ-Fsz"/>
+        <segue reference="kNZ-93-p6t"/>
     </inferredMetricsTieBreakers>
 </document>

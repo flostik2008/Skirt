@@ -51,31 +51,33 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        picker.dismiss(animated: true, completion: nil)
-
-        
+     
+        /*
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             self.performSegue(withIdentifier: "EmojiVC", sender: image)
             }
         }
-        
-    /*
-         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-
-         
-         }
-    */
+ 
+        picker.dismiss(animated: true, completion: nil)
     
+        */
+        
+        picker.dismiss(animated: false, completion: nil)
+
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            self.performSegue(withIdentifier: "EmojiVC", sender: image)
+        }
+        
+        
     }
     
     
     
     @IBAction func switchFlashBtn(_ sender: Any) {
      
-        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo )
         if (device!.hasTorch) {
             do {
                 try device!.lockForConfiguration()
