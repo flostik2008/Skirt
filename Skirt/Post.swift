@@ -61,7 +61,7 @@ class Post {
         if addLike {
             _likes = _likes + 1
         } else {
-            _likes = _likes + 1
+            _likes = _likes - 1
         }
         
         _postRef.child("likes").setValue(_likes)

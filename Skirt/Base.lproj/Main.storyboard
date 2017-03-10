@@ -57,7 +57,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSG-VH-3tG" userLabel="signUpBtn">
-                                <rect key="frame" x="-23" y="500" width="421" height="84"/>
+                                <rect key="frame" x="-22.5" y="500" width="420" height="84"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="420" id="FER-CP-qxJ"/>
                                     <constraint firstAttribute="height" constant="84" id="aXC-Ii-f5A"/>
@@ -284,7 +284,7 @@
                                 <rect key="frame" x="0.0" y="105" width="375" height="562"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="510" id="qiu-om-q2W" customClass="PostCell" customModule="Skirt" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="510" id="qiu-om-q2W" customClass="PostCell" customModule="Skirt" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="510"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qiu-om-q2W" id="18H-8C-eyP">
@@ -292,15 +292,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B27-JZ-du7">
-                                                    <rect key="frame" x="126" y="245" width="20" height="20"/>
+                                                    <rect key="frame" x="178" y="245" width="20" height="20"/>
                                                 </activityIndicatorView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HxR-dO-7pe">
-                                                    <rect key="frame" x="10" y="4" width="252" height="30"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="HxR-dO-7pe">
+                                                    <rect key="frame" x="10" y="4" width="355" height="30"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-Ya-4Oo">
-                                                            <rect key="frame" x="0.0" y="0.0" width="161" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="211" height="30"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPic" translatesAutoresizingMaskIntoConstraints="NO" id="QU3-IN-4Fd" customClass="CircleImageView" customModule="Skirt" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QU3-IN-4Fd" customClass="CircleImageView" customModule="Skirt" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="Hod-0I-Nf3"/>
@@ -308,7 +308,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="world_flower" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVP-NL-rV4">
-                                                                    <rect key="frame" x="38" y="0.0" width="123" height="30"/>
+                                                                    <rect key="frame" x="38" y="0.0" width="173" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="8eu-HE-ItK"/>
                                                                         <constraint firstAttribute="width" constant="173" id="KEI-p7-9RI"/>
@@ -319,10 +319,10 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-Y4-LJQ">
-                                                            <rect key="frame" x="161" y="0.0" width="91" height="30"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-Y4-LJQ">
+                                                            <rect key="frame" x="267" y="0.0" width="88" height="30"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeBtn" translatesAutoresizingMaskIntoConstraints="NO" id="YAr-v5-qf3">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-heart" translatesAutoresizingMaskIntoConstraints="NO" id="YAr-v5-qf3">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="25" id="G6r-2g-egO"/>
@@ -330,17 +330,16 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2737" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyD-yj-72x">
-                                                                    <rect key="frame" x="31" y="0.0" width="40" height="30"/>
+                                                                    <rect key="frame" x="31" y="0.0" width="37" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="4dJ-Bb-MRS"/>
-                                                                        <constraint firstAttribute="width" constant="40" id="7Dv-2v-Xrz"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="Roboto-LightItalic" family="Roboto" pointSize="17"/>
                                                                     <color key="textColor" red="0.094117647058823528" green="0.090196078431372548" blue="0.094117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flagBtn" translatesAutoresizingMaskIntoConstraints="NO" id="LAG-Dk-Aqd">
-                                                                    <rect key="frame" x="77" y="0.0" width="14" height="30"/>
+                                                                    <rect key="frame" x="74" y="0.0" width="14" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="h6E-eo-VYb"/>
                                                                         <constraint firstAttribute="width" constant="14" id="iPG-a0-dB8"/>
@@ -353,8 +352,8 @@
                                                         <constraint firstAttribute="height" constant="30" id="fHM-FO-Itv"/>
                                                     </constraints>
                                                 </stackView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1.3w" translatesAutoresizingMaskIntoConstraints="NO" id="F86-Lv-LJF" userLabel="MainPhoto">
-                                                    <rect key="frame" x="0.0" y="36" width="272" height="473"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F86-Lv-LJF" userLabel="MainPhoto">
+                                                    <rect key="frame" x="0.0" y="36" width="375" height="473"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.94901960784313721" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
@@ -476,7 +475,7 @@
                                             <action selector="rotateCamPressed:" destination="ZZs-mG-bnf" eventType="touchUpInside" id="qmM-LT-Qqd"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovj-dk-c12">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovj-dk-c12" userLabel="Flash">
                                         <rect key="frame" x="247" y="32" width="26" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="BmH-Hz-WSL"/>
@@ -608,24 +607,22 @@
         </scene>
     </scenes>
     <resources>
-        <image name="1.3w" width="272" height="484"/>
         <image name="Umbrella" width="100" height="100"/>
         <image name="addUserPic" width="153" height="153"/>
         <image name="backgroundPic" width="375" height="667"/>
         <image name="cloudy" width="100" height="100"/>
         <image name="createpic_btn" width="90" height="90"/>
         <image name="emoji_btn" width="45" height="45"/>
+        <image name="empty-heart" width="86" height="86"/>
         <image name="fbBtn" width="832" height="168"/>
         <image name="flagBtn" width="20" height="160"/>
         <image name="flash_btn" width="48" height="66"/>
-        <image name="likeBtn" width="86" height="86"/>
         <image name="photoLib" width="128" height="128"/>
         <image name="re_snap_btn" width="48" height="48"/>
         <image name="rotate" width="350" height="350"/>
         <image name="saveBtn" width="299" height="60"/>
         <image name="send_snap" width="50" height="49"/>
         <image name="signUpBtn" width="840" height="168"/>
-        <image name="userPic" width="87" height="87"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="kNZ-93-p6t"/>

@@ -3,7 +3,7 @@
 \f3\fnil\fcharset0 Menlo-Regular;}
 {\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red254\green254\blue255;\red170\green13\blue145;
 \red63\green110\blue116;\red92\green38\blue153;\red104\green26\blue29;\red235\green236\blue237;\red36\green38\blue41;
-\red13\green0\blue129;}
+\red13\green0\blue129;\red0\green116\blue0;}
 \margl720\margr720\margb720\margt720\vieww9000\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
@@ -154,13 +154,40 @@ Create a  makePostVC that will create posts and submits them to Firebase. \
 \f3\fs26 \cf7 \cb8 Could not create a segue of class '\cf9 (\cf10 null\cf9 )
 \f1\fs36 \cf0 \cb1 ". Solution: when creating segue in the IB, cntrl drag from VC to VC. In the pop up, don't pick custom segue classes (although logical), pick "custom". \
 \
-\
 9.\
+Create Firebase test data to load the feed. Done. \
+10.\
+Enable swipe to the right to see that VC. Done. \
+\
+11.\
 Enable likes btns and count. \
-	Need to create like icon with colored heart. \
+	Need to create like icon with colored heart. Done. \
+	Like Logic: \
+Like logic is present in 3 places: \
+- in PostCell in "configureCell" when doing initial setup. We access current user's likes value (true or no value(false)) and set the color. \
+- in PostCell we have func "likeTapped". First, it also gets into current user's likes value. If nothing there, change image, add like, set value to "true". If there is value already ("true"), image to "no heart", subtract one like from count, remove value. \
+(i think removing doesn't work, it adds up.) yep. Solved. Done. \
+- in model's Post, there is func "adjustLikes" that actually performs the action. \
+\
+12. \
+Enable Flash. \
+ - in AAPLCameraViewController we have global method called "setFlashMode: forDevices". \
+ - tracking down "flashMode" and we find enum "AVCaptureFlashMode"\
+ - Done. Found on SO simple func that used AVFoundation. \
+\
+13.\
+Enable pick from photo lib. \
+	- working on "prepare for segue" will need to detect if its the righ segue, and get "
+\f3\fs28 \cf11 \kerning1\expnd0\expndtw0 \CocoaLigature0 UIImagePickerControllerOriginalImage
+\f1\fs36 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 " out of "sender" dictionary. Then set 
+\f3\fs28 \kerning1\expnd0\expndtw0 \CocoaLigature0 emojiVC.\cf5 imageData\cf0  = snapData. 
+\f1\fs36 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
 	\
-Create Firebase test data to load the feed. \
-Enable swipe to the right to see that VC. \
+\
+\
+\
 Create a userVC that show userpic, name, looks/following/followers count. All user's posts in a collectionView. \
 Edit button for user info, load editUserVC. \
 How to enable following in the app? \

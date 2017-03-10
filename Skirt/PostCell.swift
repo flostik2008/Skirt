@@ -20,13 +20,18 @@ class PostCell: UITableViewCell {
     
     var post: Post!
     var user: User!
-    var likesRef: FIRDatabaseReference!
+    var currentUserLikesRef: FIRDatabaseReference!
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         activityIndicator.startAnimating()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
+        tap.numberOfTapsRequired = 1
+        likeBtn.addGestureRecognizer(tap)
+        likeBtn.isUserInteractionEnabled = true
     }
     
     func configureCell(user: User, post: Post, img:UIImage? = nil) {
@@ -53,9 +58,9 @@ class PostCell: UITableViewCell {
             })
         }
         
-        likesRef = DataService.ds.REF_USER_CURRENT.child("likes").child(post.postKey)
+        currentUserLikesRef = DataService.ds.REF_USER_CURRENT.child("likes").child(post.postKey)
         
-        likesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
+        currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
             if let _ = snapshot.value as? NSNull {
                 self.likeBtn.image = UIImage(named: "empty-heart")
             } else {
@@ -79,15 +84,38 @@ class PostCell: UITableViewCell {
                     }
                 }
             }
-            
-        })
-    
+        })    
     }
-
-
     
-    
-    
-    
-
+    func likeTapped(sender: UITapGestureRecognizer) {
+        
+        currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
+            if let _ = snapshot.value as? NSNull {
+                self.likeBtn.image = UIImage(named: "filled-heart")
+                self.post.adjustLikes(addLike: true)
+                self.currentUserLikesRef.setValue(true)
+            } else {
+                self.likeBtn.image = UIImage(named: "empty-heart")
+                self.post.adjustLikes(addLike: false)
+                self.currentUserLikesRef.removeValue()
+            }
+        })
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

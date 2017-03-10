@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
+class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     
     @IBOutlet weak var camView: AAPLPreviewView!
@@ -16,6 +17,8 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
     @IBOutlet weak var takePicBtn: UIButton!
     @IBOutlet weak var rotateCamBtn: UIButton!
     
+    var imagePicker: UIImagePickerController!
+
     
     override func viewDidLoad() {
         delegate = self
@@ -29,8 +32,7 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
     }
 
     @IBAction func takePicPressed(_ sender: Any) {
-    // call for a func that is declared in AAPLCameraViewController.h file. 
-       // snapStillImage()
+  
         snapStillImage()
     }
 
@@ -40,9 +42,46 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate {
 
     @IBAction func choseLibBtn(_ sender: Any) {
         
+        present(self.imagePicker, animated: true, completion: nil)
+        
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+       
+      performSegue(withIdentifier: "EmojiVC", sender: info)
+
+        
+//        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//            addImage.image = image
+//            imageSelected = true
+//        } else {
+//            print("Zhenya: A valid image wasn't selected")
+//        }
+//        
+//        picker.dismiss(animated: true, completion: nil)
+        
+    }
     @IBAction func switchFlashBtn(_ sender: Any) {
+     
+        let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        if (device!.hasTorch) {
+            do {
+                try device!.lockForConfiguration()
+                if (device!.torchMode == AVCaptureTorchMode.on) {
+                    device!.torchMode = AVCaptureTorchMode.off
+                } else {
+                    do {
+                        try device!.setTorchModeOnWithLevel(1.0)
+                    } catch {
+                        print(error)
+                    }
+                }
+                device!.unlockForConfiguration()
+            } catch {
+                print(error)
+            }
+        }
     }
     
     func snapshotTaken(_ snapshotData: Data!) {
