@@ -15,6 +15,8 @@
 		870650331E4AA7440057AED5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 870650311E4AA7440057AED5 /* LaunchScreen.storyboard */; };
 		8706504F1E4D29E20057AED5 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */; };
 		870650501E4D29E50057AED5 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */; };
+		873133451E736036007A49C4 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873133441E736036007A49C4 /* UserVC.swift */; };
+		873133471E739B25007A49C4 /* UserLooksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873133461E739B25007A49C4 /* UserLooksCell.swift */; };
 		873516A61E60DF4F00F5C550 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873516A51E60DF4F00F5C550 /* LogInVC.swift */; };
 		875CE59C1E4D594000A6B492 /* notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 875CE59B1E4D594000A6B492 /* notes.rtf */; };
 		875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CE5A01E4D6F2F00A6B492 /* Location.swift */; };
@@ -51,6 +53,8 @@
 		870650341E4AA7440057AED5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		873133441E736036007A49C4 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
+		873133461E739B25007A49C4 /* UserLooksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLooksCell.swift; sourceTree = "<group>"; };
 		873516A51E60DF4F00F5C550 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		875CE59B1E4D594000A6B492 /* notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = notes.rtf; sourceTree = "<group>"; };
 		875CE5A01E4D6F2F00A6B492 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -120,7 +124,6 @@
 				8711B9721E610B88007F344B /* View */,
 				87F8F1FD1E4E6A09004C1DA7 /* Controller */,
 				87FF20051E6E5D3600072C94 /* Protocols */,
-				873516A51E60DF4F00F5C550 /* LogInVC.swift */,
 				870650291E4AA7440057AED5 /* Main.storyboard */,
 				87FF1FFD1E6E5D1B00072C94 /* Skirt-Bridging-Header.h */,
 				875CE59B1E4D594000A6B492 /* notes.rtf */,
@@ -146,6 +149,7 @@
 				87EE9D551E6F788F004FF47E /* CircleImageView.swift */,
 				87EE9D571E6F9128004FF47E /* SwipeToLeftSegue.swift */,
 				87EE9D591E6F9144004FF47E /* SwipeToLeftSegueUnwind.swift */,
+				873133461E739B25007A49C4 /* UserLooksCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -155,10 +159,12 @@
 			children = (
 				87FF20011E6E5D1B00072C94 /* AAPLCameraViewController.h */,
 				87FF20021E6E5D1B00072C94 /* AAPLCameraViewController.m */,
+				873516A51E60DF4F00F5C550 /* LogInVC.swift */,
 				8793F1A11E664518008DB7C6 /* CreateUsernameVC.swift */,
 				870650271E4AA7430057AED5 /* FeedVC.swift */,
 				87FF1FFB1E6E4EFD00072C94 /* PostPicVC.swift */,
 				87FF20091E6EB09900072C94 /* EmojiVC.swift */,
+				873133441E736036007A49C4 /* UserVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				87FF20031E6E5D1B00072C94 /* AAPLPreviewView.m in Sources */,
 				8706502E1E4AA7440057AED5 /* Skirt.xcdatamodeld in Sources */,
 				870650281E4AA7430057AED5 /* FeedVC.swift in Sources */,
+				873133451E736036007A49C4 /* UserVC.swift in Sources */,
 				87F8F1FC1E4E69F3004C1DA7 /* CurrentWather.swift in Sources */,
 				87FF1FF81E6E327F00072C94 /* Post.swift in Sources */,
 				873516A61E60DF4F00F5C550 /* LogInVC.swift in Sources */,
@@ -354,6 +361,7 @@
 				87FF1FF61E6BE09F00072C94 /* PostCell.swift in Sources */,
 				8793F1A21E664518008DB7C6 /* CreateUsernameVC.swift in Sources */,
 				87B81CC41E627D7D0052C2D2 /* DataService.swift in Sources */,
+				873133471E739B25007A49C4 /* UserLooksCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

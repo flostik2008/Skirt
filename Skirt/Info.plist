@@ -18,8 +18,28 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb810577635757337</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.4</string>
+	<key>FacebookAppID</key>
+	<string>810577635757337</string>
+	<key>FacebookDisplayName</key>
+	<string>skirt</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -27,8 +47,14 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Please, allow access to your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Share your location for a relevant weathercast. </string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Please, allow access to your mic</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please, allow access to your photo library</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Italic.ttf</string>
@@ -46,7 +72,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -55,31 +80,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb810577635757337</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>810577635757337</string>
-	<key>FacebookDisplayName</key>
-	<string>skirt</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Please, allow access to your camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Please, allow access to your photo library</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Please, allow access to your mic</string>
 </dict>
 </plist>

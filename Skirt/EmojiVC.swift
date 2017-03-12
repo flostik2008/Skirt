@@ -72,16 +72,14 @@ class EmojiVC: UIViewController {
             "userKey": uid!,
             ]
         
-        let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
+         let firebasePost = DataService.ds.REF_POSTS.child(uid!)
+        
+       // let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
+        
         firebasePost.setValue(post)
         
         performSegue(withIdentifier: "FromEmojiVCtoFeedVC", sender: nil)
         
-        // present main FeedVC
-        
-        // self.posts.reverse()
-        
-        // tableView.reloadData()
     }
 }
 

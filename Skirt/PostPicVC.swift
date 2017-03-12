@@ -28,6 +28,9 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
         imagePicker = UIImagePickerController()
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+
+        
         
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(PostPicVC.showFirstViewController))
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
@@ -51,29 +54,13 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-     
-        /*
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
-            self.performSegue(withIdentifier: "EmojiVC", sender: image)
-            }
-        }
- 
-        picker.dismiss(animated: true, completion: nil)
-    
-        */
         
         picker.dismiss(animated: false, completion: nil)
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
             self.performSegue(withIdentifier: "EmojiVC", sender: image)
         }
-        
-        
     }
-    
-    
     
     @IBAction func switchFlashBtn(_ sender: Any) {
      

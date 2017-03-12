@@ -32,6 +32,7 @@ class LogInVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
          // if user already exists in keychain:
+        
          if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
             print("Zhenya: ID found in keychain")
          
@@ -70,8 +71,6 @@ class LogInVC: UIViewController {
                     self.performSegue(withIdentifier: "FeedVC", sender: nil)
                 }
             })
-
-            
          }
     }
     
