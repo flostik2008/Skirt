@@ -15,7 +15,8 @@ class EmojiVC: UIViewController {
     @IBOutlet weak var mainImg: UIImageView!
     
     var imageData: Data!
-    var imageItself: UIImage! 
+    var imageItself: UIImage!
+    var currentUserPostRef: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,11 +73,15 @@ class EmojiVC: UIViewController {
             "userKey": uid!,
             ]
         
-         let firebasePost = DataService.ds.REF_POSTS.child(uid!)
-        
-       // let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
-        
+        let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
         firebasePost.setValue(post)
+        
+        // get posts autoID that was just generated.
+        let postKey = firebasePost.key
+        
+        // also create a "posts" subnode in users. (take example from likes)
+        currentUserPostRef = DataService.ds.REF_USER_CURRENT.child("posts").child(postKey)
+        currentUserPostRef.setValue(true)
         
         performSegue(withIdentifier: "FromEmojiVCtoFeedVC", sender: nil)
         
