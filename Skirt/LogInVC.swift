@@ -32,12 +32,11 @@ class LogInVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
          // if user already exists in keychain:
-        
+ 
          if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
             print("Zhenya: ID found in keychain")
          
             // If user has avatarUrl/username/gender in Firebase - FeedVC, if not - CreateUsernameVC
-            
            avatarUrlRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
             
            avatarUrlRef.observe(.value, with:{ (snapshot) in
@@ -72,6 +71,8 @@ class LogInVC: UIViewController {
                 }
             })
          }
+        
+      
     }
     
     override func viewDidLayoutSubviews() {
@@ -147,7 +148,7 @@ class LogInVC: UIViewController {
     func firebaseAuth(_ credential: FIRAuthCredential) {
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
-                print("Zhenya: Unable to login with Firebase")
+                print("Zhenya: Unable to login with Firebase \(error.debugDescription)")
             } else {
                 print("Zhenya: Successfully loged in eith Firebase")
                 if let user = user {

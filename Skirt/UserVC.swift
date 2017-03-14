@@ -16,9 +16,6 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var userPicImg: UIImageView!
     @IBOutlet weak var userNameLbl: UILabel!
-    @IBOutlet weak var looksCountLbl: UILabel!
-    @IBOutlet weak var followingCountLbl: UILabel!
-    @IBOutlet weak var followersCountLbl: UILabel!
     
     var userPosts = [Post]()
     var userLooks = [UIImage] ()
@@ -31,7 +28,26 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.dataSource = self
         
         // getting user info from FB
-        
+        DataService.ds.REF_USER_CURRENT.observe(.value, with: { (snapshot) in
+            if let userInfoDict = snapshot.value as? Dictionary<String, AnyObject> {
+                let avatarUrl = userInfoDict["avatarUrl"] as! String
+                let storageRef = FIRStorage.storage().reference(forURL: avatarUrl)
+                storageRef.data(withMaxSize: 2*1024*1024, completion: { (data, error) in
+                    if error != nil {
+                        print("Zhenya: Couldn't download user's profile pic.")
+                    } else {
+                        if let imgData = data {
+                            if let img = UIImage(data: imgData) {
+                                self.userPicImg.image = img
+                            }
+                        }
+                    }
+                })
+                
+                let userName = userInfoDict["username"] as! String
+                self.userNameLbl.text = userName
+            }
+        })
         
         // getting users looks from FB (new way)
         DataService.ds.REF_USER_CURRENT.child("posts").observe(.value, with: { (snapshot) in
@@ -74,56 +90,14 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             }
         )
         
-        
-        // getting user looks from FB (old way)
-        /*
-        DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
-            self.userPosts = []
-         
-            if let arrayOfAllPosts = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                
-                for dictionaryOfOnePost in arrayOfAllPosts {
-         
-                    if let postDict = dictionaryOfOnePost.value as? Dictionary<String, AnyObject> {
-                        let key = dictionaryOfOnePost.key
-                        let post = Post(postKey: key, postData: postDict)
-                        
-                        // get current userUid. compare it to post's one. If yes, get the image.
-                        let currentUserUid = KeychainWrapper.standard.string(forKey: KEY_UID)
-                        if post.userKey == currentUserUid {
-                            let ref = FIRStorage.storage().reference(forURL: post.imageUrl)
-                            
-                            ref.data(withMaxSize: 2*1024*1024, completion: { (data, error) in
-                                if error != nil {
-                                    print("Zhenya: Unable to download images from Firebase storage")
-                                } else {
-                                    print("Zhenya: Successfully downloaded images from Firebase storage")
-                                    if let imgData = data {
-                                        if let img = UIImage(data: imgData) {
-                                            
-                                            self.userLooks.append(img)
-                                            print("Zhnya: nevertheless \(img)")
-                                        }
-                                    }
-                                }
-                                self.collectionView.reloadData()
-
-                            })
-                        }
-                    }
-                }
-            }
-            self.userPosts.reverse()
-        })
-        */
-        
-        
          let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
          let width = UIScreen.main.bounds.width
          layout.itemSize = CGSize(width: width / 3 - 2 , height: width / 3 - 2)
          layout.minimumInteritemSpacing = 3
          layout.minimumLineSpacing = 3
          collectionView!.collectionViewLayout = layout
+        
+        addGradient(color: UIColor.clear, view: gradientView)
     }
 
     
@@ -146,18 +120,25 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return 1
     }
     
-    
-    @IBAction func showFollowingBtn(_ sender: Any) {
-    
-    }
-    
-    
-    @IBAction func showFollowersBtn(_ sender: Any) {
-    
-    }
-    
     @IBAction func editUserBtn(_ sender: Any) {
+        
+        
+        
+        performSegue(withIdentifier: "EditUserVC", sender: nil)
+    }
     
+    func addGradient(color: UIColor, view: UIView) {
+        let gradient = CAGradientLayer()
+        
+        let gradientOrigin = view.bounds.origin
+        let huy = UIScreen.main.bounds.width
+        let gradientSize = CGSize(width: huy, height: CGFloat(79))
+        gradient.frame = CGRect(origin: gradientOrigin, size: gradientSize)
+        
+        let bottomColor = UIColor(red:0.07, green:0.07, blue:0.07, alpha:0.9)
+        gradient.colors = [color.cgColor, bottomColor.cgColor]
+        
+        view.layer.insertSublayer(gradient, at: 0)
     }
 }
 
