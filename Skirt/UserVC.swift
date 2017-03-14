@@ -97,6 +97,10 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
          layout.minimumLineSpacing = 3
          collectionView!.collectionViewLayout = layout
         
+        let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(UserVC.showFeedVC))
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
+        
         addGradient(color: UIColor.clear, view: gradientView)
     }
 
@@ -122,9 +126,11 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     @IBAction func editUserBtn(_ sender: Any) {
         
-        
-        
-        performSegue(withIdentifier: "EditUserVC", sender: nil)
+        self.performSegue(withIdentifier: "EditUserVC", sender: nil)
+    }
+    
+    func showFeedVC() {
+        performSegue(withIdentifier: "customSegueToUserVCUnwind", sender: self)
     }
     
     func addGradient(color: UIColor, view: UIView) {

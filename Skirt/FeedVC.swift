@@ -78,9 +78,13 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             self.tableView.reloadData()
         } )
         
-        let swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FeedVC.showPostPicVC))
-        swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeGestureRecognizer)
+        let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FeedVC.showPostPicVC))
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
+        
+        let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FeedVC.showUserVC))
+        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -188,10 +192,14 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         return 1
     }
     
-    // custom segue methods
     func showPostPicVC() {
         self.performSegue(withIdentifier: "customSegueToPostVC", sender: self)
     }
+    
+    func showUserVC(){
+        self.performSegue(withIdentifier: "UserVCFromFeedVC", sender: self)
+    }
+    
     
     @IBAction func returnPostPicVCSegue(sender: UIStoryboardSegue){
         
@@ -204,10 +212,22 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
                     
                 })
                 return unwindSegue
+            } else if id == "customSegueToUserVCUnwind" {
+                let unwindSegue = SwipeToRightSegueUnwind(identifier: id, source: fromViewController, destination: toViewController, performHandler: {()-> Void in
+                    
+                
+                })
+                return unwindSegue
             }
         }
         return super.segueForUnwinding(to: toViewController, from: fromViewController, identifier: identifier)
     }
+    
+    @IBAction func returnUserVCSegue(sender: UIStoryboardSegue) {
+    
+    }
+    
+    
 }
 
 

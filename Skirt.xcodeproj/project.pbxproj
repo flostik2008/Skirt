@@ -16,6 +16,8 @@
 		8706504F1E4D29E20057AED5 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */; };
 		870650501E4D29E50057AED5 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */; };
 		8723BD811E776960006DB58B /* EditUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8723BD801E776960006DB58B /* EditUserVC.swift */; };
+		872C10941E77EA3100829FC2 /* SwipeToRightSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C10931E77EA3100829FC2 /* SwipeToRightSegue.swift */; };
+		872C10961E77EA4500829FC2 /* SwipeToRightSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872C10951E77EA4500829FC2 /* SwipeToRightSegueUnwind.swift */; };
 		873133451E736036007A49C4 /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873133441E736036007A49C4 /* UserVC.swift */; };
 		873133471E739B25007A49C4 /* UserLooksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873133461E739B25007A49C4 /* UserLooksCell.swift */; };
 		873516A61E60DF4F00F5C550 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873516A51E60DF4F00F5C550 /* LogInVC.swift */; };
@@ -55,6 +57,8 @@
 		8706504D1E4D27FC0057AED5 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		8723BD801E776960006DB58B /* EditUserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUserVC.swift; sourceTree = "<group>"; };
+		872C10931E77EA3100829FC2 /* SwipeToRightSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToRightSegue.swift; sourceTree = "<group>"; };
+		872C10951E77EA4500829FC2 /* SwipeToRightSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToRightSegueUnwind.swift; sourceTree = "<group>"; };
 		873133441E736036007A49C4 /* UserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		873133461E739B25007A49C4 /* UserLooksCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLooksCell.swift; sourceTree = "<group>"; };
 		873516A51E60DF4F00F5C550 /* LogInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				87EE9D551E6F788F004FF47E /* CircleImageView.swift */,
 				87EE9D571E6F9128004FF47E /* SwipeToLeftSegue.swift */,
 				87EE9D591E6F9144004FF47E /* SwipeToLeftSegueUnwind.swift */,
+				872C10931E77EA3100829FC2 /* SwipeToRightSegue.swift */,
+				872C10951E77EA4500829FC2 /* SwipeToRightSegueUnwind.swift */,
 				873133461E739B25007A49C4 /* UserLooksCell.swift */,
 			);
 			name = View;
@@ -344,6 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87EE9D561E6F788F004FF47E /* CircleImageView.swift in Sources */,
+				872C10961E77EA4500829FC2 /* SwipeToRightSegueUnwind.swift in Sources */,
 				87FF1FFA1E6E332A00072C94 /* User.swift in Sources */,
 				87FF1FFC1E6E4EFD00072C94 /* PostPicVC.swift in Sources */,
 				87EE9D5A1E6F9144004FF47E /* SwipeToLeftSegueUnwind.swift in Sources */,
@@ -363,6 +370,7 @@
 				8723BD811E776960006DB58B /* EditUserVC.swift in Sources */,
 				87FF1FF41E6BC5A400072C94 /* LineSeparator.swift in Sources */,
 				87FF1FF61E6BE09F00072C94 /* PostCell.swift in Sources */,
+				872C10941E77EA3100829FC2 /* SwipeToRightSegue.swift in Sources */,
 				8793F1A21E664518008DB7C6 /* CreateUsernameVC.swift in Sources */,
 				87B81CC41E627D7D0052C2D2 /* DataService.swift in Sources */,
 				873133471E739B25007A49C4 /* UserLooksCell.swift in Sources */,

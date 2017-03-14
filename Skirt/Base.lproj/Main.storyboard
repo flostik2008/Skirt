@@ -421,9 +421,11 @@
                         <outlet property="gradientView" destination="ODR-2Z-hCn" id="aVk-sZ-mk1"/>
                         <outlet property="userNameLbl" destination="YsO-yU-mLp" id="9M7-4j-aBC"/>
                         <outlet property="userPicImg" destination="OrX-cO-dvC" id="vCb-kP-vbO"/>
+                        <segue destination="Ghm-T8-jIi" kind="unwind" identifier="customSegueToUserVCUnwind" customClass="SwipeToRightSegueUnwind" customModule="Skirt" customModuleProvider="target" unwindAction="returnUserVCSegueWithSender:" id="otM-3g-FNc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uth-2n-vqK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ghm-T8-jIi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-975.20000000000005" y="548.27586206896558"/>
         </scene>
@@ -519,7 +521,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="510"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qiu-om-q2W" id="18H-8C-eyP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="509.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B27-JZ-du7">
@@ -652,6 +654,7 @@
                         <outlet property="weatherSummeryLbl" destination="YU1-J6-N3W" id="u0X-Rw-gij"/>
                         <outlet property="weatherTypeImg" destination="KBb-BY-E6j" id="XWU-pd-2DV"/>
                         <segue destination="ZZs-mG-bnf" kind="custom" identifier="customSegueToPostVC" customClass="SwipeToLeftSegue" customModule="Skirt" customModuleProvider="target" id="gwt-3X-vHE"/>
+                        <segue destination="OIQ-Yd-n7K" kind="custom" identifier="UserVCFromFeedVC" customClass="SwipeToRightSegue" customModule="Skirt" customModuleProvider="target" id="pEg-f6-oTw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -859,6 +862,7 @@
         <image name="signUpBtn" width="840" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="pEg-f6-oTw"/>
         <segue reference="mDd-v2-Nvu"/>
     </inferredMetricsTieBreakers>
 </document>
