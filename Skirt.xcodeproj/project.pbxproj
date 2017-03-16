@@ -24,6 +24,8 @@
 		875CE59C1E4D594000A6B492 /* notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 875CE59B1E4D594000A6B492 /* notes.rtf */; };
 		875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875CE5A01E4D6F2F00A6B492 /* Location.swift */; };
 		8793F1A21E664518008DB7C6 /* CreateUsernameVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8793F1A11E664518008DB7C6 /* CreateUsernameVC.swift */; };
+		87A30DE01E7A6FBA000B0BD5 /* EmojiCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A30DDF1E7A6FBA000B0BD5 /* EmojiCollectionVC.swift */; };
+		87A30DE21E7A838C000B0BD5 /* EmojiCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A30DE11E7A838C000B0BD5 /* EmojiCollectionCell.swift */; };
 		87AA3C211E616E1D00CC5589 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */; };
 		87B81CC41E627D7D0052C2D2 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B81CC31E627D7D0052C2D2 /* DataService.swift */; };
 		87DB98601E5F7CB300EECC1F /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87DB985F1E5F7CB300EECC1F /* Roboto-Regular.ttf */; };
@@ -65,6 +67,8 @@
 		875CE59B1E4D594000A6B492 /* notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = notes.rtf; sourceTree = "<group>"; };
 		875CE5A01E4D6F2F00A6B492 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		8793F1A11E664518008DB7C6 /* CreateUsernameVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUsernameVC.swift; sourceTree = "<group>"; };
+		87A30DDF1E7A6FBA000B0BD5 /* EmojiCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollectionVC.swift; sourceTree = "<group>"; };
+		87A30DE11E7A838C000B0BD5 /* EmojiCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiCollectionCell.swift; sourceTree = "<group>"; };
 		87AA3C1F1E616BAC00CC5589 /* Skirt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Skirt.entitlements; sourceTree = "<group>"; };
 		87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87B81CC31E627D7D0052C2D2 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				872C10931E77EA3100829FC2 /* SwipeToRightSegue.swift */,
 				872C10951E77EA4500829FC2 /* SwipeToRightSegueUnwind.swift */,
 				873133461E739B25007A49C4 /* UserLooksCell.swift */,
+				87A30DE11E7A838C000B0BD5 /* EmojiCollectionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				87FF20091E6EB09900072C94 /* EmojiVC.swift */,
 				873133441E736036007A49C4 /* UserVC.swift */,
 				8723BD801E776960006DB58B /* EditUserVC.swift */,
+				87A30DDF1E7A6FBA000B0BD5 /* EmojiCollectionVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -365,10 +371,12 @@
 				875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */,
 				87EE9D581E6F9128004FF47E /* SwipeToLeftSegue.swift in Sources */,
 				870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */,
+				87A30DE21E7A838C000B0BD5 /* EmojiCollectionCell.swift in Sources */,
 				87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */,
 				87FF20041E6E5D1B00072C94 /* AAPLCameraViewController.m in Sources */,
 				8723BD811E776960006DB58B /* EditUserVC.swift in Sources */,
 				87FF1FF41E6BC5A400072C94 /* LineSeparator.swift in Sources */,
+				87A30DE01E7A6FBA000B0BD5 /* EmojiCollectionVC.swift in Sources */,
 				87FF1FF61E6BE09F00072C94 /* PostCell.swift in Sources */,
 				872C10941E77EA3100829FC2 /* SwipeToRightSegue.swift in Sources */,
 				8793F1A21E664518008DB7C6 /* CreateUsernameVC.swift in Sources */,

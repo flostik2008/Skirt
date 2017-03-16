@@ -20,7 +20,7 @@ class EmojiVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // create image out of Data, set mainImg. 
+        
         if imageData != nil {
             let img = UIImage(data: imageData)
             mainImg.image = img
@@ -34,6 +34,10 @@ class EmojiVC: UIViewController {
         
     }
     @IBAction func addEmoji(_ sender: Any) {
+        
+        // create code to pass user image as sender: 
+        let img = mainImg.image
+        performSegue(withIdentifier: "EmojiCollectionVC", sender: img)
         
     }
     @IBAction func postPic(_ sender: Any) {
@@ -59,8 +63,6 @@ class EmojiVC: UIViewController {
                 }
             }
         }
-        // need to tableView.reloadData() somewhere after this. 
-        
     }
     
     func postToFirebase(imgUrl: String) {
@@ -85,6 +87,14 @@ class EmojiVC: UIViewController {
         
         performSegue(withIdentifier: "FromEmojiVCtoFeedVC", sender: nil)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let emojiCollection = segue.destination as? EmojiCollectionVC{
+            if let image = sender as? UIImage {
+                emojiCollection.userImage = image
+            }
+        }
     }
 }
 
