@@ -51,15 +51,10 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "emojiCell", for: indexPath) as! EmojiCollectionCell
-        
         let img = UIImage(named: "\(indexPath.row + 1)")
-        
-        print("Zhenya: \(indexPath.row)")
-        
         cell.configureCell(image: img!)
         
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -71,6 +66,28 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         return 1
     }
   
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! EmojiCollectionCell
+        let chosenEmoji = cell.emojiView.image as UIImage!
+        performSegue(withIdentifier: "backToEmojiVC", sender: chosenEmoji)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToEmojiVC"{
+
+            if let destinationVC = segue.destination as? EmojiVC {
+                if let emoji = sender as? UIImage {
+                
+                    destinationVC.emojiImage = emoji
+                
+                    let data = UIImagePNGRepresentation(userImage)
+                    destinationVC.imageData = data
+                
+            }
+        }
+    }
+    }
 }
 
 

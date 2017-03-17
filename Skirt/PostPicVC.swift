@@ -92,12 +92,15 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let emojiVC = segue.destination as? EmojiVC {
+            if segue.identifier == "EmojiVC" {
+            
             if let snapDict = sender as? Dictionary<String,Data> {
                 let snapData = snapDict["snapshotData"]
                 emojiVC.imageData = snapData
             } else if let image = sender as? UIImage {
                     emojiVC.imageItself = image
             }
+        }
         }
     }
 

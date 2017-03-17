@@ -13,20 +13,53 @@ import SwiftKeychainWrapper
 class EmojiVC: UIViewController {
 
     @IBOutlet weak var mainImg: UIImageView!
+    @IBOutlet weak var emojiImageView: UIImageView!
     
     var imageData: Data!
     var imageItself: UIImage!
     var currentUserPostRef: FIRDatabaseReference!
+    var emojiImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if imageData != nil {
             let img = UIImage(data: imageData)
-            mainImg.image = img
+            print("Zhenya:5 - here is background image \(img)")
+            
+            let fixedImg = img!.fixOrientation(img: img!)
+            
+            mainImg.image = fixedImg
         } else if imageItself != nil {
             mainImg.image = imageItself
         }
+        
+        if emojiImage != nil {
+            emojiImageView.image = emojiImage
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        imageData = nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+//        if imageData != nil {
+//            let img = UIImage(data: imageData)
+//            print("Zhenya:5 - here is background image \(img)")
+//            
+//            let fixedImg = img!.fixOrientation(img: img!)
+//            
+//            mainImg.image = fixedImg
+//        } else if imageItself != nil {
+//            mainImg.image = imageItself
+//        }
+//        
+//        if emojiImage != nil {
+//            emojiImageView.image = emojiImage
+//        }
     }
 
     @IBAction func cancelPic(_ sender: Any) {
@@ -90,13 +123,49 @@ class EmojiVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "EmojiCollectionVC" {
         if let emojiCollection = segue.destination as? EmojiCollectionVC{
             if let image = sender as? UIImage {
                 emojiCollection.userImage = image
             }
+          }
         }
     }
 }
+
+extension UIImage {
+    func normalizedImage() -> UIImage {
+        
+        if (self.imageOrientation == UIImageOrientation.up) {
+            return self;
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
+        let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+        self.draw(in: rect)
+        
+        let normalizedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext();
+        return normalizedImage;
+    }
+    
+    func fixOrientation(img:UIImage) -> UIImage {
+        
+        if (img.imageOrientation == UIImageOrientation.up) {
+            return img;
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale);
+        let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        img.draw(in: rect)
+        
+        let normalizedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext();
+        return normalizedImage;
+    }
+}
+
 
 
 
