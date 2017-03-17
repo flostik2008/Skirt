@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class EmojiVC: UIViewController {
+class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var mainImg: UIImageView!
     @IBOutlet weak var emojiImageView: UIImageView!
@@ -97,6 +97,7 @@ class EmojiVC: UIViewController {
             }
         }
     }
+ 
     
     func postToFirebase(imgUrl: String) {
 
@@ -131,6 +132,30 @@ class EmojiVC: UIViewController {
             }
           }
         }
+    }
+    
+    @IBAction func handlePan(recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translation(in: self.view)
+        if let view = recognizer.view {
+            view.center = CGPoint(x:view.center.x + translation.x,
+                                  y:view.center.y + translation.y)
+        }
+        recognizer.setTranslation(CGPoint.zero, in: self.view)
+    }
+    
+    @IBAction func handlePinch(recognizer: UIPinchGestureRecognizer) {
+ 
+        emojiImageView.transform = emojiImageView.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+        recognizer.scale = 1
+    }
+    
+    @IBAction func handleRotate(recognizer: UIRotationGestureRecognizer){
+        emojiImageView.transform = emojiImageView.transform.rotated(by: recognizer.rotation)
+        recognizer.rotation = 0
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
