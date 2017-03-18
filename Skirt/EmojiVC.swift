@@ -20,6 +20,8 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     var currentUserPostRef: FIRDatabaseReference!
     var emojiImage: UIImage!
     
+    var arrayOfEmojis = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,8 +36,30 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
             mainImg.image = imageItself
         }
         
-        if emojiImage != nil {
-            emojiImageView.image = emojiImage
+        // get image out of array. 
+        
+        if arrayOfEmojis.count != 0 {
+            for emoji in arrayOfEmojis {
+
+                let emojiView = UIImageView(image: emoji)
+                emojiView.frame = CGRect(x: 153, y: 299, width: 70, height: 70)
+                emojiView.isUserInteractionEnabled = true
+                view.addSubview(emojiView)
+                
+                
+                let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
+                pan.delegate = self
+                emojiView.addGestureRecognizer(pan)
+                
+                let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(recognizer:)))
+                pinch.delegate = self
+                emojiView.addGestureRecognizer(pinch)
+                
+                let rotate = UIRotationGestureRecognizer(target: self, action: #selector(self.handleRotate(recognizer:)))
+                rotate.delegate = self
+                emojiView.addGestureRecognizer(rotate)
+                
+             }
         }
     }
     
@@ -144,13 +168,21 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func handlePinch(recognizer: UIPinchGestureRecognizer) {
- 
-        emojiImageView.transform = emojiImageView.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
+        
+        let pinchPoint = recognizer.location(in: view)
+        let ourEmojiView = view.hitTest(pinchPoint, with: nil)
+        
+        ourEmojiView!.transform = ourEmojiView!.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
         recognizer.scale = 1
+
     }
     
     @IBAction func handleRotate(recognizer: UIRotationGestureRecognizer){
-        emojiImageView.transform = emojiImageView.transform.rotated(by: recognizer.rotation)
+        
+        let rotatePoint = recognizer.location(in: view)
+        let ourEmojiView = view.hitTest(rotatePoint, with: nil)
+        
+        ourEmojiView!.transform = ourEmojiView!.transform.rotated(by: recognizer.rotation)
         recognizer.rotation = 0
     }
     

@@ -215,6 +215,15 @@ How to add emoji stickers to photos (in makePostVC)? \
 	tutorial: dragging/pinching/panning image views(stickers, emoji) - https://www.raywenderlich.com/76020/using-uigesturerecognizer-with-swift-tutorial\
 	tutorial: show custom view (in same VC), on press of a button - https://www.thorntech.com/2016/03/ios-tutorial-make-interactive-slide-menu-swift/\
 \
+18. \
+How to add more than 1 sticker? \
+	Question: When choosing to add more emoticons, need to somehow save the existent emoticon. \
+	Solution: In EmojiVC, create an array of images. After each visit to EmojiCollectionVC, add stickers to that array. \
+	in ViewDidLoad of EmojiVC, create ImageViews out of objects from array. \
+	Question: how to save array of images after going to EmojiCollectionVC? \
+	Solution: pass it in prepareForSegue back and forth. \
+\
+	Problem: since i made custom handleRotate and handlePinch, - emojiView isn't transforming. How to access subviews of the main view from gesture recognizer? \
 \
 How to show only local posts? \
 How to flag posts as "not a look". \

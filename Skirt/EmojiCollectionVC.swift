@@ -79,11 +79,10 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             if let destinationVC = segue.destination as? EmojiVC {
                 if let emoji = sender as? UIImage {
                 
-                    destinationVC.emojiImage = emoji
-                
+                  //  destinationVC.emojiImage = emoji
+                    destinationVC.arrayOfEmojis.append(emoji)
                     let data = UIImagePNGRepresentation(userImage)
                     destinationVC.imageData = data
-                
             }
         }
     }
