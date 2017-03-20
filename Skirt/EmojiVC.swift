@@ -14,6 +14,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var mainImg: UIImageView!
     @IBOutlet weak var emojiImageView: UIImageView!
+    @IBOutlet weak var viewWithEmojis: UIView!
     
     var imageData: Data!
     var imageItself: UIImage!
@@ -21,31 +22,41 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     var emojiImage: UIImage!
     
     var arrayOfEmojis = [UIImage]()
+    var arrayOfEmojiViews = [UIImageView]()
     
+    var n:Int = 1
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if imageData != nil {
             let img = UIImage(data: imageData)
-            print("Zhenya:5 - here is background image \(img)")
-            
             let fixedImg = img!.fixOrientation(img: img!)
             
             mainImg.image = fixedImg
         } else if imageItself != nil {
             mainImg.image = imageItself
         }
+
+        // get imageViews
         
-        // get image out of array. 
+        if arrayOfEmojiViews.count != 0 {
+            for emojiView1 in arrayOfEmojiViews {
+                view.addSubview(emojiView1)
+                print("Zhenya: here is the imageView that i'm looking for - \(emojiView1)")
+            }
+        }
+        
+        
+        // get image out of array.
         
         if arrayOfEmojis.count != 0 {
             for emoji in arrayOfEmojis {
 
                 let emojiView = UIImageView(image: emoji)
+                emojiView.tag = n
                 emojiView.frame = CGRect(x: 153, y: 299, width: 70, height: 70)
                 emojiView.isUserInteractionEnabled = true
-                view.addSubview(emojiView)
-                
                 
                 let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
                 pan.delegate = self
@@ -59,13 +70,36 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
                 rotate.delegate = self
                 emojiView.addGestureRecognizer(rotate)
                 
+                if view.viewWithTag(n) == nil {
+                
+                    view.addSubview(emojiView)
+                }
+                n += 1
+
              }
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    
+    override func viewWillDisappear(_ animated: Bool) {
         
         imageData = nil
+        
+        // get all UIImageViews into an array
+        //  let allSubviews:[UIView] = view.viewWithEmojis.subviews.filter{$0 is UIImageView}
+        // our n right now is 3, 4 or whatever. that is how many loos we need to perform
+       /*
+        if arrayOfEmojis.count != 0 {
+            for j in 1...n {
+            
+                if var view1 = self.view.viewWithTag(j) as? UIImageView {
+                    arrayOfEmojiViews.append(view1)
+                }
+            }
+        
+            print("Zhenya: in the viewWillDisappear arrayOfEmojiViews - \(arrayOfEmojiViews)")
+        }
+            */
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -149,10 +183,27 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if arrayOfEmojis.count != 0 {
+            for j in 1...n {
+                
+                if var view1 = self.view.viewWithTag(j) as? UIImageView {
+                    arrayOfEmojiViews.append(view1)
+                }
+            }
+            
+            print("Zhenya: in the viewWillDisappear arrayOfEmojiViews - \(arrayOfEmojiViews)")
+        }
+
         if segue.identifier == "EmojiCollectionVC" {
-        if let emojiCollection = segue.destination as? EmojiCollectionVC{
-            if let image = sender as? UIImage {
+            if let emojiCollection = segue.destination as? EmojiCollectionVC{
+                if let image = sender as? UIImage {
                 emojiCollection.userImage = image
+                    
+                    if arrayOfEmojis.count != 0 {
+                      //arrayToStoreEmojis
+                       emojiCollection.arrayToStoreEmojis = arrayOfEmojis
+                       emojiCollection.arrayToStoreEmojiViews = arrayOfEmojiViews
+                }
             }
           }
         }

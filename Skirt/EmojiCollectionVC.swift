@@ -15,10 +15,13 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
     @IBOutlet weak var emojiCollection: UICollectionView!
     
     var userImage: UIImage!
+    var arrayToStoreEmojis = [UIImage]()
+    var arrayToStoreEmojiViews = [UIImageView]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         backgroundImage.image = userImage
         
         emojiCollection.delegate = self
@@ -70,17 +73,22 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         
         let cell = collectionView.cellForItem(at: indexPath) as! EmojiCollectionCell
         let chosenEmoji = cell.emojiView.image as UIImage!
-        performSegue(withIdentifier: "backToEmojiVC", sender: chosenEmoji)
+        
+        arrayToStoreEmojis.append(chosenEmoji!)
+        performSegue(withIdentifier: "backToEmojiVC", sender: arrayToStoreEmojis)
     }
 
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToEmojiVC"{
 
             if let destinationVC = segue.destination as? EmojiVC {
-                if let emoji = sender as? UIImage {
+                if let array = sender as? [UIImage] {
                 
                   //  destinationVC.emojiImage = emoji
-                    destinationVC.arrayOfEmojis.append(emoji)
+                    destinationVC.arrayOfEmojis = arrayToStoreEmojis
+                    destinationVC.arrayOfEmojiViews = arrayToStoreEmojiViews
+                    
                     let data = UIImagePNGRepresentation(userImage)
                     destinationVC.imageData = data
             }

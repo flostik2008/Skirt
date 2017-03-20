@@ -29,8 +29,6 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         imagePicker.allowsEditing = false
-
-        
         
         var swipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(PostPicVC.showFirstViewController))
         swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
@@ -49,7 +47,6 @@ class PostPicVC: AAPLCameraViewController, AAPLCameraVCDelegate, UIImagePickerCo
     @IBAction func choseLibBtn(_ sender: Any) {
         
         present(self.imagePicker, animated: true, completion: nil)
-        
     }
     
     

@@ -521,7 +521,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="510"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qiu-om-q2W" id="18H-8C-eyP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B27-JZ-du7">
@@ -553,7 +553,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-Y4-LJQ">
-                                                            <rect key="frame" x="266" y="0.0" width="89" height="30"/>
+                                                            <rect key="frame" x="267" y="0.0" width="88" height="30"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-heart" translatesAutoresizingMaskIntoConstraints="NO" id="YAr-v5-qf3">
                                                                     <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
@@ -563,7 +563,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2737" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyD-yj-72x">
-                                                                    <rect key="frame" x="31" y="0.0" width="38" height="30"/>
+                                                                    <rect key="frame" x="31" y="0.0" width="37" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="4dJ-Bb-MRS"/>
                                                                     </constraints>
@@ -572,7 +572,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="flagBtn" translatesAutoresizingMaskIntoConstraints="NO" id="LAG-Dk-Aqd">
-                                                                    <rect key="frame" x="75" y="0.0" width="14" height="30"/>
+                                                                    <rect key="frame" x="74" y="0.0" width="14" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="h6E-eo-VYb"/>
                                                                         <constraint firstAttribute="width" constant="14" id="iPG-a0-dB8"/>
@@ -937,6 +937,7 @@
                     <connections>
                         <outlet property="emojiImageView" destination="4Kf-WZ-iSC" id="6uk-x3-gSh"/>
                         <outlet property="mainImg" destination="UlM-lX-yex" id="MWb-di-C60"/>
+                        <outlet property="viewWithEmojis" destination="DA4-Nn-PAj" id="5Xh-le-cN2"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="FromEmojiVCtoFeedVC" id="UpY-gJ-Fsz"/>
                     </connections>
                 </viewController>
@@ -987,6 +988,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="bnc-hf-EIQ"/>
         <segue reference="UpY-gJ-Fsz"/>
-        <segue reference="U3q-EB-VlT"/>
+        <segue reference="arH-KF-Wjr"/>
     </inferredMetricsTieBreakers>
 </document>
