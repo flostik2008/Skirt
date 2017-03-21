@@ -225,7 +225,7 @@ class EditUserVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource
         view.endEditing(true)
         
         if userNameTextField.text != nil, genderTextField != nil, userPicImg.image != nil {
-            performSegue(withIdentifier: "FeedVC", sender: nil)
+            performSegue(withIdentifier: "fromEditUserVCtoFeedVC", sender: nil)
         } else {
             let alertController = UIAlertController(title: "Please fill all fields", message: "don't forget about userpic", preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in

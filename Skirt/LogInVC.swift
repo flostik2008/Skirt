@@ -46,33 +46,34 @@ class LogInVC: UIViewController {
                     self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
                 } else {
                     self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                    return
                 }
-            })
             
-            usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
-            usernameRef.observe(.value, with:{ (snapshot) in
-                let snapshotValue = snapshot.value as? String
+                self.usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
+                self.usernameRef.observe(.value, with:{ (snapshot) in
+                    let snapshotValue = snapshot.value as? String
                 
-                if snapshotValue == nil || snapshotValue == "" {
-                    self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
-                } else {
-                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
-                }
-            })
-            
-            genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
-            genderRef.observe(.value, with:{ (snapshot) in
-                let snapshotValue = snapshot.value as? String
-                
-                if snapshotValue == nil || snapshotValue == "" {
-                    self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
-                } else {
-                    self.performSegue(withIdentifier: "FeedVC", sender: nil)
-                }
+                    if snapshotValue == nil || snapshotValue == "" {
+                        self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+                    } else {
+                        self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                        return
+                    }
+                    
+                    self.genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
+                    self.genderRef.observe(.value, with:{ (snapshot) in
+                        let snapshotValue = snapshot.value as? String
+                        
+                        if snapshotValue == nil || snapshotValue == "" {
+                            self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+                        } else {
+                            self.performSegue(withIdentifier: "FeedVC", sender: nil)
+                            return 
+                        }
+                    })
+                })
             })
          }
-        
-      
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,7 +96,6 @@ class LogInVC: UIViewController {
         passUnderline.borderWidth = passWidth
         passTextField.layer.addSublayer(passUnderline)
         passTextField.layer.masksToBounds = true
-        
     }
     
     @IBAction func signUpBtn(_ sender: Any) {
@@ -150,7 +150,7 @@ class LogInVC: UIViewController {
             if error != nil {
                 print("Zhenya: Unable to login with Firebase \(error.debugDescription)")
             } else {
-                print("Zhenya: Successfully loged in eith Firebase")
+                print("Zhenya: Successfully loged in with Firebase")
                 if let user = user {
                     let userData = ["provider": credential.provider]
                     self.completeSignIn(id: user.uid, userData: userData)

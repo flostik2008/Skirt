@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import Firebase
 
-class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
+class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
 
     @IBOutlet weak var cityLbl: UILabel!
     @IBOutlet weak var currentWeatherImg: UIImageView!
@@ -78,11 +78,11 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
             self.tableView.reloadData()
         } )
         
-        let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FeedVC.showPostPicVC))
+        let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showPostPicVC))
         leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
         
-        let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(FeedVC.showUserVC))
+        let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showUserVC))
         rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(rightSwipeGestureRecognizer)
     }
@@ -166,7 +166,7 @@ class FeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, 
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PostCell {
           
-             if let img = FeedVC.imageCache.object(forKey: post1.imageUrl as NSString) {
+             if let img = MainFeedVC.imageCache.object(forKey: post1.imageUrl as NSString) {
              
              cell.configureCell(user: user1, post: post1, img: img)
              return cell

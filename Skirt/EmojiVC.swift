@@ -126,14 +126,22 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     }
     @IBAction func addEmoji(_ sender: Any) {
         
-        // create code to pass user image as sender: 
         let img = mainImg.image
         performSegue(withIdentifier: "EmojiCollectionVC", sender: img)
-        
     }
+
     @IBAction func postPic(_ sender: Any) {
         
-        let img = mainImg.image
+        //create image out of the view 
+        
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        
+      //  let img = mainImg.image
+        
         if let imageToData = UIImageJPEGRepresentation(img!, 0.2) {
             
             let imgUid = NSUUID().uuidString

@@ -232,7 +232,7 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         view.endEditing(true)
         
         if usernameTextField.text != nil, genderPickerTextField != nil, userpicImg.image != nil {
-            performSegue(withIdentifier: "FeedVC", sender: nil)
+            performSegue(withIdentifier: "fromCreateUserVCtoFeedVC", sender: nil)
         } else {
             let alertController = UIAlertController(title: "Please fill all fields", message: "don't forget about userpic", preferredStyle: .actionSheet)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in

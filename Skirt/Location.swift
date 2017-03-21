@@ -11,7 +11,7 @@ import CoreLocation
 class Location {
 
     static var sharedInstance = Location()
-    let mainVC = FeedVC()
+    let mainVC = MainFeedVC()
     
     private init (){}
     

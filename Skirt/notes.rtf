@@ -233,7 +233,6 @@ How to add more than 1 sticker? \
 
 \f1\fs36 \expnd0\expndtw0\kerning0
 \CocoaLigature1 \
-\
 	Prob: UIImageView is not created in EmojiVC //
 \f3\fs28 \cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 let\cf0  emojiView = \cf6 UIImageView\cf0 (image: emoji).\cf12 viewWithTag\cf0 (\cf5 n\cf0 )\
 
@@ -243,11 +242,27 @@ How to add more than 1 sticker? \
 	Prob: cant get EmojiCollectionVC array with UImageViews. \
 	Sol: was adding UImageViews in func 'viewDidDisappear'/'viewWillDisapear'. But that func is called after the 'prepareForSegue' func, and after the 'viewDidLoad' func in the EmojiVC. Added the code to 'prepareForSegue' func now it works. \
 \
-	\
+	Prob: was adding stickers again and again, together with imageViews. \
+	Sol: before looping/adding new image in EmojiVC, in viewDidLoad, checking if the main view already has that image with that tag. \
 \
-How to show only local posts? \
-How to flag posts as "not a look". \
-How to make available window when taking pic to a set parameters (that is good for my UX)? \
+	Prob: pinching and rotating now affects the main controls. \
+	Sol: (unsolved)\
+\
+	Prob: was loading FeedVC twice. Because I had 3 if statements with closures. When one finished getting data, another was called. So func performSegue was called even after FeedVC appeared. \
+	Sol: put all 'if' statement inside each other to be consecutive. Added "return" once "performForSegue" was called once. \
+\
+19. \
+How to save user pics together with emoticons without other UI elements. \
+\
+\
+20. \
+How to show only local posts? and only for today. \
+\
+\
+\
+\
+How to flag posts as "not a looks". \
+\
 How to mix in posts from SkirtTeam into all users feed? \
 \
 \
