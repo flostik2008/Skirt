@@ -253,11 +253,21 @@ How to add more than 1 sticker? \
 \
 19. \
 How to save user pics together with emoticons without other UI elements. \
+  	I restructure view hierarchy according to SO suggestion: 	   view\
+		view with img +emoticons\
+		view wth UI. \
+	Now, when building UIGraphics context, I use viewWithImg+emoticons.bounds.size. \
+	Works. \
 \
 \
 20. \
 How to show only local posts? and only for today. \
-\
+	- Get user current location - he's already getting it for the weather api. \
+	- Based on that data - make a query to Firebase for posts only for that specific area, only today. (or better within couple hours)\
+	- So every post should have time and location stamp. \
+	- When accessing that data, somehow filter based on those two criterias. \
+	(don't delete old posts. Save them for people to see posts by specific user)	\
+Will use geoFire. \
 \
 \
 \
@@ -265,7 +275,7 @@ How to flag posts as "not a looks". \
 \
 How to mix in posts from SkirtTeam into all users feed? \
 \
-\
+Google: Update UI only when finished returning from FB. \
 \
 \
 \

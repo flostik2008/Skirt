@@ -48,7 +48,12 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         
         addGradient(color: UIColor.clear, view: gradientView)
         
-        // Getting posts data into users array:
+        // get only local posts data created today
+        
+        
+        
+        
+        // Getting posts data into posts array:
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
             self.posts = []
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {

@@ -12,9 +12,11 @@ import SwiftKeychainWrapper
 
 class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
+    @IBOutlet weak var viewForImgAndEmoji: UIView!
+    
     @IBOutlet weak var mainImg: UIImageView!
-    @IBOutlet weak var emojiImageView: UIImageView!
-    @IBOutlet weak var viewWithEmojis: UIView!
+
+    @IBOutlet weak var viewForUI: UIView!
     
     var imageData: Data!
     var imageItself: UIImage!
@@ -29,6 +31,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         if imageData != nil {
             let img = UIImage(data: imageData)
             let fixedImg = img!.fixOrientation(img: img!)
@@ -42,8 +45,8 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         
         if arrayOfEmojiViews.count != 0 {
             for emojiView1 in arrayOfEmojiViews {
-                view.addSubview(emojiView1)
-                print("Zhenya: here is the imageView that i'm looking for - \(emojiView1)")
+                viewForImgAndEmoji.addSubview(emojiView1)
+              //  view.addSubview(emojiView1)
             }
         }
         
@@ -70,9 +73,9 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
                 rotate.delegate = self
                 emojiView.addGestureRecognizer(rotate)
                 
-                if view.viewWithTag(n) == nil {
+                if viewForImgAndEmoji.viewWithTag(n) == nil {
                 
-                    view.addSubview(emojiView)
+                    viewForImgAndEmoji.addSubview(emojiView)
                 }
                 n += 1
 
@@ -82,43 +85,10 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     
     
     override func viewWillDisappear(_ animated: Bool) {
-        
+
         imageData = nil
-        
-        // get all UIImageViews into an array
-        //  let allSubviews:[UIView] = view.viewWithEmojis.subviews.filter{$0 is UIImageView}
-        // our n right now is 3, 4 or whatever. that is how many loos we need to perform
-       /*
-        if arrayOfEmojis.count != 0 {
-            for j in 1...n {
-            
-                if var view1 = self.view.viewWithTag(j) as? UIImageView {
-                    arrayOfEmojiViews.append(view1)
-                }
-            }
-        
-            print("Zhenya: in the viewWillDisappear arrayOfEmojiViews - \(arrayOfEmojiViews)")
-        }
-            */
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-//        if imageData != nil {
-//            let img = UIImage(data: imageData)
-//            print("Zhenya:5 - here is background image \(img)")
-//            
-//            let fixedImg = img!.fixOrientation(img: img!)
-//            
-//            mainImg.image = fixedImg
-//        } else if imageItself != nil {
-//            mainImg.image = imageItself
-//        }
-//        
-//        if emojiImage != nil {
-//            emojiImageView.image = emojiImage
-//        }
-    }
 
     @IBAction func cancelPic(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -134,8 +104,8 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         
         //create image out of the view 
         
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
-        view.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(viewForImgAndEmoji.bounds.size, viewForImgAndEmoji.isOpaque, 0.0)
+        viewForImgAndEmoji.drawHierarchy(in: viewForImgAndEmoji.bounds, afterScreenUpdates: true)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -218,18 +188,18 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
     @IBAction func handlePan(recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translation(in: self.view)
+        let translation = recognizer.translation(in: self.viewForImgAndEmoji)
         if let view = recognizer.view {
             view.center = CGPoint(x:view.center.x + translation.x,
                                   y:view.center.y + translation.y)
         }
-        recognizer.setTranslation(CGPoint.zero, in: self.view)
+        recognizer.setTranslation(CGPoint.zero, in: self.viewForImgAndEmoji)
     }
     
     @IBAction func handlePinch(recognizer: UIPinchGestureRecognizer) {
         
-        let pinchPoint = recognizer.location(in: view)
-        let ourEmojiView = view.hitTest(pinchPoint, with: nil)
+        let pinchPoint = recognizer.location(in: viewForImgAndEmoji)
+        let ourEmojiView = viewForImgAndEmoji.hitTest(pinchPoint, with: nil)
         
         ourEmojiView!.transform = ourEmojiView!.transform.scaledBy(x: recognizer.scale, y: recognizer.scale)
         recognizer.scale = 1
@@ -238,8 +208,8 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func handleRotate(recognizer: UIRotationGestureRecognizer){
         
-        let rotatePoint = recognizer.location(in: view)
-        let ourEmojiView = view.hitTest(rotatePoint, with: nil)
+        let rotatePoint = recognizer.location(in: viewForImgAndEmoji)
+        let ourEmojiView = viewForImgAndEmoji.hitTest(rotatePoint, with: nil)
         
         ourEmojiView!.transform = ourEmojiView!.transform.rotated(by: recognizer.rotation)
         recognizer.rotation = 0
@@ -248,6 +218,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
 }
 
 extension UIImage {
