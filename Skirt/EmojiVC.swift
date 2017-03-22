@@ -15,8 +15,9 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var viewForImgAndEmoji: UIView!
     
     @IBOutlet weak var mainImg: UIImageView!
-
-    @IBOutlet weak var viewForUI: UIView!
+    
+    @IBOutlet weak var viewForSnapshot: UIView!
+    
     
     var imageData: Data!
     var imageItself: UIImage!
@@ -63,15 +64,15 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
                 
                 let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
                 pan.delegate = self
-                emojiView.addGestureRecognizer(pan)
+                viewForImgAndEmoji.addGestureRecognizer(pan)
                 
                 let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(recognizer:)))
                 pinch.delegate = self
-                emojiView.addGestureRecognizer(pinch)
+                viewForImgAndEmoji.addGestureRecognizer(pinch)
                 
                 let rotate = UIRotationGestureRecognizer(target: self, action: #selector(self.handleRotate(recognizer:)))
                 rotate.delegate = self
-                emojiView.addGestureRecognizer(rotate)
+                viewForImgAndEmoji.addGestureRecognizer(rotate)
                 
                 if viewForImgAndEmoji.viewWithTag(n) == nil {
                 
@@ -91,7 +92,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     
 
     @IBAction func cancelPic(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
         
     }
     @IBAction func addEmoji(_ sender: Any) {
@@ -104,8 +105,8 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         
         //create image out of the view 
         
-        UIGraphicsBeginImageContextWithOptions(viewForImgAndEmoji.bounds.size, viewForImgAndEmoji.isOpaque, 0.0)
-        viewForImgAndEmoji.drawHierarchy(in: viewForImgAndEmoji.bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(viewForSnapshot.bounds.size, viewForSnapshot.isOpaque, 0.0)
+        viewForSnapshot.drawHierarchy(in: viewForSnapshot.bounds, afterScreenUpdates: true)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

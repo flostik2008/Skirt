@@ -853,90 +853,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3A-yx-WSa" userLabel="ViewForImgAndEmoji">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M2a-3Q-wec">
+                                <rect key="frame" x="-4" y="0.0" width="379" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UlM-lX-yex">
-                                        <rect key="frame" x="-3" y="-3" width="381" height="673"/>
-                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BAO-ec-hxG" userLabel="ViewForImg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UlM-lX-yex">
+                                                <rect key="frame" x="-3" y="-3" width="381" height="673"/>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="UlM-lX-yex" secondAttribute="trailing" constant="-3" id="CCG-ug-jJf"/>
+                                            <constraint firstAttribute="bottom" secondItem="UlM-lX-yex" secondAttribute="bottom" constant="-3" id="DLm-3Z-uI5"/>
+                                            <constraint firstItem="UlM-lX-yex" firstAttribute="top" secondItem="BAO-ec-hxG" secondAttribute="top" constant="-3" id="JK0-HR-fjA"/>
+                                            <constraint firstItem="UlM-lX-yex" firstAttribute="leading" secondItem="BAO-ec-hxG" secondAttribute="leading" constant="-3" id="a4i-nR-CEE"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u3A-yx-WSa" userLabel="ViewForEmoji">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="647"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="UlM-lX-yex" secondAttribute="trailing" constant="-3" id="2Nt-vL-vEp"/>
-                                    <constraint firstItem="UlM-lX-yex" firstAttribute="leading" secondItem="u3A-yx-WSa" secondAttribute="leading" constant="-3" id="Hkr-lY-PPc"/>
-                                    <constraint firstAttribute="bottom" secondItem="UlM-lX-yex" secondAttribute="bottom" constant="-3" id="KdD-bb-ebp"/>
-                                    <constraint firstItem="UlM-lX-yex" firstAttribute="top" secondItem="u3A-yx-WSa" secondAttribute="top" constant="-3" id="Vjr-id-Fa8"/>
+                                    <constraint firstAttribute="trailing" secondItem="u3A-yx-WSa" secondAttribute="trailing" id="8tr-Vu-yeh"/>
+                                    <constraint firstAttribute="trailing" secondItem="BAO-ec-hxG" secondAttribute="trailing" id="KkN-A6-Gec"/>
+                                    <constraint firstItem="u3A-yx-WSa" firstAttribute="leading" secondItem="M2a-3Q-wec" secondAttribute="leading" id="QBf-Hq-UGO"/>
+                                    <constraint firstAttribute="bottom" secondItem="u3A-yx-WSa" secondAttribute="bottom" id="Qqv-Ws-lcc"/>
+                                    <constraint firstItem="BAO-ec-hxG" firstAttribute="leading" secondItem="M2a-3Q-wec" secondAttribute="leading" id="d7b-Gi-16v"/>
+                                    <constraint firstAttribute="bottom" secondItem="BAO-ec-hxG" secondAttribute="bottom" id="eO9-9e-kqp"/>
+                                    <constraint firstItem="u3A-yx-WSa" firstAttribute="top" secondItem="M2a-3Q-wec" secondAttribute="top" id="ezy-4f-1ym"/>
+                                    <constraint firstItem="BAO-ec-hxG" firstAttribute="top" secondItem="M2a-3Q-wec" secondAttribute="top" id="utl-T0-pOn"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DA4-Nn-PAj" userLabel="ViewWithUI">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-D2-A7m">
-                                        <rect key="frame" x="20" y="35" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="7dy-yd-xzS"/>
-                                            <constraint firstAttribute="width" constant="40" id="M9S-EH-CCj"/>
-                                        </constraints>
-                                        <state key="normal" image="re_snap_btn"/>
-                                        <connections>
-                                            <action selector="cancelPic:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="Fu3-UT-iFm"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1W-gB-ml1">
-                                        <rect key="frame" x="273" y="582" width="50" height="49"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="49" id="Idx-K5-QIa"/>
-                                            <constraint firstAttribute="width" constant="50" id="wLL-jr-2ml"/>
-                                        </constraints>
-                                        <state key="normal" image="send_snap"/>
-                                        <connections>
-                                            <action selector="postPic:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="yI4-Xb-Xdi"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Zj-BBv">
-                                        <rect key="frame" x="295" y="35" width="45" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="AXm-Lw-8lF"/>
-                                            <constraint firstAttribute="width" constant="45" id="Joh-sK-Qsx"/>
-                                        </constraints>
-                                        <state key="normal" image="emoji_btn"/>
-                                        <connections>
-                                            <action selector="addEmoji:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="UKy-M7-FGc"/>
-                                            <segue destination="h1h-hS-guA" kind="show" identifier="EmojiCollectionVC" animates="NO" id="WeS-Za-6yd"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <gestureRecognizers/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uHa-D2-A7m">
+                                <rect key="frame" x="20" y="35" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstItem="uHa-D2-A7m" firstAttribute="top" secondItem="DA4-Nn-PAj" secondAttribute="top" constant="35" id="Kbf-SK-E3S"/>
-                                    <constraint firstAttribute="bottom" secondItem="t1W-gB-ml1" secondAttribute="bottom" constant="36" id="Rny-Fh-rZR"/>
-                                    <constraint firstItem="87d-Zj-BBv" firstAttribute="top" secondItem="DA4-Nn-PAj" secondAttribute="top" constant="35" id="SVK-3U-irU"/>
-                                    <constraint firstItem="uHa-D2-A7m" firstAttribute="leading" secondItem="DA4-Nn-PAj" secondAttribute="leading" constant="20" id="ev8-FY-iOG"/>
-                                    <constraint firstAttribute="trailing" secondItem="87d-Zj-BBv" secondAttribute="trailing" constant="35" id="h8F-v9-ltI"/>
-                                    <constraint firstAttribute="trailing" secondItem="t1W-gB-ml1" secondAttribute="trailing" constant="35" id="r78-XS-wIj"/>
+                                    <constraint firstAttribute="height" constant="40" id="7dy-yd-xzS"/>
+                                    <constraint firstAttribute="width" constant="40" id="M9S-EH-CCj"/>
                                 </constraints>
+                                <state key="normal" image="re_snap_btn"/>
                                 <connections>
-                                    <outletCollection property="gestureRecognizers" destination="F0j-ff-wDQ" appends="YES" id="Gmd-aj-rvO"/>
-                                    <outletCollection property="gestureRecognizers" destination="plK-Id-DTK" appends="YES" id="1ra-ZC-coh"/>
+                                    <action selector="cancelPic:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="Fu3-UT-iFm"/>
                                 </connections>
-                            </view>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t1W-gB-ml1">
+                                <rect key="frame" x="289" y="600" width="50" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="Idx-K5-QIa"/>
+                                    <constraint firstAttribute="width" constant="50" id="wLL-jr-2ml"/>
+                                </constraints>
+                                <state key="normal" image="send_snap"/>
+                                <connections>
+                                    <action selector="postPic:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="yI4-Xb-Xdi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Zj-BBv">
+                                <rect key="frame" x="315" y="35" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AXm-Lw-8lF"/>
+                                    <constraint firstAttribute="width" constant="40" id="Joh-sK-Qsx"/>
+                                </constraints>
+                                <state key="normal" image="emoji_btn"/>
+                                <connections>
+                                    <action selector="addEmoji:" destination="SsD-ef-Q6S" eventType="touchUpInside" id="UKy-M7-FGc"/>
+                                    <segue destination="h1h-hS-guA" kind="show" identifier="EmojiCollectionVC" animates="NO" id="WeS-Za-6yd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="O64-nq-kgv" firstAttribute="top" secondItem="DA4-Nn-PAj" secondAttribute="bottom" id="0mt-yn-IB5"/>
-                            <constraint firstAttribute="trailing" secondItem="DA4-Nn-PAj" secondAttribute="trailing" id="561-pQ-o6Z"/>
-                            <constraint firstItem="u3A-yx-WSa" firstAttribute="top" secondItem="d0u-8e-eut" secondAttribute="top" id="8c1-2w-KoM"/>
-                            <constraint firstItem="u3A-yx-WSa" firstAttribute="leading" secondItem="d0u-8e-eut" secondAttribute="leading" id="9eL-nU-IIs"/>
-                            <constraint firstItem="DA4-Nn-PAj" firstAttribute="top" secondItem="d0u-8e-eut" secondAttribute="top" id="EkL-9f-nna"/>
-                            <constraint firstItem="DA4-Nn-PAj" firstAttribute="leading" secondItem="d0u-8e-eut" secondAttribute="leading" id="GzR-aW-fff"/>
-                            <constraint firstAttribute="trailing" secondItem="u3A-yx-WSa" secondAttribute="trailing" id="qxT-wV-qGc"/>
-                            <constraint firstItem="O64-nq-kgv" firstAttribute="top" secondItem="u3A-yx-WSa" secondAttribute="bottom" id="ypT-DV-eZv"/>
+                            <constraint firstItem="uHa-D2-A7m" firstAttribute="leading" secondItem="d0u-8e-eut" secondAttribute="leadingMargin" constant="4" id="1mc-aI-zwL"/>
+                            <constraint firstItem="O64-nq-kgv" firstAttribute="top" secondItem="t1W-gB-ml1" secondAttribute="bottom" constant="18" id="6Ft-la-mCA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="87d-Zj-BBv" secondAttribute="trailing" constant="4" id="8od-EW-os9"/>
+                            <constraint firstItem="O64-nq-kgv" firstAttribute="top" secondItem="M2a-3Q-wec" secondAttribute="bottom" id="GlG-9d-Hbq"/>
+                            <constraint firstAttribute="trailing" secondItem="M2a-3Q-wec" secondAttribute="trailing" id="RtI-Um-do7"/>
+                            <constraint firstItem="87d-Zj-BBv" firstAttribute="top" secondItem="h75-j0-r7b" secondAttribute="bottom" constant="15" id="V73-bE-7F2"/>
+                            <constraint firstItem="uHa-D2-A7m" firstAttribute="top" secondItem="h75-j0-r7b" secondAttribute="bottom" constant="15" id="VOW-u8-Ft7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="t1W-gB-ml1" secondAttribute="trailing" constant="20" id="Vw5-bm-YS9"/>
+                            <constraint firstItem="M2a-3Q-wec" firstAttribute="leading" secondItem="d0u-8e-eut" secondAttribute="leading" id="pje-DG-jsN"/>
+                            <constraint firstItem="M2a-3Q-wec" firstAttribute="top" secondItem="d0u-8e-eut" secondAttribute="top" id="vj3-Om-pv3"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mainImg" destination="UlM-lX-yex" id="MWb-di-C60"/>
                         <outlet property="viewForImgAndEmoji" destination="u3A-yx-WSa" id="BGC-no-4OH"/>
-                        <outlet property="viewForUI" destination="DA4-Nn-PAj" id="47o-DH-dOo"/>
+                        <outlet property="viewForSnapshot" destination="M2a-3Q-wec" id="TCe-bA-dRy"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="FromEmojiVCtoFeedVC" id="UpY-gJ-Fsz"/>
                     </connections>
                 </viewController>
@@ -984,8 +985,8 @@
         <image name="signUpBtn" width="840" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UpY-gJ-Fsz"/>
         <segue reference="arH-KF-Wjr"/>
+        <segue reference="UpY-gJ-Fsz"/>
         <segue reference="bnc-hf-EIQ"/>
     </inferredMetricsTieBreakers>
 </document>
