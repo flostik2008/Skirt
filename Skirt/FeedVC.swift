@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Firebase
+import GeoFire
 
 class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
 
@@ -28,9 +29,12 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     var currentLocation: CLLocation!
 
     var posts = [Post]()
+    var nearbyPostsKeys = [String]()
+    
     var users = [User]()
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imageSelected = false
+    
 
     
     override func viewDidLoad() {
@@ -43,31 +47,52 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
+        locationAuthStatus()
         
         currentWeather = CurrentWeather()
         
         addGradient(color: UIColor.clear, view: gradientView)
         
-        // get only local posts data created today
+        // get only local posts (letter: also created today)
+        // call for function that is declared outside of viewDidLoad, that populates 'posts'.
         
+        //populate 'posts' based on 'nearby..'
         
+        let theGeoFire = GeoFire(firebaseRef: DB_BASE.child("posts_location"))
+        let location = CLLocation(latitude: Location.sharedInstance.currentLatitude, longitude: Location.sharedInstance.currentLongitude)
+        let circleQuery = theGeoFire!.query(at: location, withRadius: 6.0)
         
-        
-        // Getting posts data into posts array:
-        DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
-            self.posts = []
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for snap in snapshot {
-                    if let postDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let post = Post(postKey: key, postData: postDict)
-                        self.posts.append(post)
-                    }
+        _ = circleQuery!.observe(.keyEntered, with: { (key, location) in
+            
+            _ = DataService.ds.REF_POSTS.child(key!).observe(.value, with: { (snapshot) in
+                
+                if let postDict = snapshot.value as? Dictionary<String, AnyObject> {
+                    let key = snapshot.key
+                    let post = Post(postKey: key, postData: postDict)
+                    self.posts.append(post)
+                    
+                    let userId = postDict["userKey"] as! String
+                    
+                    _ = DataService.ds.REF_USERS.child(userId).observe(.value, with: { (snapshot) in
+                        if let userDict = snapshot.value as? Dictionary<String,AnyObject>{
+                            let key = snapshot.key
+                            let user = User(userKey: key, userData: userDict)
+                            self.users.append(user)
+                        }
+                        self.tableView.reloadData()
+
+                    })
+                    
+                    
                 }
-            }
-            self.posts.reverse()
+                print("Zhenya: the posts array is \(self.posts)")
+                
+                // get userKeys from previous dict. Based on it, query Firebase for those.
+                
+            })
         })
         
+        /*
         // Getting users data into users array:
         DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
             self.users = []
@@ -82,7 +107,8 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
             }
             self.tableView.reloadData()
         } )
-        
+        */
+ 
         let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showPostPicVC))
         leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
@@ -104,6 +130,8 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         locationAuthStatus()
     }
     
+
+    
     func locationAuthStatus() {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse{
             currentLocation = locationManager.location
@@ -122,11 +150,11 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
                         self.updateLocatinLabel()
                 }
             }
-            
-            currentWeather.downloadWeatherDetails{
-                self.updateMainUI()
+            if currentWeather != nil {
+                currentWeather.downloadWeatherDetails{
+                    self.updateMainUI()
+                }
             }
-            
         } else {
             locationManager.requestWhenInUseAuthorization()
             locationAuthStatus()
@@ -165,8 +193,8 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
          let post1 = posts[indexPath.row]
-        // do i save userKeys? i don't think so.
-         let key = post1.userKey
+        
+        let key = post1.userKey
          let user1 = users.filter({$0.userKey == key}).first!
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PostCell {
@@ -176,8 +204,6 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
              cell.configureCell(user: user1, post: post1, img: img)
              return cell
              } else {
-             print("Zhenya: loading feed with user \(user1.avatarUrl) and post \(post1.imageUrl)")
-             
              cell.configureCell(user: user1, post: post1)
              }
              return cell

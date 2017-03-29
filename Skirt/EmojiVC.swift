@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SwiftKeychainWrapper
+import GeoFire
 
 class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
@@ -23,6 +24,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     var imageItself: UIImage!
     var currentUserPostRef: FIRDatabaseReference!
     var emojiImage: UIImage!
+    var geoFire: GeoFire!
     
     var arrayOfEmojis = [UIImage]()
     var arrayOfEmojiViews = [UIImageView]()
@@ -151,6 +153,16 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         
         // get posts autoID that was just generated.
         let postKey = firebasePost.key
+       
+        
+        geoFire = GeoFire(firebaseRef: DataService.ds.REF_LOCATION)
+        
+        // create user's current location. Get posts key
+        
+        let location = CLLocation(latitude: Location.sharedInstance.currentLatitude, longitude: Location.sharedInstance.currentLongitude)
+        
+        let postLocation = geoFire.setLocation(location, forKey: postKey)
+        
         
         // also create a "posts" subnode in users. (take example from likes)
         currentUserPostRef = DataService.ds.REF_USER_CURRENT.child("posts").child(postKey)

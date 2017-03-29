@@ -15,9 +15,7 @@ class CircleImageView: UIImageView {
         
         let picImgBordeWidth: CGFloat = 1
         layer.cornerRadius = self.frame.width/2
-        
-        print("Zhenya: width is \(self.frame.width), hight is \(self.frame.height) ")
-        
+                
         layer.borderColor = UIColor.darkGray.cgColor
         layer.borderWidth = picImgBordeWidth
         clipsToBounds = true
