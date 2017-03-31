@@ -52,10 +52,21 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         currentWeather = CurrentWeather()
         
         addGradient(color: UIColor.clear, view: gradientView)
+
+        let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showPostPicVC))
+        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
+        
+        let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showUserVC))
+        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(rightSwipeGestureRecognizer)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         // get only local posts (letter: also created today)
         // call for function that is declared outside of viewDidLoad, that populates 'posts'.
-        
         //populate 'posts' based on 'nearby..'
         
         let theGeoFire = GeoFire(firebaseRef: DB_BASE.child("posts_location"))
@@ -80,21 +91,18 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
                             self.users.append(user)
                         }
                         self.tableView.reloadData()
-
                     })
-                    
-                    
                 }
-                print("Zhenya: the posts array is \(self.posts)")
-                
-                // get userKeys from previous dict. Based on it, query Firebase for those.
-                
+                self.posts.reverse()
             })
         })
         
+        
         /*
-        // Getting users data into users array:
-        DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
+         Getting the whole users branch into users array:
+         Also, how to parse 'snapshot': 
+         
+         DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
             self.users = []
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshot {
@@ -106,21 +114,9 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
                 }
             }
             self.tableView.reloadData()
-        } )
-        */
- 
-        let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showPostPicVC))
-        leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
-        
-        let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showUserVC))
-        rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(rightSwipeGestureRecognizer)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+         } )
+         */
+
         tableView.reloadData()
     }
     

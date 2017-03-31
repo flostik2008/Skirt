@@ -1,4 +1,4 @@
-//
+
 //  EmojiVC.swift
 //  Skirt
 //
@@ -141,11 +141,22 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     func postToFirebase(imgUrl: String) {
 
         let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
+
+        let dateToday = Date()
+        let date = DateFormatter()
+        date.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+        let dateString:String
+        
+        date.string(from: dateToday)
+        
+        
+        print("Zhenya: hello date and time - \(date)")
         
         let post: Dictionary<String, Any> = [
             "imageUrl": imgUrl,
             "likes": 0,
             "userKey": uid!,
+            "date": [".sv": "timestamp"]
             ]
         
         let firebasePost = DataService.ds.REF_POSTS.childByAutoId()
