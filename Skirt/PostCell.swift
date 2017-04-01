@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SwiftKeychainWrapper
 
 class PostCell: UITableViewCell {
 
@@ -77,7 +78,7 @@ class PostCell: UITableViewCell {
         timeLbl.text = String("(\(finalResult)hrs)")
         
         currentUserLikesRef = DataService.ds.REF_USER_CURRENT.child("likes").child(post.postKey)
-        
+
         currentFlagRef = DataService.ds.REF_POSTS.child(post.postKey).child("flag")
         
         currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
@@ -123,39 +124,66 @@ class PostCell: UITableViewCell {
     }
     
     func flagTapped(sender: UITapGestureRecognizer) {
-    
-        // instantiate an alert window, an only after pressing "flag" btn perform FB code.
         
         let alertController = UIAlertController(title: "Flag", message: "Flag this post as \"not an outfit\" or as \"inappropriate\".", preferredStyle: UIAlertControllerStyle.alert)
-        
-        
+      
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) {
             (result : UIAlertAction) -> Void in
-        
         }
         
-        // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
         let flaggingAction = UIAlertAction(title: "Flag", style: UIAlertActionStyle.default) {
             (result : UIAlertAction) -> Void in
 
             self.currentFlagRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                
                 if let _ = snapshot.value as? NSNull {
                     
-                    // set the value to "true"
-                } else {
-                    // delete this post all together.
+                    //take userkey here, save it to the branch. 
+                    let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
+                    self.currentFlagRef.child(uid!).setValue(true)
                     
-                }
-                
-            })
+                    // this will always be true, because our 'currentFlagRef' goes to the child with key of current value. and it is nil. 
+                    // instead, we need to have currentFlagRef one level up. so
+                    
+                } else {
+    
+                    let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
 
+                    print("Zhenya: snapshot.key is \(snapshot.key)")
+                    print("Zhenya: snapshot.value is \(snapshot.value)")
+
+                    // right now, we quering FB to posts/postID/flag and snapshot returns a single dict. not a value. How to get to the snapshots only child and get name of the key? we had similar problem in viewDidAppear when rebuilding posts.
+                    if let flagDict = snapshot.value as? Dictionary<String, AnyObject> {
+                        let firstKey = Array(flagDict.keys)[0]
+                        if firstKey == uid{
+                            //show a window "we are working on reviewing this post"
+                            
+                            let alertController = UIAlertController(title: "Got It", message: "Working on reviewing this post", preferredStyle: UIAlertControllerStyle.alert)
+                            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel,     handler: nil)
+                            alertController.addAction(cancelAction)
+                            
+                            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+                            alertWindow.rootViewController = UIViewController()
+                            alertWindow.windowLevel = UIWindowLevelAlert + 1;
+                            alertWindow.makeKeyAndVisible()
+                            alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
+                        } else {
+                            print("Zhenya: If I see this, then snapshot.key != uid (new user leaving flag, should be deleted)")
+                            
+                            DataService.ds.REF_POSTS.child(self.post.postKey).removeValue()
+                        }
+                    }
+                }
+            })
         }
-        
         
         alertController.addAction(cancelAction)
         alertController.addAction(flaggingAction)
-        self.presentViewController(alertController, animated: true, completion: nil)
+         
+         let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+         alertWindow.rootViewController = UIViewController()
+         alertWindow.windowLevel = UIWindowLevelAlert + 1;
+         alertWindow.makeKeyAndVisible()
+         alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
         
     }
 }
