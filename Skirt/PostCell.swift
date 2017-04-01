@@ -108,6 +108,13 @@ class PostCell: UITableViewCell {
         })    
     }
     
+    override func prepareForReuse() {
+        
+        // set the image to a preset, generic one. 
+        postImg.image = UIImage(named: "preimage.jpg")
+        
+    }
+    
     func likeTapped(sender: UITapGestureRecognizer) {
         
         currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
@@ -148,14 +155,9 @@ class PostCell: UITableViewCell {
     
                     let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
 
-                    print("Zhenya: snapshot.key is \(snapshot.key)")
-                    print("Zhenya: snapshot.value is \(snapshot.value)")
-
-                    // right now, we quering FB to posts/postID/flag and snapshot returns a single dict. not a value. How to get to the snapshots only child and get name of the key? we had similar problem in viewDidAppear when rebuilding posts.
                     if let flagDict = snapshot.value as? Dictionary<String, AnyObject> {
                         let firstKey = Array(flagDict.keys)[0]
                         if firstKey == uid{
-                            //show a window "we are working on reviewing this post"
                             
                             let alertController = UIAlertController(title: "Got It", message: "Working on reviewing this post", preferredStyle: UIAlertControllerStyle.alert)
                             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel,     handler: nil)
@@ -167,7 +169,6 @@ class PostCell: UITableViewCell {
                             alertWindow.makeKeyAndVisible()
                             alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
                         } else {
-                            print("Zhenya: If I see this, then snapshot.key != uid (new user leaving flag, should be deleted)")
                             
                             DataService.ds.REF_POSTS.child(self.post.postKey).removeValue()
                         }
