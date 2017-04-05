@@ -5,3 +5,5 @@
 #import "AAPLCameraViewController.h"
 #import "AAPLPreviewView.h"
 #import "AAPLCameraVCDelegate.h"
+#import "UIViewController+Alerts.h"
+

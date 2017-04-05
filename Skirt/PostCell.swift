@@ -26,7 +26,10 @@ class PostCell: UITableViewCell {
     var user: User!
     var currentUserLikesRef: FIRDatabaseReference!
     var currentFlagRef: FIRDatabaseReference!
-
+    var currentPostRef: FIRDatabaseReference!
+    var postKey: String!
+    var currentUid = KeychainWrapper.standard.string(forKey: KEY_UID)
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,9 +81,6 @@ class PostCell: UITableViewCell {
         timeLbl.text = String("(\(finalResult)hrs)")
         
         currentUserLikesRef = DataService.ds.REF_USER_CURRENT.child("likes").child(post.postKey)
-
-        currentFlagRef = DataService.ds.REF_POSTS.child(post.postKey).child("flag")
-        
         currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
             if let _ = snapshot.value as? NSNull {
                 self.likeBtn.image = UIImage(named: "empty-heart")
@@ -88,7 +88,11 @@ class PostCell: UITableViewCell {
                 self.likeBtn.image = UIImage(named: "filled-heart")
             }
         })
-
+        
+        currentFlagRef = DataService.ds.REF_POSTS.child(post.postKey).child("flag")
+        currentPostRef = DataService.ds.REF_POSTS.child(post.postKey)
+        postKey = post.postKey
+        
         self.user = user
         self.userNameLbl.text = user.userName
         let ref = FIRStorage.storage().reference(forURL: user.avatarUrl)
@@ -128,6 +132,9 @@ class PostCell: UITableViewCell {
                 self.currentUserLikesRef.removeValue()
             }
         })
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "postWasLiked"), object: nil)
+        
     }
     
     func flagTapped(sender: UITapGestureRecognizer) {
@@ -144,20 +151,16 @@ class PostCell: UITableViewCell {
             self.currentFlagRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let _ = snapshot.value as? NSNull {
                     
-                    //take userkey here, save it to the branch. 
-                    let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
-                    self.currentFlagRef.child(uid!).setValue(true)
-                    
-                    // this will always be true, because our 'currentFlagRef' goes to the child with key of current value. and it is nil. 
-                    // instead, we need to have currentFlagRef one level up. so
+                  //  let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
+                    self.currentFlagRef.child(self.currentUid!).setValue(true)
                     
                 } else {
     
-                    let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
+                 //   let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
 
                     if let flagDict = snapshot.value as? Dictionary<String, AnyObject> {
                         let firstKey = Array(flagDict.keys)[0]
-                        if firstKey == uid{
+                        if firstKey == self.currentUid{
                             
                             let alertController = UIAlertController(title: "Got It", message: "Working on reviewing this post", preferredStyle: UIAlertControllerStyle.alert)
                             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel,     handler: nil)
@@ -169,8 +172,14 @@ class PostCell: UITableViewCell {
                             alertWindow.makeKeyAndVisible()
                             alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
                         } else {
+                            DataService.ds.REF_POSTS.child(self.postKey).removeValue()
+                            DataService.ds.REF_USER_CURRENT.child("likes").child(self.postKey).removeValue()
+                            DataService.ds.REF_USER_CURRENT.child("posts").child(self.postKey).removeValue()
+                            DataService.ds.REF_LOCATION.child(self.postKey).removeValue()
+                           
                             
-                            DataService.ds.REF_POSTS.child(self.post.postKey).removeValue()
+                         //   NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DataWasDeleted"), object: nil)
+
                         }
                     }
                 }

@@ -334,8 +334,21 @@ How to flag posts as "not a looks". \
 One user can press a couple times and post will be deleted. Need to also create a flag in FB that "user with this id" already flagged this. Then, check, if there is value in that branch - do nothing. \
 Done. \
 \
+\
+When deleting a post, need to check the "user's" branch and delete from there too.( same for location branch? )\
+\
+\
 23.\
 Fix flickering of tableCells when scrolling up and down.\
+	- seems like it is fixed now. Added method to 'prepareForReuse( )' func in cell class. Added a default pic there. \
+\
+24. \
+When pressing "like", more of liked posts are loaded. Number of likes isn't right. Because of '.value' func instead of 'childChanged'?\
+Also, when leaving FeedVC and coming again - posts are filtered and added again. \
+\
+\
+25.\
+Stickers bug. 2nd sticker \
 \
 24. \
 Change logic to start from the feed. If not logged in, show "log in" screen. \
@@ -349,14 +362,18 @@ How to mix in posts from SkirtTeam into all users feed? \
 Add "on-boarding"\
 \
 \
-27. \
-When pressing "like", more posts are loaded. Also number of likes is messing up. wtf? \
+\
 \
 28. \
 When pressing "temp" lbl - should convert to celsius and back \
 \
 29. \
 Can we load the main Feed screen only when temp data was loaded? \
+\
+30. \
+if users created acc through FB, then logged out, then coming again and device didn't save his id in keychain - hi presses "log in FB" - and gets to 'change avatar/username'. \
+Possible fix: put code for checking weather there is value in avatar/username/gender - instead in 'logInVC' to 'createUsernameVC' in 'viewWillAppear'. \
+\
 \
 \
 \

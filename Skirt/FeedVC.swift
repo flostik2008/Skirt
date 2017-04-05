@@ -60,10 +60,23 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         let rightSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showUserVC))
         rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.right
         self.view.addGestureRecognizer(rightSwipeGestureRecognizer)
+        
+   NotificationCenter.default.addObserver(self, selector: #selector(reloadTableView(_:)), name:NSNotification.Name(rawValue: "postWasLiked"), object: nil)
+
     }
+    
+   
+    func reloadTableView(_ notification: NSNotification){
+        print("Zhenya: PIZDAAAAA")
+        tableView.reloadData()
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        posts.removeAll()
+        users.removeAll()
         
         // get only local posts (letter: also created today)
         // call for function that is declared outside of viewDidLoad, that populates 'posts'.
@@ -75,16 +88,17 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         
         _ = circleQuery!.observe(.keyEntered, with: { (key, location) in
             
-            _ = DataService.ds.REF_POSTS.child(key!).observe(.value, with: { (snapshot) in
+            _ = DataService.ds.REF_POSTS.child(key!).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 if let postDict = snapshot.value as? Dictionary<String, AnyObject> {
                     let key = snapshot.key
                     let post = Post(postKey: key, postData: postDict)
                     self.posts.append(post)
                     
+                    
                     let userId = postDict["userKey"] as! String
                     
-                    _ = DataService.ds.REF_USERS.child(userId).observe(.value, with: { (snapshot) in
+                    _ = DataService.ds.REF_USERS.child(userId).observeSingleEvent(of: .value, with: { (snapshot) in
                         if let userDict = snapshot.value as? Dictionary<String,AnyObject>{
                             let key = snapshot.key
                             let user = User(userKey: key, userData: userDict)
@@ -93,29 +107,11 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
                         self.tableView.reloadData()
                     })
                 }
-                self.posts.reverse()
+                
+                self.posts.sort(by:{ $0.date > $1.date })
+                
             })
         })
-        
-        
-        /*
-         Getting the whole users branch into users array:
-         Also, how to parse 'snapshot': 
-         
-         DataService.ds.REF_USERS.observe(.value, with: { (snapshot) in
-            self.users = []
-            if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
-                for snap in snapshot {
-                    if let userDict = snap.value as? Dictionary<String, AnyObject> {
-                        let key = snap.key
-                        let user = User(userKey: key, userData: userDict)
-                        self.users.append(user)
-                    }
-                }
-            }
-            self.tableView.reloadData()
-         } )
-         */
 
         tableView.reloadData()
     }
@@ -191,7 +187,8 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
          let post1 = posts[indexPath.row]
         
         let key = post1.userKey
-         let user1 = users.filter({$0.userKey == key}).first!
+        let user1 = users.filter({$0.userKey == key}).first!
+        
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PostCell {
           

@@ -29,14 +29,14 @@ class LogInVC: UIViewController {
         IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 75
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-
-         // if user already exists in keychain:
- 
-         if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            print("Zhenya: ID found in keychain")
+    override func viewWillAppear(_ animated: Bool) {
+        
+         if let keyUid = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            
+           // KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+            
+            print("Zhenya: ID found in keychain - \(keyUid)")
          
-            // If user has avatarUrl/username/gender in Firebase - FeedVC, if not - CreateUsernameVC
            avatarUrlRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
             
            avatarUrlRef.observe(.value, with:{ (snapshot) in
@@ -44,6 +44,7 @@ class LogInVC: UIViewController {
                 
                 if snapshotValue == nil || snapshotValue == "" {
                     self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
+                    print("Zhenya: didn't find avatar for this user")
                 } else {
                     self.performSegue(withIdentifier: "FeedVC", sender: nil)
                     return
@@ -54,6 +55,8 @@ class LogInVC: UIViewController {
                     let snapshotValue = snapshot.value as? String
                 
                     if snapshotValue == nil || snapshotValue == "" {
+                        
+                        print("Zhenya: didn't find username for this user")
                         self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
                     } else {
                         self.performSegue(withIdentifier: "FeedVC", sender: nil)
@@ -65,6 +68,8 @@ class LogInVC: UIViewController {
                         let snapshotValue = snapshot.value as? String
                         
                         if snapshotValue == nil || snapshotValue == "" {
+                            
+                            print("Zhenya: didn't find gender for this user")
                             self.performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
                         } else {
                             self.performSegue(withIdentifier: "FeedVC", sender: nil)
@@ -164,7 +169,7 @@ class LogInVC: UIViewController {
         DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         
         let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
-        print("Zhenya: Data saved to keychain \(keychainResult)")
+        print("Zhenya: Data saved to keychain \(KeychainWrapper.standard.string(forKey: KEY_UID))")
         
         performSegue(withIdentifier: "CreateUsernameVC", sender: nil)
     }

@@ -29,6 +29,7 @@
 		87AA3C211E616E1D00CC5589 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */; };
 		87B81CC41E627D7D0052C2D2 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B81CC31E627D7D0052C2D2 /* DataService.swift */; };
 		87DB98601E5F7CB300EECC1F /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87DB985F1E5F7CB300EECC1F /* Roboto-Regular.ttf */; };
+		87EE7C9E1E94315100AB3CE8 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EE7C9D1E94315100AB3CE8 /* UIViewController+Alerts.m */; };
 		87EE9D561E6F788F004FF47E /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE9D551E6F788F004FF47E /* CircleImageView.swift */; };
 		87EE9D581E6F9128004FF47E /* SwipeToLeftSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE9D571E6F9128004FF47E /* SwipeToLeftSegue.swift */; };
 		87EE9D5A1E6F9144004FF47E /* SwipeToLeftSegueUnwind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE9D591E6F9144004FF47E /* SwipeToLeftSegueUnwind.swift */; };
@@ -73,6 +74,8 @@
 		87AA3C201E616E1D00CC5589 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87B81CC31E627D7D0052C2D2 /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		87DB985F1E5F7CB300EECC1F /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		87EE7C9C1E94315100AB3CE8 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
+		87EE7C9D1E94315100AB3CE8 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
 		87EE9D551E6F788F004FF47E /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		87EE9D571E6F9128004FF47E /* SwipeToLeftSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToLeftSegue.swift; sourceTree = "<group>"; };
 		87EE9D591E6F9144004FF47E /* SwipeToLeftSegueUnwind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeToLeftSegueUnwind.swift; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 				8706504E1E4D27FC0057AED5 /* Roboto-LightItalic.ttf */,
 				87DB985F1E5F7CB300EECC1F /* Roboto-Regular.ttf */,
 				870650311E4AA7440057AED5 /* LaunchScreen.storyboard */,
+				87EE7C9C1E94315100AB3CE8 /* UIViewController+Alerts.h */,
+				87EE7C9D1E94315100AB3CE8 /* UIViewController+Alerts.m */,
 			);
 			path = Skirt;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				87FF200A1E6EB09900072C94 /* EmojiVC.swift in Sources */,
 				875CE5A11E4D6F2F00A6B492 /* Location.swift in Sources */,
 				87EE9D581E6F9128004FF47E /* SwipeToLeftSegue.swift in Sources */,
+				87EE7C9E1E94315100AB3CE8 /* UIViewController+Alerts.m in Sources */,
 				870650261E4AA7430057AED5 /* AppDelegate.swift in Sources */,
 				87A30DE21E7A838C000B0BD5 /* EmojiCollectionCell.swift in Sources */,
 				87F8F2001E4E6C1B004C1DA7 /* Constants.swift in Sources */,

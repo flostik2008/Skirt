@@ -104,15 +104,18 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @IBAction func postPic(_ sender: Any) {
-        
-        //create image out of the view 
+
+        self.showSpinner {}
+
+        //create image out of the view
         
         UIGraphicsBeginImageContextWithOptions(viewForSnapshot.bounds.size, viewForSnapshot.isOpaque, 0.0)
         viewForSnapshot.drawHierarchy(in: viewForSnapshot.bounds, afterScreenUpdates: true)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        
+        self.hideSpinner{}
+
       //  let img = mainImg.image
         
         if let imageToData = UIImageJPEGRepresentation(img!, 0.2) {
@@ -122,10 +125,14 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
             metadata.contentType = "image/jpeg"
             
             DataService.ds.REF_POST_IMAGES.child(imgUid).put(imageToData, metadata: metadata) {(metadata, error) in
+                
+
                 if error != nil {
                     print("Zhenya: Image didn't upload to Firebase")
                 } else {
                     print("Zhenya: Image successfully uploaded to Firebase")
+                    
+                    
                     let downloadUrl = metadata?.downloadURL()?.absoluteString
                     
                     if let url = downloadUrl {
@@ -139,6 +146,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
  
     
     func postToFirebase(imgUrl: String) {
+
 
         let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
 
