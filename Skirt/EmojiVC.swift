@@ -14,9 +14,7 @@ import GeoFire
 class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var viewForImgAndEmoji: UIView!
-    
     @IBOutlet weak var mainImg: UIImageView!
-    
     @IBOutlet weak var viewForSnapshot: UIView!
     
     
@@ -34,7 +32,6 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         if imageData != nil {
             let img = UIImage(data: imageData)
             let fixedImg = img!.fixOrientation(img: img!)
@@ -44,12 +41,10 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
             mainImg.image = imageItself
         }
 
-        // get imageViews
         
         if arrayOfEmojiViews.count != 0 {
             for emojiView1 in arrayOfEmojiViews {
                 viewForImgAndEmoji.addSubview(emojiView1)
-              //  view.addSubview(emojiView1)
             }
         }
         
@@ -76,6 +71,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
                 rotate.delegate = self
                 viewForImgAndEmoji.addGestureRecognizer(rotate)
                 
+                // check so we won't add previous emoji. only new. 
                 if viewForImgAndEmoji.viewWithTag(n) == nil {
                 
                     viewForImgAndEmoji.addSubview(emojiView)
@@ -97,6 +93,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         dismiss(animated: false, completion: nil)
         
     }
+    
     @IBAction func addEmoji(_ sender: Any) {
         
         let img = mainImg.image
@@ -196,12 +193,12 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         if arrayOfEmojis.count != 0 {
             for j in 1...n {
                 
-                if var view1 = self.view.viewWithTag(j) as? UIImageView {
+                if var view1 = self.viewForImgAndEmoji.viewWithTag(j) as? UIImageView {
                     arrayOfEmojiViews.append(view1)
+                    print("Zhenya: views frame is \(view1.frame)")
                 }
             }
             
-            print("Zhenya: in the viewWillDisappear arrayOfEmojiViews - \(arrayOfEmojiViews)")
         }
 
         if segue.identifier == "EmojiCollectionVC" {
@@ -219,14 +216,15 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    @IBAction func handlePan(recognizer: UIPanGestureRecognizer) {
+     @IBAction func handlePan(recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self.viewForImgAndEmoji)
         if let view = recognizer.view {
             view.center = CGPoint(x:view.center.x + translation.x,
-                                  y:view.center.y + translation.y)
-        }
+            y:view.center.y + translation.y)
+            }
         recognizer.setTranslation(CGPoint.zero, in: self.viewForImgAndEmoji)
-    }
+     }
+
     
     @IBAction func handlePinch(recognizer: UIPinchGestureRecognizer) {
         

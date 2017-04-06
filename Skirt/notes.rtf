@@ -5,7 +5,7 @@
 \red63\green110\blue116;\red92\green38\blue153;\red104\green26\blue29;\red235\green236\blue237;\red36\green38\blue41;
 \red13\green0\blue129;\red37\green127\blue159;\red46\green13\blue110;\red27\green31\blue34;\red148\green6\blue75;
 \red244\green246\blue249;\red14\green114\blue164;\red132\green134\blue132;\red38\green38\blue38;}
-\margl720\margr720\margb720\margt720\vieww9000\viewh8400\viewkind0
+\margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 \
@@ -341,14 +341,42 @@ When deleting a post, need to check the "user's" branch and delete from there to
 23.\
 Fix flickering of tableCells when scrolling up and down.\
 	- seems like it is fixed now. Added method to 'prepareForReuse( )' func in cell class. Added a default pic there. \
+Done. \
 \
 24. \
 When pressing "like", more of liked posts are loaded. Number of likes isn't right. Because of '.value' func instead of 'childChanged'?\
 Also, when leaving FeedVC and coming again - posts are filtered and added again. \
-\
+Done. \
 \
 25.\
-Stickers bug. 2nd sticker \
+Stickers bug. \
+After adding 2nd sticker, the emojiVC reappears but previous sticker isn't where we left if. It is pinched and zoomed, but not panned. Also new stickers are sticked to the first one (as thought those images were added to the same frame). \
+We can pinch and zoom previous stickers separately from new ones - (they do have their own imageFrames), but we can't separate them. \
+Also, speed of panning is increasing after each additional sticker. \
+\
+So here is what happening in EmojiVC: \
+We have viewForSnapshot that contains viewForImg + viewForImgAndEmoji. On top of viewForSnapshot we have all controls. \
+Have 2 arrays arrayOfEmojis and arrayOfEmojiViews. \
+In viewDidLoad we set the main image. We also check, if there is anything in arrayOfEmojiViews. If there is anything, we add them to viewForImgAndEmoji. (here is the bug, cuz we arent getting imageViews with its previous frames)\
+\
+Then, we also check images from arrayOfEmojis. If there are any, we build imageFrames out of them. \
+When building them, we set their frames to default ones(153X299 70X70). \
+We add pan/pinch/rotate gestures. At the end, we check if there are no imageViews with current value of N. If there is no - we add our newly created imageView with emoji. \
+We could've add imageViews when we were checking if there is anything in arrayOfEmojiViews. \
+(bunch of func for saving to FB)\
+At the end  - 'prepareForSegue' we need to add all existing imageViews to our array and then pass both arrayOfEmoji and arrayOfEmojiViews to EmojiCollectionVC. \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
 \
 24. \
 Change logic to start from the feed. If not logged in, show "log in" screen. \

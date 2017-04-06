@@ -85,9 +85,9 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
             if let destinationVC = segue.destination as? EmojiVC {
                 if let array = sender as? [UIImage] {
                 
-                  //  destinationVC.emojiImage = emoji
                     destinationVC.arrayOfEmojis = arrayToStoreEmojis
                     destinationVC.arrayOfEmojiViews = arrayToStoreEmojiViews
+                    
                     
                     let data = UIImagePNGRepresentation(userImage)
                     destinationVC.imageData = data
