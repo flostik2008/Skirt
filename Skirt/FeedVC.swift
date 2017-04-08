@@ -67,7 +67,6 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     
    
     func reloadTableView(_ notification: NSNotification){
-        print("Zhenya: PIZDAAAAA")
         tableView.reloadData()
     }
 

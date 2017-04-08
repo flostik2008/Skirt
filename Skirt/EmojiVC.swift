@@ -41,7 +41,6 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
             mainImg.image = imageItself
         }
 
-        
         if arrayOfEmojiViews.count != 0 {
             for emojiView1 in arrayOfEmojiViews {
                 viewForImgAndEmoji.addSubview(emojiView1)
@@ -61,7 +60,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
                 
                 let pan = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan(recognizer:)))
                 pan.delegate = self
-                viewForImgAndEmoji.addGestureRecognizer(pan)
+                emojiView.addGestureRecognizer(pan)
                 
                 let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.handlePinch(recognizer:)))
                 pinch.delegate = self
@@ -80,6 +79,8 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
              }
         }
+        
+
     }
     
     
@@ -154,9 +155,6 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         
         date.string(from: dateToday)
         
-        
-        print("Zhenya: hello date and time - \(date)")
-        
         let post: Dictionary<String, Any> = [
             "imageUrl": imgUrl,
             "likes": 0,
@@ -177,7 +175,7 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
         
         let location = CLLocation(latitude: Location.sharedInstance.currentLatitude, longitude: Location.sharedInstance.currentLongitude)
         
-        let postLocation = geoFire.setLocation(location, forKey: postKey)
+        let _ = geoFire.setLocation(location, forKey: postKey)
         
         
         // also create a "posts" subnode in users. (take example from likes)
@@ -190,15 +188,29 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+//        let allEmojiViews = viewForImgAndEmoji.subviews
+//        
+//        let origins = allEmojiViews.map {$0.frame.origin}
+//        print("Zhenya: this one in prepareForSegue of EmojiVC. Views origins again shouldn't be 153x299: \(origins)")
+//        
+        
         if arrayOfEmojis.count != 0 {
-            for j in 1...n {
-                
-                if var view1 = self.viewForImgAndEmoji.viewWithTag(j) as? UIImageView {
+            for j in 1..<n {
+                if let view1 = self.viewForImgAndEmoji.viewWithTag(j) as? UIImageView {
+                    
+                    /*
+                    print("Zhenya: old frame was \(view1.frame)")
+
+                    let frame = viewForSnapshot.convert(view1.frame, from:viewForImgAndEmoji)
+                    view1.frame = frame
+                   print("Zhenya: new frame is \(frame)")
+                    */
+                    
                     arrayOfEmojiViews.append(view1)
-                    print("Zhenya: views frame is \(view1.frame)")
+                    print("Zhenya: in prepareForSegue, in EmojiVC views origins shouldn't be 153X299:  \(view1.frame.origin)")
+                  
                 }
             }
-            
         }
 
         if segue.identifier == "EmojiCollectionVC" {
@@ -217,12 +229,28 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
     }
     
      @IBAction func handlePan(recognizer: UIPanGestureRecognizer) {
+        
+        /*
+         func draggedView(sender:UIPanGestureRecognizer){
+            self.view.bringSubviewToFront(sender.view)
+            var translation = sender.translationInView(self.view)
+            sender.view.center = CGPointMake(sender.view.center.x + translation.x, sender.view.center.y + translation.y)
+            sender.setTranslation(CGPointZero, inView: self.view)
+         }
+         
+        */
+        
+        
+   //     self.viewForImgAndEmoji.bringSubviewToFront(recognizer.view!)
+        
         let translation = recognizer.translation(in: self.viewForImgAndEmoji)
+       
         if let view = recognizer.view {
             view.center = CGPoint(x:view.center.x + translation.x,
             y:view.center.y + translation.y)
             }
         recognizer.setTranslation(CGPoint.zero, in: self.viewForImgAndEmoji)
+        
      }
 
     

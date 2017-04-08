@@ -43,6 +43,9 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
         layout.minimumLineSpacing = 3
         emojiCollection!.collectionViewLayout = layout
         
+//        let frames = arrayToStoreEmojiViews.map { $0.frame.origin }
+//        print("Zhenya: In viewDidLoad, in EmojiCollectionVC views origin shouldn't be 153X299: \(frames)")
+        
         emojiCollection.reloadData()
     }
 
@@ -87,7 +90,6 @@ class EmojiCollectionVC: UIViewController, UICollectionViewDelegate, UICollectio
                 
                     destinationVC.arrayOfEmojis = arrayToStoreEmojis
                     destinationVC.arrayOfEmojiViews = arrayToStoreEmojiViews
-                    
                     
                     let data = UIImagePNGRepresentation(userImage)
                     destinationVC.imageData = data
