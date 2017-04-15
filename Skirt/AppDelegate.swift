@@ -11,12 +11,18 @@ import CoreData
 import IQKeyboardManagerSwift
 import FBSDKLoginKit
 import Firebase
+import Onboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var storyboard: UIStoryboard?
 
+//    static NSString * const kUserHasOnboardedKey = @"user_has_onboarded";
+    let kUserHasOnboardedKey = String("user_has_onboarded")
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         IQKeyboardManager.sharedManager().enable = true
@@ -24,40 +30,111 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         FIRApp.configure()
+        
+        // on boarding:
+        let userHasOnboarded = UserDefaults.standard.bool(forKey: kUserHasOnboardedKey!)
+        
+        if userHasOnboarded {
+            setupNormalRootViewController()
+        } else {
+            self.window?.rootViewController = generateStandardOnboardingVC()
+        }
+        
+        
         return true
     }
 
+    func setupNormalRootViewController() {
+        // logic should be transfered to "setupNormalRootViewCotroller" (starting from different VC depending if user is logged in or not)
+        
+        self.storyboard =  UIStoryboard(name: "Main", bundle: Bundle.main)
+        let currentUser = FIRAuth.auth()?.currentUser
+        if currentUser != nil
+        {
+            self.window?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "FeedVC")
+        }
+        else
+        {
+            self.window?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+        }
+    
+    }
+
+    func handleOnboardingComplition() {
+        _ = UserDefaults.standard.set(true, forKey: kUserHasOnboardedKey!)
+        
+        self.setupNormalRootViewController()
+    }
+    
+    func generateStandardOnboardingVC()-> OnboardingViewController {
+    
+    // create multiple pages of type "OnboardingContentViewController". Then add them to "OnboardingViewController". 
+        
+    // at the end of last page (OnboardingContentViewController), call for handleOnboardingComplition()
+        
+//        let firstPage = OnboardingContentViewController(title: "See what others are wearing today", body: nil, image: UIImage(named: "onboarding1"), buttonText: nil, action: nil)
+        
+        let firstPage = OnboardingContentViewController(title: "See what others are wearing today", body: nil, image: UIImage(named: "onboard1"), buttonText: nil, action: nil)
+      
+        let secondPage = OnboardingContentViewController(title: "Swipe left to post", body: nil, image: UIImage(named: "onboard2"), buttonText: nil, action: nil)
+        
+        let thirdPage = OnboardingContentViewController(title: "Swipe right to see your profile", body: nil, image: UIImage(named: "onboard3"), buttonText: nil, action: nil)
+        
+        let forthPage = OnboardingContentViewController(title: "Flag inappropriate content", body: nil, image: UIImage(named: "onboard4"), buttonText: "Get Started", action: self.handleOnboardingComplition)
+        
+        let pages = [firstPage, secondPage, thirdPage, forthPage]
+        
+        let titleFont = UIFont(name: "Roboto-Regular", size: 30)
+        let buttonFont = UIFont(name: "Roboto-Italic", size: 32)
+      
+        switch UIScreen.main.bounds.height{
+        case 568.0:
+            
+            for page in pages {
+                page.titleLabel.font = titleFont
+                page.topPadding = 90
+                page.iconWidth = 260
+                page.iconHeight = 480
+                page.underIconPadding = -550
+            }
+            forthPage.actionButton.titleLabel?.font = buttonFont
+            forthPage.actionButton.setBackgroundImage(UIImage(named: "getStartedBtn"), for: .normal)
+            
+        case 667.0:
+            firstPage.topPadding = 267
+            firstPage.underIconPadding = -580
+            firstPage.underTitlePadding = 5
+            firstPage.iconWidth = 298
+            firstPage.iconHeight = 375
+        case 736.0:
+            firstPage.topPadding = 295
+            firstPage.underIconPadding = -620
+            firstPage.underTitlePadding = 5
+            firstPage.iconWidth = 324
+            firstPage.iconHeight = 404
+        default:
+            firstPage.topPadding = 228
+            firstPage.underIconPadding = -500
+            firstPage.underTitlePadding = 5
+            firstPage.iconWidth = 252
+            firstPage.iconHeight = 310
+        }
+        
+        let onboardingVC = OnboardingViewController.onboard(withBackgroundImage: UIImage(named: "Background1"), contents: [firstPage,secondPage,thirdPage,forthPage])
+        onboardingVC?.shouldMaskBackground = false
+        
+        return onboardingVC!
+        
+    }
+    
+    
+    
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     
     }
  
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
-    }
-
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

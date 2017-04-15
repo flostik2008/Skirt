@@ -19,9 +19,9 @@ class LogInVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
     
-    var avatarUrlRef: FIRDatabaseReference!
-    var usernameRef: FIRDatabaseReference!
-    var genderRef: FIRDatabaseReference!
+   // var avatarUrlRef: FIRDatabaseReference!
+   // var usernameRef: FIRDatabaseReference!
+   // var genderRef: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +30,15 @@ class LogInVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        /*
          if let keyUid = KeychainWrapper.standard.string(forKey: KEY_UID) {
             
            // KeychainWrapper.standard.removeObject(forKey: KEY_UID)
             
             print("Zhenya: ID found in keychain - \(keyUid)")
-         
+       
+            
+          //   All of this now in FeedVC.
            avatarUrlRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
             
            avatarUrlRef.observe(.value, with:{ (snapshot) in
@@ -78,7 +80,9 @@ class LogInVC: UIViewController {
                     })
                 })
             })
+            
          }
+        */
     }
     
     override func viewDidLayoutSubviews() {

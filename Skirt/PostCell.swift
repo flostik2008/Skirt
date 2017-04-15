@@ -58,6 +58,7 @@ class PostCell: UITableViewCell {
         } else {
             let ref = FIRStorage.storage().reference(forURL: post.imageUrl)
             ref.data(withMaxSize: 2*1024*1024, completion: { (data, error) in
+
                 if error != nil {
                     print("Zhenya: Unable to download images from Firebase storage")
                 } else {

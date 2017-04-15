@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="nGo-QY-wM3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
         <!--Log InVC-->
         <scene sceneID="rlg-qQ-KCq">
             <objects>
-                <viewController id="nGo-QY-wM3" customClass="LogInVC" customModule="Skirt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginVC" id="nGo-QY-wM3" customClass="LogInVC" customModule="Skirt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M3I-vE-s0W"/>
                         <viewControllerLayoutGuide type="bottom" id="2hg-pW-ubf"/>
@@ -57,7 +57,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSG-VH-3tG" userLabel="signUpBtn">
-                                <rect key="frame" x="-23" y="500" width="421" height="84"/>
+                                <rect key="frame" x="-22.5" y="500" width="420" height="84"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="420" id="FER-CP-qxJ"/>
                                     <constraint firstAttribute="height" constant="84" id="aXC-Ii-f5A"/>
@@ -107,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R2a-yO-yeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-871" y="-367"/>
+            <point key="canvasLocation" x="1076" y="-660"/>
         </scene>
         <!--Create UsernameVC-->
         <scene sceneID="NuF-pE-6QG">
@@ -194,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rqa-es-BrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125.59999999999999" y="-566.26686656671666"/>
+            <point key="canvasLocation" x="2073" y="-883"/>
         </scene>
         <!--Edit UserVC-->
         <scene sceneID="mpz-4k-Vba">
@@ -432,7 +432,7 @@
         <!--Main FeedVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainFeedVC" customModule="Skirt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedVC" id="BYZ-38-t0r" customClass="MainFeedVC" customModule="Skirt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -521,7 +521,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="510"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qiu-om-q2W" id="18H-8C-eyP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="509.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="B27-JZ-du7">
@@ -671,11 +671,13 @@
                         <outlet property="weatherTypeImg" destination="KBb-BY-E6j" id="XWU-pd-2DV"/>
                         <segue destination="ZZs-mG-bnf" kind="custom" identifier="customSegueToPostVC" customClass="SwipeToLeftSegue" customModule="Skirt" customModuleProvider="target" id="gwt-3X-vHE"/>
                         <segue destination="OIQ-Yd-n7K" kind="custom" identifier="UserVCFromFeedVC" customClass="SwipeToRightSegue" customModule="Skirt" customModuleProvider="target" id="pEg-f6-oTw"/>
+                        <segue destination="nGo-QY-wM3" kind="show" identifier="FeedVCtoLoginVC" id="DxR-LQ-7P9"/>
+                        <segue destination="EhL-nZ-GzR" kind="show" identifier="FeedVCtoCreateUsernameVC" id="frV-Qd-R7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125.59999999999999" y="257.72113943028489"/>
+            <point key="canvasLocation" x="4" y="258"/>
         </scene>
         <!--Post PicVC-->
         <scene sceneID="bN5-to-OIH">
@@ -770,7 +772,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cqn-Pk-X70" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="fj4-yX-dUI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1070" y="-160"/>
+            <point key="canvasLocation" x="1076" y="258"/>
         </scene>
         <!--Emoji CollectionVC-->
         <scene sceneID="i8F-Pe-IIG">
@@ -855,7 +857,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Wy-lK-eqL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2050" y="-457"/>
+            <point key="canvasLocation" x="2001" y="-39"/>
         </scene>
         <!--EmojiVC-->
         <scene sceneID="P0P-B5-FFJ">
@@ -977,7 +979,7 @@
                     </connections>
                 </rotationGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2050" y="258"/>
+            <point key="canvasLocation" x="2001" y="812"/>
         </scene>
     </scenes>
     <resources>
@@ -1001,8 +1003,10 @@
         <image name="signUpBtn" width="840" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="arH-KF-Wjr"/>
         <segue reference="pEg-f6-oTw"/>
-        <segue reference="8mW-W5-tAR"/>
-        <segue reference="U3q-EB-VlT"/>
+        <segue reference="Dib-EH-jLA"/>
+        <segue reference="DxR-LQ-7P9"/>
+        <segue reference="frV-Qd-R7l"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -35,7 +35,9 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imageSelected = false
     
-
+    var avatarUrlRef: FIRDatabaseReference!
+    var usernameRef: FIRDatabaseReference!
+    var genderRef: FIRDatabaseReference!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +76,47 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // check if user has username/userpic/gender chosen. no -> go to CreasteUsernameVC.
+        avatarUrlRef = DataService.ds.REF_USER_CURRENT.child("avatarUrl")
+        
+        avatarUrlRef.observe(.value, with:{ (snapshot) in
+            let snapshotValue = snapshot.value as? String
+            
+            if snapshotValue == nil || snapshotValue == "" {
+                self.performSegue(withIdentifier: "FeedVCtoCreateUsernameVC", sender: nil)
+                print("Zhenya: didn't find avatar for this user")
+            }
+            
+            self.usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
+            self.usernameRef.observe(.value, with:{ (snapshot) in
+                let snapshotValue = snapshot.value as? String
+                
+                if snapshotValue == nil || snapshotValue == "" {
+                    
+                    print("Zhenya: didn't find username for this user")
+                    self.performSegue(withIdentifier: "FeedVCtoCreateUsernameVC", sender: nil)
+                }
+                
+                self.genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
+                self.genderRef.observe(.value, with:{ (snapshot) in
+                    let snapshotValue = snapshot.value as? String
+                    
+                    if snapshotValue == nil || snapshotValue == "" {
+                        
+                        print("Zhenya: didn't find gender for this user")
+                        self.performSegue(withIdentifier: "FeedVCtoCreateUsernameVC", sender: nil)
+                    }
+                })
+            })
+        })
+     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationAuthStatus()
+        
         posts.removeAll()
         users.removeAll()
         
@@ -106,19 +149,12 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
                         self.tableView.reloadData()
                     })
                 }
-                
                 self.posts.sort(by:{ $0.date > $1.date })
                 
             })
         })
-
-        tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        locationAuthStatus()
+        tableView.reloadData()
     }
     
 
@@ -167,7 +203,7 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     }
     
     func addGradient(color: UIColor, view: UIView) {
-        
+
         let gradient = CAGradientLayer()
         let gradientOrigin = view.bounds.origin
         let gradientWidth = UIScreen.main.bounds.width

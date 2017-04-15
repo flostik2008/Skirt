@@ -39,7 +39,7 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        
+
         usernameRef = DataService.ds.REF_USER_CURRENT.child("username")
         usernameRef.observe(.value, with:{ (snapshot) in
             let snapshotValue = snapshot.value as? String
@@ -52,6 +52,7 @@ class CreateUsernameVC: UIViewController, UIPickerViewDelegate, UIPickerViewData
         
         genderRef = DataService.ds.REF_USER_CURRENT.child("gender")
         genderRef.observe(.value, with:{ (snapshot) in
+
             let snapshotValue = snapshot.value as? String
             
             if snapshotValue != nil || snapshotValue != "" {
