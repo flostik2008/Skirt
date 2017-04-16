@@ -11,7 +11,7 @@ import CoreLocation
 import Firebase
 import GeoFire
 
-class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource  {
+class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate  {
 
     @IBOutlet weak var cityLbl: UILabel!
     @IBOutlet weak var currentWeatherImg: UIImageView!
@@ -22,6 +22,7 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     @IBOutlet weak var gradientView: UIView!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navBar: UIView!
     
     var currentWeather: CurrentWeather!
 
@@ -34,6 +35,7 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     var users = [User]()
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imageSelected = false
+    var isConvertedToCel = false
     
     var avatarUrlRef: FIRDatabaseReference!
     var usernameRef: FIRDatabaseReference!
@@ -55,6 +57,12 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
         
         addGradient(color: UIColor.clear, view: gradientView)
 
+        let tempLblTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainFeedVC.convertDegrees))
+        tempLblTap.delegate = self
+        tempLblTap.numberOfTapsRequired = 1
+        self.tempLbl.isUserInteractionEnabled = true
+        self.tempLbl.addGestureRecognizer(tempLblTap)
+        
         let leftSwipeGestureRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(MainFeedVC.showPostPicVC))
         leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(leftSwipeGestureRecognizer)
@@ -71,7 +79,6 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     func reloadTableView(_ notification: NSNotification){
         tableView.reloadData()
     }
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -165,12 +172,6 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
             
             Location.sharedInstance.currentLatitude = currentLocation.coordinate.latitude
             Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
-
-//            if Location.sharedInstance.currentLongitude != nil {
-//                Location.sharedInstance.currentLongitude = currentLocation.coordinate.longitude
-//            } else {
-//                Location.sharedInstance.currentLongitude = -149.863129
-//            }
             
             Location.sharedInstance.getLocationName { (success) in
                 if success {
@@ -194,12 +195,12 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     
     func updateMainUI() {
         rainChanceLbl.text = "%\(currentWeather.rainChance)"
+        
+        
         tempLbl.text = "\(currentWeather.currentTemp)°"
         weatherSummeryLbl.text = currentWeather.weatherSummery
         
         currentWeatherImg.image = UIImage(named: currentWeather.weatherTypeIcon)
-    
-    //    outfitImg.image = UIImage(named: currentWeather.outfitForWeather)
     }
     
     func addGradient(color: UIColor, view: UIView) {
@@ -285,8 +286,57 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     @IBAction func returnUserVCSegue(sender: UIStoryboardSegue) {
     
     }
+
     
     
+    func convertDegrees(sender: UITapGestureRecognizer){
+       /*
+        let currentTemp = tempLbl.text
+        let currentTempJustDigits = currentTemp!.substring(to: currentTemp!.index(before: currentTemp!.endIndex))
+            
+       
+        let currentTempAsDouble = Double(currentTempJustDigits)
+        
+        if isConvertedToCel{
+            //convert to far (C * 9/5) + 32
+            let convertedToFar = (currentTempAsDouble! * (9/5)) + 32
+            let convertedToFarInt = Int(convertedToFar)
+            let convertedToFarString = String(convertedToFarInt) + String("˚")
+            tempLbl.text = convertedToFarString
+            isConvertedToCel = false
+            print("Zhenya: while 'isConvertedToCel' = \(isConvertedToCel), conv from F to C = \(convertedToFarString)")
+            
+        } else {
+            //convert to cel (F - 32) * 5/9
+            let convertedToCel = (currentTempAsDouble! - 32) * (5/9)
+            let convertedToCelInt = Int(convertedToCel)
+            let convertedToCelString = String(convertedToCelInt) + String("˚")
+            tempLbl.text = convertedToCelString
+            isConvertedToCel = true
+            print("Zhenya: while 'isConvertedToCel' = \(isConvertedToCel), conv from F to C = \(convertedToCelString)")
+        }
+    }
+    */
+        
+        if isConvertedToCel{
+        
+            tempLbl.text = "\(currentWeather.currentTemp)°"
+            isConvertedToCel = false
+        } else {
+            
+            let currentTemp = tempLbl.text
+            let currentTempJustDigits = currentTemp!.substring(to: currentTemp!.index(before: currentTemp!.endIndex))
+            let currentTempAsInt = Int(currentTempJustDigits)
+            print("Zhenya: currentTempAsInt is \(currentTempAsInt)")
+            
+            let tempInC = currentWeather.convertToC(temp: currentTempAsInt!)
+            
+            print("Zhenya: tempInC is \(tempInC)")
+
+            tempLbl.text = "\(tempInC)°"
+            isConvertedToCel = true
+        }
+    }
 }
 
 

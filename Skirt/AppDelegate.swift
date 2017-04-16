@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var storyboard: UIStoryboard?
 
-//    static NSString * const kUserHasOnboardedKey = @"user_has_onboarded";
     let kUserHasOnboardedKey = String("user_has_onboarded")
     
     
@@ -40,12 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = generateStandardOnboardingVC()
         }
         
-        
         return true
     }
 
     func setupNormalRootViewController() {
-        // logic should be transfered to "setupNormalRootViewCotroller" (starting from different VC depending if user is logged in or not)
         
         self.storyboard =  UIStoryboard(name: "Main", bundle: Bundle.main)
         let currentUser = FIRAuth.auth()?.currentUser
@@ -68,12 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func generateStandardOnboardingVC()-> OnboardingViewController {
     
-    // create multiple pages of type "OnboardingContentViewController". Then add them to "OnboardingViewController". 
-        
-    // at the end of last page (OnboardingContentViewController), call for handleOnboardingComplition()
-        
-//        let firstPage = OnboardingContentViewController(title: "See what others are wearing today", body: nil, image: UIImage(named: "onboarding1"), buttonText: nil, action: nil)
-        
         let firstPage = OnboardingContentViewController(title: "See what others are wearing today", body: nil, image: UIImage(named: "onboard1"), buttonText: nil, action: nil)
       
         let secondPage = OnboardingContentViewController(title: "Swipe left to post", body: nil, image: UIImage(named: "onboard2"), buttonText: nil, action: nil)
@@ -86,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let titleFont = UIFont(name: "Roboto-Regular", size: 30)
         let buttonFont = UIFont(name: "Roboto-Italic", size: 32)
-      
+        
         switch UIScreen.main.bounds.height{
         case 568.0:
             
@@ -99,25 +90,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             forthPage.actionButton.titleLabel?.font = buttonFont
             forthPage.actionButton.setBackgroundImage(UIImage(named: "getStartedBtn"), for: .normal)
-            
+        
+        //iphone6,6s,7
         case 667.0:
-            firstPage.topPadding = 267
-            firstPage.underIconPadding = -580
-            firstPage.underTitlePadding = 5
-            firstPage.iconWidth = 298
-            firstPage.iconHeight = 375
+            
+            for page in pages {
+                page.titleLabel.font = titleFont
+                page.topPadding = 160
+                page.iconWidth = 276
+                page.iconHeight = 510
+                page.underIconPadding = -610
+            }
+            forthPage.actionButton.titleLabel?.font = buttonFont
+            forthPage.actionButton.setBackgroundImage(UIImage(named: "getStartedBtn"), for: .normal)
+            
+        //iphone6+,6s+,7+
         case 736.0:
-            firstPage.topPadding = 295
-            firstPage.underIconPadding = -620
-            firstPage.underTitlePadding = 5
-            firstPage.iconWidth = 324
-            firstPage.iconHeight = 404
+            for page in pages {
+                page.titleLabel.font = titleFont
+                page.topPadding = 180
+                page.iconWidth = 303
+                page.iconHeight = 560
+                page.underIconPadding = -650
+            }
+            forthPage.actionButton.titleLabel?.font = buttonFont
+            forthPage.actionButton.setBackgroundImage(UIImage(named: "getStartedBtn"), for: .normal)
+            
         default:
-            firstPage.topPadding = 228
-            firstPage.underIconPadding = -500
-            firstPage.underTitlePadding = 5
-            firstPage.iconWidth = 252
-            firstPage.iconHeight = 310
+            for page in pages {
+                page.titleLabel.font = titleFont
+                page.topPadding = 90
+                page.iconWidth = 260
+                page.iconHeight = 480
+                page.underIconPadding = -550
+            }
+            forthPage.actionButton.titleLabel?.font = buttonFont
+            forthPage.actionButton.setBackgroundImage(UIImage(named: "getStartedBtn"), for: .normal)
         }
         
         let onboardingVC = OnboardingViewController.onboard(withBackgroundImage: UIImage(named: "Background1"), contents: [firstPage,secondPage,thirdPage,forthPage])

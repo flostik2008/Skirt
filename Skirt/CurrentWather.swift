@@ -39,6 +39,15 @@ class CurrentWeather {
         return _currentTemp
     }
     
+    func convertToC(temp: Int)-> Int {
+    
+        let one = temp - 32
+        let convertedToCel = one * 5/9
+        let convertedToCelInt = Int(convertedToCel)
+        
+        return convertedToCelInt
+    }
+    
     var rainChance: Int {
         if _rainChance == nil {
             _rainChance = 0
@@ -59,6 +68,7 @@ class CurrentWeather {
         }
         return _outfitForWeather
     }
+    
     
     func downloadWeatherDetails(completed: @escaping DownloadComplete) {
     
