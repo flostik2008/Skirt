@@ -79,8 +79,17 @@ class PostCell: UITableViewCell {
         let difference = clientUnixTime - serverUnixTime
         let result = Int(difference)
         let finalResult = result/60/60
-        timeLbl.text = String("(\(finalResult)hrs)")
         
+        if finalResult < 1 {
+        
+            let finalResultMinutes = result/60
+            timeLbl.text = String("(\(finalResultMinutes)min)")
+        } else if finalResult > 24 {
+        
+            let finalResultDays = result/60/60/24
+            timeLbl.text = String("(\(finalResultDays)days)")
+        }
+                
         currentUserLikesRef = DataService.ds.REF_USER_CURRENT.child("likes").child(post.postKey)
         currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
             if let _ = snapshot.value as? NSNull {

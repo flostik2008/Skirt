@@ -442,13 +442,7 @@ To figure out layout, need to see exact positioning of app screenshot on all iPh
 Use those dimensions to do padding setup in delegate. \
 Done.\
 \
-26.\
-How to mix in posts from SkirtTeam into all users feed? \
-Work on cell identifiers. \
-\
-\
-\
-28. \
+26. \
 When pressing "temp" lbl - should convert to celsius and back.\
 \
 No other views cover the label view. \
@@ -456,21 +450,25 @@ Tried implement func '
 \f3\fs28 \kerning1\expnd0\expndtw0 \CocoaLigature0 shouldRecognizeSimultaneouslyWith otherGestureRecognizer
 \f1\fs36 \expnd0\expndtw0\kerning0
 \CocoaLigature1 ' . It is not being triggered. \
-\
 Continue reading about TableView and other view on the view. Do they conflict? \
 Found the problem - navBar - view that contained tempLbl had its 'userInterractionEnabled' to false. Thats it. \
 So in the feature, check not just lbl or img itself but also parent view. \
-\
 \uc0\u1042 \u1099 \u1095 \u1077 \u1089 \u1083 \u1077 \u1085 \u1080 \u1103  \u1087 \u1088 \u1086 \u1080 \u1089 \u1093 \u1086 \u1076 \u1103 \u1090  \u1074  CurrentWeather func 'convertToC'. \
 \uc0\u1053 \u1072 \u1079 \u1085 \u1072 \u1095 \u1072 \u1077 \u1084  \u1083 \u1077 \u1081 \u1073 \u1083  \u1074  FeedVC. \
-\uc0\u1055 \u1086 \u1095 \u1077 \u1084 \u1091  \u1090 \u1086  \u1074 \u1099 \u1076 \u1072 \u1105 \u1090  '0'. \
-\uc0\u1057  \u1087 \u1086 \u1084 \u1086 \u1097 \u1100 \u1102  print \u1085 \u1072 \u1081 \u1090 \u1080  \u1086 \u1096 \u1080 \u1073 \u1082 \u1091 . \u1042 \u1086 \u1079 \u1084 \u1086 \u1078 \u1085 \u1086  \u1075 \u1076 \u1077  \u1090 \u1086  \u1084 \u1099  \u1076 \u1077 \u1083 \u1072 \u1077 \u1084  \u1084 \u1072 \u1090  \u1086 \u1087 \u1077 \u1088 \u1072 \u1094 \u1080 \u1080  \u1085 \u1072 \u1076  \u1095 \u1080 \u1089 \u1083 \u1086 \u1084  \u1082 \u1086 \u1090 \u1086 \u1088 \u1086 \u1077  \u1077 \u1097 \u1077  \u1085 \u1077  \u1089 \u1086 \u1079 \u1076 \u1072 \u1085 \u1086 . \
-\uc0\u1048 \u1083 \u1080  \u1087 \u1088 \u1086 \u1080 \u1089 \u1093 \u1086 \u1076 \u1080 \u1090  \u1085 \u1077  \u1087 \u1088 \u1072 \u1074 \u1080 \u1083 \u1100 \u1085 \u1072 \u1103  \u1082 \u1086 \u1085 \u1074 \u1077 \u1088 \u1089 \u1080 \u1103 \
+\uc0\u1055 \u1086 \u1095 \u1077 \u1084 \u1091  \u1090 \u1086  \u1074 \u1099 \u1076 \u1072 \u1105 \u1090  '0'.  - \u1055 \u1086 \u1090 \u1086 \u1084 \u1091  \u1095 \u1090 \u1086  \u1086 \u1082 \u1072 \u1079 \u1099 \u1074 \u1072 \u1077 \u1090 \u1089 \u1103 , swift \u1085 \u1077  \u1087 \u1086 \u1085 \u1080 \u1084 \u1072 \u1077 \u1090  ( ) \u1074  \u1072 \u1088 \u1080 \u1092 \u1084 \u1077 \u1090 \u1080 \u1095 \u1077 \u1089 \u1082 \u1080 \u1093  \u1074 \u1099 \u1088 \u1072 \u1078 \u1077 \u1085 \u1080 \u1103 \u1093 . \
+Done. \
 \
-29. \
-Can we load the main Feed screen only when temp data was loaded? \
+27.\
+How to mix in posts from SkirtTeam into all users feed? \
+Work on cell identifiers. \
 \
-30. \
+\
+\
+\
+\
+\
+\
+39. \
 if users created acc through FB, then logged out, then coming again and device didn't save his id in keychain - hi presses "log in FB" - and gets to 'change avatar/username'. \
 Possible fix: put code for checking weather there is value in avatar/username/gender - instead in 'logInVC' to 'createUsernameVC' in 'viewWillAppear'. \
 \

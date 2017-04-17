@@ -220,7 +220,7 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-         let post1 = posts[indexPath.row]
+        let post1 = posts[indexPath.row]
         
         let key = post1.userKey
         let user1 = users.filter({$0.userKey == key}).first!
