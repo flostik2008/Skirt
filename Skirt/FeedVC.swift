@@ -181,6 +181,7 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
             if currentWeather != nil {
                 currentWeather.downloadWeatherDetails{
                     self.updateMainUI()
+                    self.tableView.reloadData()
                 }
             }
         } else {
@@ -195,7 +196,6 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     
     func updateMainUI() {
         rainChanceLbl.text = "%\(currentWeather.rainChance)"
-        
         
         tempLbl.text = "\(currentWeather.currentTemp)°"
         weatherSummeryLbl.text = currentWeather.weatherSummery
@@ -219,41 +219,91 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
     }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
-        let post1 = posts[indexPath.row]
+      
+        if indexPath.section == 0 {
         
-        let key = post1.userKey
-        let user1 = users.filter({$0.userKey == key}).first!
-        
-        
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PostCell {
-          
-             if let img = MainFeedVC.imageCache.object(forKey: post1.imageUrl as NSString) {
-             
-             cell.configureCell(user: user1, post: post1, img: img)
-             return cell
-             } else {
-             cell.configureCell(user: user1, post: post1)
-             }
-             return cell
-             
+            // code for Skirt cell
+            let skirtCell = tableView.dequeueReusableCell(withIdentifier: "skirtCell") as! SkirtTeamCell
+                
+         //   skirtCell.configureCell(tempLbl.text!, rainChance: rainChanceLbl.text!)
+            skirtCell.configureCell(currentWeather.currentTemp, rainChance: currentWeather.rainChance)
+            return skirtCell
+            
+            
+        } else if indexPath.section == 1 {
+            
+            // code for regular cell
+            let post1 = posts[indexPath.row]
+            
+            let key = post1.userKey
+            let user1 = users.filter({$0.userKey == key}).first!
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? PostCell {
+                
+                
+                if let img = MainFeedVC.imageCache.object(forKey: post1.imageUrl as NSString) {
+                    
+                    cell.configureCell(user: user1, post: post1, img: img)
+                    return cell
+                } else {
+                    cell.configureCell(user: user1, post: post1)
+                }
+                return cell
+                
+            }
+
         }
-            
-        let skirtCell = tableView.dequeueReusableCell(withIdentifier: "skirtCell") as! SkirtTeamCell
+        
+        return UITableViewCell()
         
         
             
+        /*
+        
+        1. 
+         I need this to be called multiple times - because of indexPath.row
+         Solution:
+         Create an array "thisTempImages" of images for this particular temperature. Should be done in 'viewDidLoad', or once we have current Temp from API.
+         Here call for "thisTempImages[indexPath.row]"
+         
+         
+        2. i might get crash because tempLbl.text isn't available yet.
+           try to call skirtCell.configureCell(withTemperature: currentWeather.currentTemp)
+           (then i don't need to take our last character in "configureCell" func )
+ 
+        //
+         
+        else if let skirtCell = tableView.dequeueReusableCell(withIdentifier: "skirtCell") as? SkirtTeamCell {
+        
+        skirtCell.configureCell(tempLbl.text!, rainChance: rainChanceLbl.text!)
         return skirtCell
+            
+        } else {
+            return UITableViewCell()
+        }
+         */
+    
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return posts.count
+        switch section {
+        case 0:
+            return 1
+        
+        case 1:
+            return posts.count
+            
+        default:
+            assert(false, "section \(section)")
+            return 0
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return 2
     }
     
     func showPostPicVC() {
