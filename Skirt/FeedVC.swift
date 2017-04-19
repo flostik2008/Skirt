@@ -237,9 +237,13 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
              }
              return cell
              
-            } else {
-            return PostCell()
         }
+            
+        let skirtCell = tableView.dequeueReusableCell(withIdentifier: "skirtCell") as! SkirtTeamCell
+        
+        
+            
+        return skirtCell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
