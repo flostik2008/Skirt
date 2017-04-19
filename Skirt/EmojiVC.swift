@@ -47,7 +47,6 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
             }
         }
         
-        
         // get image out of array.
         
         if arrayOfEmojis.count != 0 {
@@ -79,8 +78,6 @@ class EmojiVC: UIViewController, UIGestureRecognizerDelegate {
 
              }
         }
-        
-
     }
     
     
