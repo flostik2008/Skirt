@@ -637,7 +637,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CSb-CC-yIE">
-                                                    <rect key="frame" x="177.5" y="245" width="20" height="20"/>
+                                                    <rect key="frame" x="178" y="245" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wzh-6t-YbX">
                                                     <rect key="frame" x="10" y="4" width="190" height="30"/>
@@ -698,6 +698,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="CSb-CC-yIE" id="F7e-Q8-yj6"/>
                                             <outlet property="postImage" destination="cFk-4d-4b1" id="o1X-ke-Ps4"/>
                                         </connections>
                                     </tableViewCell>

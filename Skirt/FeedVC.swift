@@ -181,7 +181,7 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
             if currentWeather != nil {
                 currentWeather.downloadWeatherDetails{
                     self.updateMainUI()
-                    self.tableView.reloadData()
+                 //   self.tableView.reloadData()
                 }
             }
         } else {
@@ -220,15 +220,16 @@ class MainFeedVC: UIViewController, CLLocationManagerDelegate, UITableViewDelega
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
+        print("Zhenya: cellForRowAt in FeedVC is called")
+
         if indexPath.section == 0 {
         
-            // code for Skirt cell
             let skirtCell = tableView.dequeueReusableCell(withIdentifier: "skirtCell") as! SkirtTeamCell
-                
-         //   skirtCell.configureCell(tempLbl.text!, rainChance: rainChanceLbl.text!)
+           
+           // skirtCell.configureCell(tempLbl.text!, rainChance: rainChanceLbl.text!)
+            
             skirtCell.configureCell(currentWeather.currentTemp, rainChance: currentWeather.rainChance)
             return skirtCell
-            
             
         } else if indexPath.section == 1 {
             

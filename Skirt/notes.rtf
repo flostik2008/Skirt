@@ -6,7 +6,7 @@
 \red13\green0\blue129;\red37\green127\blue159;\red46\green13\blue110;\red27\green31\blue34;\red148\green6\blue75;
 \red244\green246\blue249;\red14\green114\blue164;\red132\green134\blue132;\red38\green38\blue38;\red0\green116\blue0;
 }
-\margl1440\margr1440\vieww9000\viewh8400\viewkind0
+\margl720\margr720\margb720\margt720\vieww9000\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 \
@@ -467,20 +467,19 @@ The second cell isn't created. Find out why. \
 \
 Figure out why cant create table view with 2 sections. Done. \
 How to wait temp first, then call for 'dequeReusableCellWithIdentifier' ? -> called 'tableView.reloadData( )' but that is not enough. \
-Doesn't assign correct image "2.5w", instead, gets image "2". In previous program, we saved that number and then configured image somwere else based on '
+Doesn't assign correct image "2.5w", instead, gets image "2". In previous program, we saved that number and then configured image somwhere else based on '
 \f3\fs28 \cf5 \kerning1\expnd0\expndtw0 \CocoaLigature0 _outfitForWeather
 \f1\fs36 \cf0 \expnd0\expndtw0\kerning0
 \CocoaLigature1 '. Take a look trough terminal how image creation happened. \
+Solved with using "sections". \
+Done. \
 \
-\
-\
-\
-\
-\
-39. \
+Bug: \
 if users created acc through FB, then logged out, then coming again and device didn't save his id in keychain - hi presses "log in FB" - and gets to 'change avatar/username'. \
 Possible fix: put code for checking weather there is value in avatar/username/gender - instead in 'logInVC' to 'createUsernameVC' in 'viewWillAppear'. \
 \
+Bug: \
+When pressing "likes" and "flag" - too much time passes before anything happens. It has to do with the way table view is updated. \
 \
 \
 \

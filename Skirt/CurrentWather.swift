@@ -34,7 +34,7 @@ class CurrentWeather {
     
     var currentTemp: Int {
         if _currentTemp == nil {
-            _currentTemp = 0
+            _currentTemp = -50
         }
         return _currentTemp
     }

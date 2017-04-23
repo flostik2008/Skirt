@@ -67,6 +67,8 @@ class Post {
     }
     
     func adjustLikes(addLike: Bool) {
+        print("Zhenya: adjustLikes in Post is called")
+
         if addLike {
             _likes = _likes + 1
         } else {

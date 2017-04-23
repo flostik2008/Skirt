@@ -29,7 +29,16 @@ class PostCell: UITableViewCell {
     var currentPostRef: FIRDatabaseReference!
     var postKey: String!
     var currentUid = KeychainWrapper.standard.string(forKey: KEY_UID)
-    
+  
+    var currentVC: UIViewController {
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = UIViewController()
+        window.windowLevel = UIWindowLevelAlert + 1
+        window.makeKeyAndVisible()
+        let vc = window.rootViewController
+        
+        return vc!
+    }	
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -130,9 +139,12 @@ class PostCell: UITableViewCell {
     }
     
     func likeTapped(sender: UITapGestureRecognizer) {
-        
+        print("Zhenya: likeTapped in PostCell is called")
         currentUserLikesRef.observeSingleEvent(of: .value, with:  { (snapshot) in
+
             if let _ = snapshot.value as? NSNull {
+                print("Zhenya: hart should turn red")
+
                 self.likeBtn.image = UIImage(named: "filled-heart")
                 self.post.adjustLikes(addLike: true)
                 self.currentUserLikesRef.setValue(true)
@@ -144,7 +156,6 @@ class PostCell: UITableViewCell {
         })
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "postWasLiked"), object: nil)
-        
     }
     
     func flagTapped(sender: UITapGestureRecognizer) {
@@ -159,6 +170,7 @@ class PostCell: UITableViewCell {
             (result : UIAlertAction) -> Void in
 
             self.currentFlagRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
                 if let _ = snapshot.value as? NSNull {
                     
                   //  let uid = KeychainWrapper.standard.string(forKey: KEY_UID)
@@ -176,11 +188,7 @@ class PostCell: UITableViewCell {
                             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel,     handler: nil)
                             alertController.addAction(cancelAction)
                             
-                            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-                            alertWindow.rootViewController = UIViewController()
-                            alertWindow.windowLevel = UIWindowLevelAlert + 1;
-                            alertWindow.makeKeyAndVisible()
-                            alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
+                            self.currentVC.present(alertController, animated: true, completion: nil)
                         } else {
                             DataService.ds.REF_POSTS.child(self.postKey).removeValue()
                             DataService.ds.REF_USER_CURRENT.child("likes").child(self.postKey).removeValue()
@@ -198,14 +206,10 @@ class PostCell: UITableViewCell {
         
         alertController.addAction(cancelAction)
         alertController.addAction(flaggingAction)
-         
-         let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-         alertWindow.rootViewController = UIViewController()
-         alertWindow.windowLevel = UIWindowLevelAlert + 1;
-         alertWindow.makeKeyAndVisible()
-         alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
         
+        currentVC.present(alertController, animated: true, completion: nil)
     }
+  
 }
 
 

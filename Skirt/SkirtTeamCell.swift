@@ -10,6 +10,9 @@ import UIKit
 
 class SkirtTeamCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let x = Int(arc4random_uniform(6)+1)
+
     
     func configureCell(_ temp: Int, rainChance: Int){
         
@@ -23,67 +26,73 @@ class SkirtTeamCell: UITableViewCell {
 
         if temp >= 74 {
             if rainChance >= 55 {
-                self.postImage.image = UIImage(named:"1.7w")
+                self.postImage.image = UIImage(named:"17w")
             }
             else {
-                let x = Int(arc4random_uniform(6)+1)
-                self.postImage.image = UIImage(named:"1.\(x)w")
+                self.postImage.image = UIImage(named:"1\(x)w")
             }
         } else if temp < 74 && temp >= 62{
             
             if rainChance >= 55{
-                self.postImage.image = UIImage(named:"2.7w")
+                self.postImage.image = UIImage(named:"27w")
             }
             else {
-                let x = Int(arc4random_uniform(6)+1)
-                print("Zhenya: x is \(x)")
-                let imageName = "2.\(x)w"
-                    
-                print("Zhenya: imageName is \(imageName)")
-
-                self.postImage.image = UIImage(named: imageName)
+                self.postImage.image = UIImage(named: "2\(x)w")
             }
             
         } else if temp < 62 && temp >= 53{
             
             if rainChance >= 55 {
-                self.postImage.image = UIImage(named:"3.7w")
+                self.postImage.image = UIImage(named:"37w")
             }
             else {
-                let x = Int(arc4random_uniform(6)+1)
-                self.postImage.image = UIImage(named:"3.\(x)w")
+                self.postImage.image = UIImage(named:"3\(x)w")
             }
             
         } else if temp < 53 && temp >= 41{
             
             if rainChance >= 55{
-                self.postImage.image = UIImage(named:"4.7w")
+                self.postImage.image = UIImage(named:"47w")
             }
             else {
-                let x = Int(arc4random_uniform(6)+1)
-                self.postImage.image = UIImage(named:"4.\(x)w")
+                self.postImage.image = UIImage(named:"4\(x)w")
             }
             
         } else if temp < 41 && temp >= 32{
             
             if rainChance >= 55{
-                self.postImage.image = UIImage(named:"5.7w")
+                self.postImage.image = UIImage(named:"57w")
             }
             else {
-                let x = Int(arc4random_uniform(6)+1)
-                self.postImage.image = UIImage(named:"5.\(x)w")
+                self.postImage.image = UIImage(named:"5\(x)w")
             }
-            
         } else if temp < 32 && temp >= 19{
-            let x = Int(arc4random_uniform(6)+1)
-            self.postImage.image = UIImage(named:"6.\(x)w")
+            self.postImage.image = UIImage(named:"6\(x)w")
         } else if temp < 19 && temp >= 5{
-            let x = Int(arc4random_uniform(7)+1)
-            self.postImage.image = UIImage(named:"7.\(x)w")
-        } else if temp < 5 {
+            self.postImage.image = UIImage(named:"7\(x)w")
+        } else if temp < 5  && temp > -50 {
             self.postImage.image = UIImage(named:"8w")
+        } else if temp == -50 {
+            return
         }
+        
+    }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        activityIndicator.startAnimating()
+        
+    }
+    
+    override func prepareForReuse() {
+        
+        // set the image to a preset, generic one.
+        postImage.image = UIImage(named: "preimage.jpg")
+        
     }
     
 }
+
+
+
